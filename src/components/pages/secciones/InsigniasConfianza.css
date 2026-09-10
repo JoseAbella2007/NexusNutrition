@@ -1,0 +1,92 @@
+.insignias-confianza {
+  position: relative;
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+  background: var(--bg-1);
+}
+
+.insignias-confianza__interior {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 36px;
+  padding: 26px 24px;
+}
+
+.insignias-confianza__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grey-mute);
+  white-space: nowrap;
+}
+
+.insignias-confianza__punto {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green-lime);
+  box-shadow: 0 0 8px var(--green-lime);
+  flex-shrink: 0;
+}
+
+.insignias-confianza__carrusel {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .insignias-confianza__interior {
+    display: none;
+  }
+
+  .insignias-confianza__carrusel {
+    display: block;
+    overflow: hidden;
+    padding: 18px 0;
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent,
+      #000 8%,
+      #000 92%,
+      transparent
+    );
+    mask-image: linear-gradient(
+      90deg,
+      transparent,
+      #000 8%,
+      #000 92%,
+      transparent
+    );
+  }
+
+  .insignias-confianza__pista {
+    display: flex;
+    width: max-content;
+    gap: 28px;
+    animation: desplazar-carrusel 18s linear infinite;
+  }
+
+  .insignias-confianza__pista .insignias-confianza__item {
+    padding: 0 2px;
+  }
+}
+
+@keyframes desplazar-carrusel {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .insignias-confianza__pista {
+    animation: none;
+  }
+}

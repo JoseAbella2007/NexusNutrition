@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function usarPrefiereMovimientoReducido() {
+export function usePrefiereMovimientoReducido() {
   const [reducido, setReducido] = useState(
     () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
   );

@@ -1,9 +1,9 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { usarAutenticacion } from "../context/ContextoAutenticacion";
+import { useAutenticacion } from "../context/ContextoAutenticacion";
 import { RUTAS } from "./rutas";
 
 export default function RutaProtegida() {
-  const { estaAutenticado } = usarAutenticacion();
+  const { estaAutenticado } = useAutenticacion();
   const ubicacion = useLocation();
 
   if (!estaAutenticado) {

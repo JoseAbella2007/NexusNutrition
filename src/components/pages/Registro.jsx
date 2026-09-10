@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import DisenoAutenticacion from "../common/DisenoAutenticacion";
-import { usarAutenticacion } from "../../context/ContextoAutenticacion";
+import { useAutenticacion } from "../../context/ContextoAutenticacion";
 import { RUTAS } from "../../routes/rutas";
 
 const EXPRESION_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -51,7 +51,7 @@ const TODOS_TOCADOS = {
 };
 
 export default function Registro() {
-  const { registrar } = usarAutenticacion();
+  const { registrar } = useAutenticacion();
   const navegar = useNavigate();
 
   const [formulario, setFormulario] = useState({

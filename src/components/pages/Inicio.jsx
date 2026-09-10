@@ -1,3 +1,11 @@
+import Portada from "./secciones/Portada";
+import InsigniasConfianza from "./secciones/InsigniasConfianza";
+
 export default function Inicio() {
-  return <h1>Inicio</h1>;
+  return (
+    <main>
+      <Portada />
+      <InsigniasConfianza />
+    </main>
+  );
 }

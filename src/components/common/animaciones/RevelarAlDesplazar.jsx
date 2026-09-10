@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { usarPrefiereMovimientoReducido } from "../../../hooks/usarPrefiereMovimientoReducido";
+import { usePrefiereMovimientoReducido } from "../../../hooks/usePrefiereMovimientoReducido";
 
 export default function RevelarAlDesplazar({
   children,
@@ -9,7 +9,7 @@ export default function RevelarAlDesplazar({
   claseCss = "",
   etiqueta = "div",
 }) {
-  const movimientoReducido = usarPrefiereMovimientoReducido();
+  const movimientoReducido = usePrefiereMovimientoReducido();
   const ElementoMotion = motion[etiqueta] ?? motion.div;
 
   if (movimientoReducido) {

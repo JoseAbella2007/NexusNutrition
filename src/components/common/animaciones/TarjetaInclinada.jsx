@@ -6,7 +6,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { usarPrefiereMovimientoReducido } from "../../../hooks/usarPrefiereMovimientoReducido";
+import { usePrefiereMovimientoReducido } from "../../../hooks/usePrefiereMovimientoReducido";
 
 export default function TarjetaInclinada({
   children,
@@ -15,7 +15,7 @@ export default function TarjetaInclinada({
   ...props
 }) {
   const referencia = useRef(null);
-  const movimientoReducido = usarPrefiereMovimientoReducido();
+  const movimientoReducido = usePrefiereMovimientoReducido();
 
   const rotacionXCruda = useMotionValue(0);
   const rotacionYCruda = useMotionValue(0);

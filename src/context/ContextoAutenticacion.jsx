@@ -47,11 +47,12 @@ export function ProveedorAutenticacion({ children }) {
   );
 }
 
-export function usarAutenticacion() {
+// eslint-disable-next-line react-refresh/only-export-components -- hook y contexto van juntos a proposito
+export function useAutenticacion() {
   const contexto = useContext(ContextoAutenticacion);
   if (!contexto) {
     throw new Error(
-      "usarAutenticacion debe usarse dentro de un ProveedorAutenticacion",
+      "useAutenticacion debe usarse dentro de un ProveedorAutenticacion",
     );
   }
   return contexto;

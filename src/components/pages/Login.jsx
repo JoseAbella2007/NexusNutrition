@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import DisenoAutenticacion from "../common/DisenoAutenticacion";
-import { usarAutenticacion } from "../../context/ContextoAutenticacion";
+import { useAutenticacion } from "../../context/ContextoAutenticacion";
 import { RUTAS } from "../../routes/rutas";
 
 const EXPRESION_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -25,7 +25,7 @@ function validar(formulario) {
 const TODOS_TOCADOS = { correo: true, contrasena: true };
 
 export default function Login() {
-  const { iniciarSesion } = usarAutenticacion();
+  const { iniciarSesion } = useAutenticacion();
   const navegar = useNavigate();
   const ubicacion = useLocation();
 

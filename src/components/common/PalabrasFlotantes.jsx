@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { usarPrefiereMovimientoReducido } from "../../hooks/usarPrefiereMovimientoReducido";
+import { usePrefiereMovimientoReducido } from "../../hooks/usePrefiereMovimientoReducido";
 import "./PalabrasFlotantes.css";
 
 const POSICIONES = [
@@ -14,7 +14,7 @@ const POSICIONES = [
 ];
 
 export default function PalabrasFlotantes({ palabras = [], claseCss = "" }) {
-  const movimientoReducido = usarPrefiereMovimientoReducido();
+  const movimientoReducido = usePrefiereMovimientoReducido();
 
   const items = useMemo(
     () =>
