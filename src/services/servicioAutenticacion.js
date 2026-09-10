@@ -5,11 +5,6 @@ const EXPRESION_CORREO = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const EXPRESION_MAYUSCULA = /[A-ZÁÉÍÓÚÑ]/;
 const EXPRESION_CARACTER_ESPECIAL = /[!@#$%^&*(),.?":{}|<>_\-+=[\]/\\;'~`]/;
 
-const CREDENCIALES_ADMINISTRADOR = {
-  usuario: "admin",
-  contrasena: "admin123",
-};
-
 function obtenerUsuarios() {
   try {
     const datosGuardados = localStorage.getItem(CLAVE_USUARIOS);
@@ -61,7 +56,6 @@ function registrarUsuario({ nombre, correo, contrasena }) {
     nombre: nombre.trim(),
     correo: correoNormalizado,
     contrasena,
-    rol: "usuario",
   };
 
   usuarios.push(usuarioNuevo);
@@ -71,21 +65,6 @@ function registrarUsuario({ nombre, correo, contrasena }) {
 }
 
 function iniciarSesion(correo, contrasena) {
-  if (
-    correo?.trim() === CREDENCIALES_ADMINISTRADOR.usuario &&
-    contrasena === CREDENCIALES_ADMINISTRADOR.contrasena
-  ) {
-    const usuarioAdministrador = {
-      id: "admin",
-      nombre: "Administrador",
-      correo: CREDENCIALES_ADMINISTRADOR.usuario,
-      rol: "administrador",
-    };
-
-    sessionStorage.setItem(CLAVE_SESION, JSON.stringify(usuarioAdministrador));
-    return usuarioAdministrador;
-  }
-
   if (!correo || !EXPRESION_CORREO.test(correo.trim())) {
     throw new Error("Ingresá un email válido.");
   }
@@ -106,21 +85,10 @@ function iniciarSesion(correo, contrasena) {
     id: usuarioEncontrado.id,
     nombre: usuarioEncontrado.nombre,
     correo: usuarioEncontrado.correo,
-    rol: usuarioEncontrado.rol,
   };
 
   sessionStorage.setItem(CLAVE_SESION, JSON.stringify(usuarioActual));
   return usuarioActual;
-}
-
-function eliminarUsuario(id) {
-  const usuarios = obtenerUsuarios().filter((usuario) => usuario.id !== id);
-  guardarUsuarios(usuarios);
-
-  const actual = obtenerUsuarioActual();
-  if (actual?.id === id) {
-    cerrarSesion();
-  }
 }
 
 function cerrarSesion() {
@@ -144,7 +112,6 @@ export const servicioAutenticacion = {
   obtenerUsuarios,
   guardarUsuarios,
   registrarUsuario,
-  eliminarUsuario,
   iniciarSesion,
   cerrarSesion,
   obtenerUsuarioActual,

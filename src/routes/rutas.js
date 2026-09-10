@@ -3,7 +3,6 @@ export const RUTAS = {
   INICIAR_SESION: "/iniciar-sesion",
   REGISTRO: "/registro",
   PRODUCTOS: "/productos",
-  ADMIN: "/admin",
   ACERCA_DE: "/acerca-de",
   NO_ENCONTRADA: "/404",
 };

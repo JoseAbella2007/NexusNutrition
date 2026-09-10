@@ -34,7 +34,6 @@ export function ProveedorAutenticacion({ children }) {
   const valor = {
     usuario,
     estaAutenticado: usuario !== null,
-    esAdministrador: usuario?.rol === "administrador",
     iniciarSesion,
     registrar,
     cerrarSesion,
