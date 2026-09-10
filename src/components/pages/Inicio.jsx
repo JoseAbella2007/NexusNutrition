@@ -5,6 +5,7 @@ import Beneficios from "./secciones/Beneficios";
 import Proceso from "./secciones/Proceso";
 import Filosofia from "./secciones/Filosofia";
 import DivisorSeccion from "../common/DivisorSeccion";
+import Testimonios from "./secciones/Testimonios";
 
 export default function Inicio() {
   return (
@@ -16,6 +17,7 @@ export default function Inicio() {
       <Beneficios />
       <Proceso />
       <Filosofia />
+      <Testimonios />
     </main>
   );
 }
