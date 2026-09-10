@@ -1,0 +1,126 @@
+.pie-pagina {
+  background: var(--bg-1);
+  border-top: 1px solid var(--border-soft);
+  padding-top: 80px;
+}
+
+.pie-pagina__interior {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 60px;
+  padding-bottom: 60px;
+}
+
+.pie-pagina__marca {
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.pie-pagina__lema {
+  font-size: 0.9rem;
+}
+
+.pie-pagina__columnas {
+  display: flex;
+  gap: 64px;
+  flex-wrap: wrap;
+}
+
+.pie-pagina__columna {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pie-pagina__columna-titulo {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.pie-pagina__columna a,
+.pie-pagina__texto-estatico {
+  font-size: 0.88rem;
+  color: var(--grey-mute);
+  transition: color 0.3s ease;
+  width: fit-content;
+}
+
+.pie-pagina__columna a:hover {
+  color: var(--green-lime);
+}
+
+.pie-pagina__inferior {
+  border-top: 1px solid var(--border-soft);
+}
+
+.pie-pagina__inferior-interior {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  padding: 24px 0;
+  font-size: 0.78rem;
+  color: var(--grey-mute);
+}
+
+.pie-pagina__firma {
+  font-family: var(--font-display);
+  letter-spacing: 0.08em;
+  color: var(--green-mid);
+}
+
+@media (max-width: 900px) {
+  .pie-pagina__interior {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .pie-pagina__marca {
+    align-items: center;
+  }
+
+  .pie-pagina .logo--sm .logo__mark {
+    width: 44px;
+    height: 44px;
+  }
+
+  .pie-pagina .logo--sm .logo__word {
+    font-size: 1.25rem;
+  }
+
+  .pie-pagina .logo--sm .logo__sub {
+    font-size: 0.62rem;
+  }
+
+  .pie-pagina__columnas {
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .pie-pagina__columna {
+    align-items: center;
+  }
+
+  .pie-pagina__columna a,
+  .pie-pagina__texto-estatico {
+    width: auto;
+  }
+
+  .pie-pagina__inferior-interior {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+  }
+}
