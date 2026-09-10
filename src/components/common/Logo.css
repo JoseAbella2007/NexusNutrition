@@ -1,0 +1,61 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  user-select: none;
+}
+
+.logo__mark {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 10px rgba(183, 255, 0, 0.22));
+}
+
+.logo--sm .logo__mark {
+  width: 32px;
+  height: 32px;
+}
+
+.logo--lg .logo__mark {
+  width: 56px;
+  height: 56px;
+}
+
+.logo__wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  gap: 4px;
+}
+
+.logo__word {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 0.06em;
+  background: linear-gradient(90deg, #ffffff 0%, var(--green-lime) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.logo--sm .logo__word {
+  font-size: 1rem;
+}
+
+.logo--lg .logo__word {
+  font-size: 1.6rem;
+}
+
+.logo__sub {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.55rem;
+  letter-spacing: 0.42em;
+  color: var(--green-mid);
+}
+
+.logo--lg .logo__sub {
+  font-size: 0.65rem;
+}
