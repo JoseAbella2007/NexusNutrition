@@ -1,0 +1,86 @@
+.card-producto {
+  background-color: var(--bg-1, #080808);
+  border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s var(--ease-premium, cubic-bezier(0.16, 1, 0.3, 1)),
+    border-color 0.3s;
+}
+
+.card-producto:hover {
+  transform: translateY(-4px);
+  border-color: var(--green-classic, #39ff14);
+}
+
+.card-producto__imagen-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: var(--bg-2, #0d0d0d);
+}
+
+.card-producto__imagen {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-producto__categoria {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: var(--green-lime, #b7ff00);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.card-producto__info {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.card-producto__nombre {
+  font-family: 'Space Grotesk', 'Sora', sans-serif;
+  font-size: 1rem;
+  color: var(--white, #ffffff);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.card-producto__precio {
+  font-family: 'Manrope', 'Inter', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--green-lime, #b7ff00);
+  margin: 0;
+}
+
+.card-producto__boton {
+  margin-top: auto;
+  text-align: center;
+  padding: 10px;
+  border-radius: 999px;
+  background-color: transparent;
+  border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
+  color: var(--white-soft, #e5e5e5);
+  font-family: 'Manrope', 'Inter', sans-serif;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.card-producto__boton:hover {
+  background-color: var(--green-lime, #b7ff00);
+  border-color: var(--green-lime, #b7ff00);
+  color: #050505;
+}
