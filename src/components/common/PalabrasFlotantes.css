@@ -1,0 +1,61 @@
+.palabras-flotantes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.palabras-flotantes__item {
+  position: absolute;
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: linear-gradient(
+    120deg,
+    rgba(183, 255, 0, 0.55),
+    rgba(168, 85, 247, 0.5)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  opacity: 0;
+  filter: blur(0.2px);
+  animation-name: flotar-palabra;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes flotar-palabra {
+  0% {
+    transform: translateY(14px);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateY(-10px);
+    opacity: 0.32;
+  }
+  85% {
+    opacity: 0.55;
+  }
+  100% {
+    transform: translateY(14px);
+    opacity: 0;
+  }
+}
+
+.palabras-flotantes__item--estatico {
+  animation: none;
+  opacity: 0.3;
+  transform: none;
+}
+
+@media (max-width: 940px) {
+  .palabras-flotantes {
+    display: none;
+  }
+}
