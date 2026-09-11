@@ -40,13 +40,24 @@ export default function Menu() {
   };
 
   return (
-    <header className={`barra-navegacion ${conScroll ? "barra-navegacion--desplazada" : ""}`}>
+    <header
+      className={`barra-navegacion ${conScroll ? "barra-navegacion--desplazada" : ""}`}
+    >
       <div className="contenedor barra-navegacion__interior">
-        <Link to={RUTAS.INICIO} className="barra-navegacion__logo" onClick={() => setMenuAbierto(false)}>
+        <Link
+          to={RUTAS.INICIO}
+          className="barra-navegacion__logo"
+          onClick={() => {
+            setMenuAbierto(false);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+        >
           <Logo size="sm" />
         </Link>
 
-        <nav className={`barra-navegacion__enlaces ${menuAbierto ? "barra-navegacion__enlaces--abierto" : ""}`}>
+        <nav
+          className={`barra-navegacion__enlaces ${menuAbierto ? "barra-navegacion__enlaces--abierto" : ""}`}
+        >
           {estaAutenticado && (
             <>
               <Link to={RUTAS.INICIO} onClick={() => setMenuAbierto(false)}>
@@ -65,16 +76,27 @@ export default function Menu() {
                   <span className="barra-navegacion__usuario-punto" />
                   Hola, {usuario.nombre.split(" ")[0]}
                 </span>
-                <button className="boton boton-secundario" onClick={manejarCerrarSesion}>
+                <button
+                  className="boton boton-secundario"
+                  onClick={manejarCerrarSesion}
+                >
                   Cerrar sesión
                 </button>
               </>
             ) : (
               <>
-                <Link to={RUTAS.INICIAR_SESION} className="boton boton-fantasma" onClick={() => setMenuAbierto(false)}>
+                <Link
+                  to={RUTAS.INICIAR_SESION}
+                  className="boton boton-fantasma"
+                  onClick={() => setMenuAbierto(false)}
+                >
                   Iniciar sesión
                 </Link>
-                <Link to={RUTAS.REGISTRO} className="boton boton-primario" onClick={() => setMenuAbierto(false)}>
+                <Link
+                  to={RUTAS.REGISTRO}
+                  className="boton boton-primario"
+                  onClick={() => setMenuAbierto(false)}
+                >
                   Crear cuenta
                 </Link>
               </>
@@ -89,7 +111,10 @@ export default function Menu() {
                 <span className="barra-navegacion__usuario-punto" />
                 Hola, {usuario.nombre.split(" ")[0]}
               </span>
-              <button className="boton boton-secundario" onClick={manejarCerrarSesion}>
+              <button
+                className="boton boton-secundario"
+                onClick={manejarCerrarSesion}
+              >
                 Cerrar sesión
               </button>
             </>

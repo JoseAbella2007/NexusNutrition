@@ -3,12 +3,18 @@ import Logo from "./Logo";
 import { RUTAS } from "../../routes/rutas";
 import "./Footer.css";
 
+function irAlComienzo() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
 export default function Footer() {
   return (
     <footer className="pie-pagina">
       <div className="contenedor pie-pagina__interior">
         <div className="pie-pagina__marca">
-          <Logo size="sm" />
+          <Link to={RUTAS.INICIO} onClick={irAlComienzo}>
+            <Logo size="sm" />
+          </Link>
           <p className="pie-pagina__lema">
             Nutrición premium diseñada para acompañar tu rendimiento, tu
             disciplina y tus objetivos.
@@ -18,8 +24,10 @@ export default function Footer() {
         <div className="pie-pagina__columnas">
           <div className="pie-pagina__columna">
             <span className="pie-pagina__columna-titulo">Marca</span>
-            <Link to={RUTAS.INICIO}>Inicio</Link>
-            <Link to={RUTAS.PRODUCTOS}>Productos</Link>
+            <Link to={RUTAS.INICIO} onClick={irAlComienzo}>
+              Inicio
+            </Link>
+            <Link to={RUTAS.REGISTRO}>Productos</Link>
           </div>
 
           <div className="pie-pagina__columna">
