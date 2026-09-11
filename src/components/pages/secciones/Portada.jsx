@@ -129,7 +129,7 @@ export default function Portada() {
           transition={{ duration: 0.8, delay: 0.34, ease: [0.16, 1, 0.3, 1] }}
         >
           <BotonMagnetico
-            hacia={RUTAS.PRODUCTOS}
+            hacia={RUTAS.REGISTRO}
             claseCss="boton boton-primario"
           >
             Descubrir Nexus

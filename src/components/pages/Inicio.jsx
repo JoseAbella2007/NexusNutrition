@@ -4,8 +4,9 @@ import Categorias from "./secciones/Categorias";
 import Beneficios from "./secciones/Beneficios";
 import Proceso from "./secciones/Proceso";
 import Filosofia from "./secciones/Filosofia";
-import DivisorSeccion from "../common/DivisorSeccion";
 import Testimonios from "./secciones/Testimonios";
+import SeccionLlamadoAccion from "./secciones/SeccionLlamadoAccion";
+import DivisorSeccion from "../common/DivisorSeccion";
 
 export default function Inicio() {
   return (
@@ -18,6 +19,7 @@ export default function Inicio() {
       <Proceso />
       <Filosofia />
       <Testimonios />
+      <SeccionLlamadoAccion />
     </main>
   );
 }
