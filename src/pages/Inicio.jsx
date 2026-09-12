@@ -19,7 +19,7 @@ const CATEGORIAS_HOME = [
   {
     nombre: 'Nutrición y Dietas',
     slug: 'nutricion-y-dietas',
-    imagen: 'https://placehold.co/400x300?text=Nutricion',
+    imagen: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80&auto=format&fit=crop',
     tags: ['Alimentación saludable', 'Planes alimentarios', 'Recetas saludables', 'Meal prep'],
     icono: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -32,7 +32,7 @@ const CATEGORIAS_HOME = [
   {
     nombre: 'Salud y Bienestar',
     slug: 'salud-y-bienestar',
-    imagen: 'https://placehold.co/400x300?text=Salud',
+    imagen: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&q=80&auto=format&fit=crop',
     tags: ['Bienestar', 'Sueño y descanso', 'Manejo del estrés', 'Hábitos saludables'],
     icono: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -43,7 +43,7 @@ const CATEGORIAS_HOME = [
   {
     nombre: 'Suplementación',
     slug: 'suplementacion',
-    imagen: 'https://placehold.co/400x300?text=Suplementacion',
+    imagen: 'https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=800&q=80&auto=format&fit=crop',
     tags: ['Proteínas', 'Creatina', 'Pre-entrenos', 'Vitaminas y minerales'],
     icono: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -56,7 +56,6 @@ const CATEGORIAS_HOME = [
 function Inicio() {
   const [productos] = useLocalStorage('productos', productosIniciales);
 
-  // Un producto destacado por categoría (el primero de cada una)
   const PRODUCTOS_DESTACADOS = CATEGORIAS_HOME.map((cat) =>
     productos.find((p) => p.categoria === cat.nombre)
   );
@@ -97,10 +96,17 @@ function Inicio() {
         <div className="categorias__grid">
           {CATEGORIAS_HOME.map((cat) => (
             <Link key={cat.slug} to={`/categoria/${cat.slug}`} className="categoria-card">
+              <span className="categoria-card__corner categoria-card__corner--tl"></span>
+              <span className="categoria-card__corner categoria-card__corner--tr"></span>
+              <span className="categoria-card__corner categoria-card__corner--bl"></span>
+              <span className="categoria-card__corner categoria-card__corner--br"></span>
+
               <div className="categoria-card__imagen-wrapper">
                 <img src={cat.imagen} alt={cat.nombre} className="categoria-card__imagen" />
-                <span className="categoria-card__icono">{cat.icono}</span>
               </div>
+
+              <span className="categoria-card__icono">{cat.icono}</span>
+
               <h3 className="categoria-card__nombre">{cat.nombre}</h3>
               <div className="categoria-card__tags">
                 {cat.tags.map((tag) => (

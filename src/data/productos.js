@@ -5,7 +5,7 @@ const productos = [
     nombre: "Whey Protein Concentrado 1kg",
     precio: 25000,
     categoria: "Suplementación",
-    imagen: "https://placehold.co/300x300?text=Whey+Protein",
+    imagen: "https://placehold.co/400x300/0d0d0d/b7ff00?text=Whey+Protein",
     descripcion: "Proteína de suero de leche, sabor chocolate, ideal para recuperación muscular post-entrenamiento.",
     stock: 15
   },
@@ -14,7 +14,7 @@ const productos = [
     nombre: "Creatina Monohidratada 300g",
     precio: 18000,
     categoria: "Suplementación",
-    imagen: "https://placehold.co/300x300?text=Creatina",
+    imagen: "https://placehold.co/400x300/0d0d0d/b7ff00?text=Creatina",
     descripcion: "Creatina pura sin sabor, mejora la fuerza y el rendimiento en entrenamientos de alta intensidad.",
     stock: 20
   },
@@ -23,7 +23,7 @@ const productos = [
     nombre: "BCAA en Polvo 400g",
     precio: 16500,
     categoria: "Suplementación",
-    imagen: "https://placehold.co/300x300?text=BCAA",
+    imagen: "https://images.unsplash.com/photo-1593095948071-474c5cc2989d?w=800&q=80&auto=format&fit=crop",
     descripcion: "Aminoácidos ramificados, sabor frutilla, ayuda a reducir la fatiga muscular.",
     stock: 18
   },
@@ -32,7 +32,7 @@ const productos = [
     nombre: "Multivitamínico x60 comprimidos",
     precio: 12000,
     categoria: "Suplementación",
-    imagen: "https://placehold.co/300x300?text=Multivitaminico",
+    imagen: "https://images.unsplash.com/photo-1709976142774-ce1ef41a8378?w=800&q=80&auto=format&fit=crop",
     descripcion: "Complejo vitamínico completo para complementar la dieta de un deportista.",
     stock: 22
   },
@@ -41,7 +41,7 @@ const productos = [
     nombre: "Glutamina 300g",
     precio: 14000,
     categoria: "Suplementación",
-    imagen: "https://placehold.co/300x300?text=Glutamina",
+    imagen: "https://images.unsplash.com/photo-1683394572742-1e471f60fc2a?w=800&q=80&auto=format&fit=crop",
     descripcion: "Aminoácido que favorece la recuperación muscular y fortalece el sistema inmune.",
     stock: 16
   },
@@ -50,7 +50,7 @@ const productos = [
     nombre: "Pre-Entreno Explosivo 250g",
     precio: 21000,
     categoria: "Suplementación",
-    imagen: "https://placehold.co/300x300?text=Pre-Entreno",
+    imagen: "https://images.unsplash.com/photo-1724160167551-2ffc3d7ca809?w=800&q=80&auto=format&fit=crop",
     descripcion: "Fórmula con cafeína y beta-alanina para aumentar energía y foco antes de entrenar.",
     stock: 12
   },
@@ -59,7 +59,7 @@ const productos = [
     nombre: "Proteína Vegana 900g",
     precio: 27000,
     categoria: "Suplementación",
-    imagen: "https://placehold.co/300x300?text=Proteina+Vegana",
+    imagen: "https://images.unsplash.com/photo-1693996045838-980674653385?w=800&q=80&auto=format&fit=crop",
     descripcion: "Mezcla de proteína de arveja y arroz, sabor vainilla, apta para dietas plant-based.",
     stock: 10
   },
@@ -68,7 +68,7 @@ const productos = [
     nombre: "Caseína Micelar 900g",
     precio: 26500,
     categoria: "Suplementación",
-    imagen: "https://placehold.co/300x300?text=Caseina",
+    imagen: "https://images.unsplash.com/photo-1693996046147-df51fcf78ebc?w=800&q=80&auto=format&fit=crop",
     descripcion: "Proteína de digestión lenta, ideal para tomar antes de dormir.",
     stock: 11
   },
@@ -77,7 +77,7 @@ const productos = [
     nombre: "Omega 3 x90 cápsulas",
     precio: 9800,
     categoria: "Suplementación",
-    imagen: "https://placehold.co/300x300?text=Omega+3",
+    imagen: "https://images.unsplash.com/photo-1709976142774-ce1ef41a8378?w=800&q=80&auto=format&fit=crop",
     descripcion: "Ácidos grasos esenciales que ayudan a la salud cardiovascular y articular.",
     stock: 24
   },
@@ -86,7 +86,7 @@ const productos = [
     nombre: "Colágeno Hidrolizado 300g",
     precio: 13500,
     categoria: "Suplementación",
-    imagen: "https://placehold.co/300x300?text=Colageno",
+    imagen: "https://images.unsplash.com/photo-1724160167630-a33086ddb552?w=800&q=80&auto=format&fit=crop",
     descripcion: "Colágeno tipo I y III, favorece la salud de piel, articulaciones y tendones.",
     stock: 19
   },
@@ -95,7 +95,7 @@ const productos = [
     nombre: "Quemador de Grasa Termogénico x60",
     precio: 17800,
     categoria: "Suplementación",
-    imagen: "https://placehold.co/300x300?text=Quemador",
+    imagen: "https://images.unsplash.com/photo-1709976142749-4a83767c4228?w=800&q=80&auto=format&fit=crop",
     descripcion: "Fórmula termogénica con cafeína y té verde para apoyar la definición muscular.",
     stock: 13
   },
@@ -104,7 +104,7 @@ const productos = [
     nombre: "Barritas Proteicas Caja x12",
     precio: 15000,
     categoria: "Suplementación",
-    imagen: "https://placehold.co/300x300?text=Barritas",
+    imagen: "https://placehold.co/400x300?text=Barritas+Proteicas",
     descripcion: "Barritas con 20g de proteína cada una, sabor brownie, snack post-entreno.",
     stock: 27
   },
@@ -113,7 +113,7 @@ const productos = [
     nombre: "Maltodextrina 1kg",
     precio: 11000,
     categoria: "Suplementación",
-    imagen: "https://placehold.co/300x300?text=Maltodextrina",
+    imagen: "https://images.unsplash.com/photo-1724160167630-a33086ddb552?w=800&q=80&auto=format&fit=crop",
     descripcion: "Carbohidrato de rápida absorción, ideal para recargar energía en entrenamientos largos.",
     stock: 17
   },
@@ -122,7 +122,7 @@ const productos = [
     nombre: "ZMA x90 cápsulas",
     precio: 10500,
     categoria: "Suplementación",
-    imagen: "https://placehold.co/300x300?text=ZMA",
+    imagen: "https://images.unsplash.com/photo-1709976142749-4a83767c4228?w=800&q=80&auto=format&fit=crop",
     descripcion: "Zinc, magnesio y vitamina B6, apoya el descanso y la recuperación nocturna.",
     stock: 21
   },
@@ -131,7 +131,7 @@ const productos = [
     nombre: "Electrolitos en Polvo 300g",
     precio: 8900,
     categoria: "Suplementación",
-    imagen: "https://placehold.co/300x300?text=Electrolitos",
+    imagen: "https://images.unsplash.com/photo-1764182350435-ed46f1e93c2f?w=800&q=80&auto=format&fit=crop",
     descripcion: "Repone sales minerales perdidas por transpiración durante el ejercicio intenso.",
     stock: 26
   },
@@ -140,7 +140,7 @@ const productos = [
     nombre: "Aminoácidos Esenciales (EAA) 300g",
     precio: 19500,
     categoria: "Suplementación",
-    imagen: "https://placehold.co/300x300?text=EAA",
+    imagen: "https://images.unsplash.com/photo-1693996045463-6ea86d10a2e7?w=800&q=80&auto=format&fit=crop",
     descripcion: "Los 9 aminoácidos esenciales que el cuerpo no puede producir por sí solo.",
     stock: 14
   },

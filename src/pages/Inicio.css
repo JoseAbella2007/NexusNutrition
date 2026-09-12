@@ -102,6 +102,7 @@
   max-width: var(--container-width, 1240px);
   margin: 0 auto;
   padding: 80px 20px;
+  text-align: center;
 }
 
 .categorias__eyebrow {
@@ -118,7 +119,7 @@
   font-family: 'Space Grotesk', 'Sora', sans-serif;
   font-size: 2.2rem;
   color: var(--white, #ffffff);
-  margin: 0 0 40px;
+  margin: 0 0 48px;
 }
 
 .categorias__titulo--verde {
@@ -129,9 +130,11 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 24px;
+  align-items: stretch;
 }
 
 .categoria-card {
+  position: relative;
   background-color: var(--bg-1, #080808);
   border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
   border-radius: 16px;
@@ -139,6 +142,8 @@
   text-decoration: none;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  height: 100%;
   transition: transform 0.3s var(--ease-premium, cubic-bezier(0.16, 1, 0.3, 1)), border-color 0.3s;
 }
 
@@ -147,22 +152,82 @@
   border-color: var(--green-classic, #39ff14);
 }
 
+.categoria-card__corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--green-lime, #b7ff00);
+  opacity: 0;
+  z-index: 3;
+  pointer-events: none;
+  transition: opacity 0.35s var(--ease-premium, cubic-bezier(0.16, 1, 0.3, 1)),
+    transform 0.35s var(--ease-premium, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+.categoria-card__corner--tl {
+  top: 10px;
+  left: 10px;
+  border-right: none;
+  border-bottom: none;
+  transform: translate(10px, 10px);
+}
+
+.categoria-card__corner--tr {
+  top: 10px;
+  right: 10px;
+  border-left: none;
+  border-bottom: none;
+  transform: translate(-10px, 10px);
+}
+
+.categoria-card__corner--bl {
+  bottom: 10px;
+  left: 10px;
+  border-right: none;
+  border-top: none;
+  transform: translate(10px, -10px);
+}
+
+.categoria-card__corner--br {
+  bottom: 10px;
+  right: 10px;
+  border-left: none;
+  border-top: none;
+  transform: translate(-10px, -10px);
+}
+
+.categoria-card:hover .categoria-card__corner {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Altura FIJA en vez de aspect-ratio: garantiza que las 4 cards midan
+   exactamente lo mismo sin importar el tamaño real de cada foto. */
 .categoria-card__imagen-wrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  height: 200px;
+  flex-shrink: 0;
 }
 
 .categoria-card__imagen {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
+}
+
+.categoria-card__imagen-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(5, 5, 5, 0) 55%, var(--bg-1, #080808) 100%);
 }
 
 .categoria-card__icono {
-  position: absolute;
-  bottom: -20px;
-  left: 20px;
+  position: relative;
+  margin-top: -22px;
+  z-index: 2;
   width: 44px;
   height: 44px;
   background-color: var(--bg-1, #080808);
@@ -172,6 +237,7 @@
   align-items: center;
   justify-content: center;
   color: var(--green-lime, #b7ff00);
+  flex-shrink: 0;
 }
 
 .categoria-card__icono svg {
@@ -183,14 +249,17 @@
   font-family: 'Space Grotesk', 'Sora', sans-serif;
   color: var(--white, #ffffff);
   font-size: 1.15rem;
-  margin: 32px 20px 12px;
+  margin: 16px 20px 12px;
+  text-align: center;
 }
 
 .categoria-card__tags {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 8px;
-  padding: 0 20px 20px;
+  padding: 0 20px 24px;
+  margin-top: auto;
 }
 
 .categoria-card__tag {
