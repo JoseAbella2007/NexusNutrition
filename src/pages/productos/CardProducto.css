@@ -1,52 +1,121 @@
 .card-producto {
-  background-color: var(--bg-1, #080808);
-  border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
+  position: relative;
+  height: 320px;
   border-radius: 16px;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s var(--ease-premium, cubic-bezier(0.16, 1, 0.3, 1)),
-    border-color 0.3s;
-}
-
-.card-producto:hover {
-  transform: translateY(-4px);
-  border-color: var(--green-classic, #39ff14);
-}
-
-.card-producto__imagen-wrapper {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  background-color: var(--bg-2, #0d0d0d);
+  border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
+  background-color: var(--bg-1, #080808);
 }
 
 .card-producto__imagen {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.6s var(--ease-premium, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+.card-producto:hover .card-producto__imagen {
+  transform: scale(1.08);
+}
+
+/* El degradado ahora es invisible por defecto: solo aparece en hover,
+   al mismo tiempo que el panel de texto. */
+.card-producto__degradado {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(5, 5, 5, 0.95) 0%, rgba(5, 5, 5, 0.5) 45%, transparent 75%);
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.card-producto:hover .card-producto__degradado {
+  opacity: 1;
+}
+
+/* ================= ÍCONOS Y CATEGORÍA (siempre visibles) ================= */
+.card-producto__superior {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .card-producto__categoria {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.55);
   color: var(--green-lime, #b7ff00);
   font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  padding: 4px 10px;
+  padding: 6px 12px;
   border-radius: 999px;
+  backdrop-filter: blur(4px);
 }
 
-.card-producto__info {
+.card-producto__iconos {
+  display: flex;
+  gap: 8px;
+}
+
+.card-producto__icono-boton {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--white, #ffffff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background-color 0.25s, color 0.25s, transform 0.25s;
+}
+
+.card-producto__icono-boton svg {
+  width: 16px;
+  height: 16px;
+}
+
+.card-producto__icono-boton:hover {
+  transform: scale(1.12);
+}
+
+.card-producto__icono-boton--activo {
+  background-color: var(--green-lime, #b7ff00);
+  color: #050505;
+  border-color: var(--green-lime, #b7ff00);
+}
+
+/* ================= PANEL: oculto del todo por defecto ================= */
+.card-producto__panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
   padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  flex: 1;
+  /* translateY(100%) mueve el panel exactamente su propia altura hacia
+     abajo, sin importar cuánto texto tenga adentro — queda 100% oculto. */
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.45s var(--ease-premium, cubic-bezier(0.16, 1, 0.3, 1)),
+    opacity 0.3s ease;
+}
+
+.card-producto:hover .card-producto__panel {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .card-producto__nombre {
@@ -66,21 +135,18 @@
 }
 
 .card-producto__boton {
-  margin-top: auto;
   text-align: center;
   padding: 10px;
   border-radius: 999px;
-  background-color: transparent;
-  border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
-  color: var(--white-soft, #e5e5e5);
+  background-color: var(--green-lime, #b7ff00);
+  color: #050505;
   font-family: 'Manrope', 'Inter', sans-serif;
+  font-weight: 700;
   font-size: 0.85rem;
   text-decoration: none;
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  transition: opacity 0.3s;
 }
 
 .card-producto__boton:hover {
-  background-color: var(--green-lime, #b7ff00);
-  border-color: var(--green-lime, #b7ff00);
-  color: #050505;
+  opacity: 0.85;
 }
