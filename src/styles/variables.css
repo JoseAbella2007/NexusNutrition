@@ -1,0 +1,91 @@
+/* src/styles/variables.css
+   Cargar UNA sola vez, de forma global (por ejemplo desde main.jsx o App.jsx: import "./styles/variables.css").
+   Si otro integrante ya definió estas variables en otro archivo, borrar este y avisar al equipo para no duplicar. */
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600&display=swap");
+
+:root {
+  /* Fondos oscuros */
+  --bg-0: #050505;
+  --bg-1: #080808;
+  --bg-2: #0d0d0d;
+
+  /* Verdes de marca (principales) */
+  --green-lime: #b7ff00;
+  --green-mid: #7cff3a;
+  --green-classic: #39ff14;
+
+  /* Violetas de marca (acentos) */
+  --purple-1: #7b2cff;
+  --purple-2: #a855f7;
+
+  /* Blancos y grises */
+  --white: #ffffff;
+  --white-soft: #e5e5e5;
+  --grey-mute: #8a8a8a;
+  --border-soft: rgba(255, 255, 255, 0.08);
+
+  /* Degradados */
+  --gradient-green: linear-gradient(135deg, #b7ff00 0%, #7cff3a 100%);
+  --gradient-green-purple: linear-gradient(135deg, #b7ff00 0%, #7b2cff 100%);
+  --gradient-purple-black: linear-gradient(135deg, #7b2cff 0%, #050505 100%);
+
+  /* Tipografía */
+  --font-heading: "Space Grotesk", "Sora", sans-serif;
+  --font-body: "Manrope", "Inter", sans-serif;
+
+  /* Otros tokens */
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+  --container-width: 1240px;
+
+  /* Pisa las variables de Bootstrap para que su propio body{} termine
+     usando nuestros colores, sin importar el orden de los imports. */
+  --bs-body-bg: var(--bg-0);
+  --bs-body-color: var(--white-soft);
+  --bs-body-font-family: var(--font-body);
+}
+
+html, body, #root {
+  background-color: var(--bg-0) !important;
+  min-height: 100vh;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--white-soft);
+  font-family: var(--font-body);
+}
+
+/* Popup de SweetAlert2 con el tema oscuro/verde de la marca */
+.swal-nexus-popup {
+  background: var(--bg-1) !important;
+  border: 1px solid var(--border-soft);
+  border-radius: 20px !important;
+  font-family: var(--font-body);
+}
+.swal-nexus-title {
+  font-family: var(--font-heading) !important;
+  color: var(--white) !important;
+}
+.swal-nexus-text {
+  color: var(--white-soft) !important;
+}
+.swal-nexus-confirm {
+  background: var(--gradient-green) !important;
+  color: var(--bg-0) !important;
+  border-radius: 999px !important;
+  font-weight: 700 !important;
+  padding: 10px 28px !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--white);
+}
