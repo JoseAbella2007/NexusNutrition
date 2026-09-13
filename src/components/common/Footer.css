@@ -46,7 +46,8 @@
 }
 
 .pie-pagina__columna a,
-.pie-pagina__texto-estatico {
+.pie-pagina__texto-estatico,
+.pie-pagina__sesion {
   font-size: 0.88rem;
   color: var(--grey-mute);
   transition: color 0.3s ease;
@@ -113,7 +114,8 @@
   }
 
   .pie-pagina__columna a,
-  .pie-pagina__texto-estatico {
+  .pie-pagina__texto-estatico,
+  .pie-pagina__sesion {
     width: auto;
   }
 

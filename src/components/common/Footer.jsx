@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
+import { useAutenticacion } from "../../context/ContextoAutenticacion";
 import { RUTAS } from "../../routes/rutas";
 import "./Footer.css";
 
@@ -8,6 +9,13 @@ function irAlComienzo() {
 }
 
 export default function Footer() {
+  const { estaAutenticado, esAdministrador, usuario } = useAutenticacion();
+  const destinoProductos = esAdministrador
+    ? RUTAS.ADMIN
+    : estaAutenticado
+      ? RUTAS.PRODUCTOS
+      : RUTAS.REGISTRO;
+
   return (
     <footer className="pie-pagina">
       <div className="contenedor pie-pagina__interior">
@@ -27,13 +35,21 @@ export default function Footer() {
             <Link to={RUTAS.INICIO} onClick={irAlComienzo}>
               Inicio
             </Link>
-            <Link to={RUTAS.REGISTRO}>Productos</Link>
+            <Link to={destinoProductos}>Productos</Link>
           </div>
 
           <div className="pie-pagina__columna">
             <span className="pie-pagina__columna-titulo">Cuenta</span>
-            <Link to={RUTAS.INICIAR_SESION}>Iniciar sesión</Link>
-            <Link to={RUTAS.REGISTRO}>Crear cuenta</Link>
+            {estaAutenticado ? (
+              <span className="pie-pagina__sesion">
+                Sesión iniciada como {usuario.nombre.split(" ")[0]}
+              </span>
+            ) : (
+              <>
+                <Link to={RUTAS.INICIAR_SESION}>Iniciar sesión</Link>
+                <Link to={RUTAS.REGISTRO}>Crear cuenta</Link>
+              </>
+            )}
           </div>
 
           <div className="pie-pagina__columna">

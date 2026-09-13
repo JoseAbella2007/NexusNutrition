@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import BotonMagnetico from "../../common/animaciones/BotonMagnetico";
 import imagenCorredor from "../../../assets/imagenes/corredor.webp";
 import { usePrefiereMovimientoReducido } from "../../../hooks/usePrefiereMovimientoReducido";
+import { useAutenticacion } from "../../../context/ContextoAutenticacion";
 import { RUTAS } from "../../../routes/rutas";
 import "./Portada.css";
 
@@ -29,6 +30,7 @@ export default function Portada() {
   const referenciaSeccion = useRef(null);
   const movimientoReducido = usePrefiereMovimientoReducido();
   const particulas = useParticulas(18);
+  const { estaAutenticado, usuario } = useAutenticacion();
 
   const { scrollYProgress: progresoScroll } = useScroll({
     target: referenciaSeccion,
@@ -98,7 +100,9 @@ export default function Portada() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          NEXUS NUTRITION
+          {estaAutenticado
+            ? `Bienvenido de nuevo, ${usuario.nombre.split(" ")[0]}`
+            : "NEXUS NUTRITION"}
         </motion.span>
 
         <motion.h1
@@ -107,9 +111,19 @@ export default function Portada() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         >
-          TU MEJOR VERSIÓN
-          <br />
-          <span className="texto-degradado">EMPIEZA AQUÍ</span>
+          {estaAutenticado ? (
+            <>
+              SEGUÍ CONSTRUYENDO
+              <br />
+              <span className="texto-degradado">TU MEJOR VERSIÓN</span>
+            </>
+          ) : (
+            <>
+              TU MEJOR VERSIÓN
+              <br />
+              <span className="texto-degradado">EMPIEZA AQUÍ</span>
+            </>
+          )}
         </motion.h1>
 
         <motion.p
@@ -118,8 +132,9 @@ export default function Portada() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
         >
-          Nutrición premium diseñada para acompañar tu rendimiento, tu
-          disciplina y tus objetivos.
+          {estaAutenticado
+            ? "Cada entrenamiento suma. Explorá el catálogo y encontrá tu próxima fórmula."
+            : "Nutrición premium diseñada para acompañar tu rendimiento, tu disciplina y tus objetivos."}
         </motion.p>
 
         <motion.div
@@ -128,18 +143,29 @@ export default function Portada() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.34, ease: [0.16, 1, 0.3, 1] }}
         >
-          <BotonMagnetico
-            hacia={RUTAS.REGISTRO}
-            claseCss="boton boton-primario"
-          >
-            Descubrir Nexus
-          </BotonMagnetico>
-          <BotonMagnetico
-            hacia={RUTAS.REGISTRO}
-            claseCss="boton boton-secundario"
-          >
-            Crear cuenta
-          </BotonMagnetico>
+          {estaAutenticado ? (
+            <BotonMagnetico
+              hacia={RUTAS.PRODUCTOS}
+              claseCss="boton boton-primario"
+            >
+              Ver catálogo
+            </BotonMagnetico>
+          ) : (
+            <>
+              <BotonMagnetico
+                hacia={RUTAS.REGISTRO}
+                claseCss="boton boton-primario"
+              >
+                Descubrir Nexus
+              </BotonMagnetico>
+              <BotonMagnetico
+                hacia={RUTAS.REGISTRO}
+                claseCss="boton boton-secundario"
+              >
+                Crear cuenta
+              </BotonMagnetico>
+            </>
+          )}
         </motion.div>
       </motion.div>
 
