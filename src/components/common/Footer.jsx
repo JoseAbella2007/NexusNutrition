@@ -38,12 +38,33 @@ export default function Footer() {
             <Link to={destinoProductos}>Productos</Link>
           </div>
 
+          {estaAutenticado && (
+            <div className="pie-pagina__columna">
+              <span className="pie-pagina__columna-titulo">Legal</span>
+              <Link to={RUTAS.NO_ENCONTRADA}>Términos y condiciones</Link>
+              <Link to={RUTAS.NO_ENCONTRADA}>Política de privacidad</Link>
+            </div>
+          )}
+
           <div className="pie-pagina__columna">
             <span className="pie-pagina__columna-titulo">Cuenta</span>
             {estaAutenticado ? (
-              <span className="pie-pagina__sesion">
-                Sesión iniciada como {usuario.nombre.split(" ")[0]}
-              </span>
+              <div className="pie-pagina__sesion">
+                <span className="pie-pagina__sesion-texto">
+                  Sesión iniciada como {usuario.nombre.split(" ")[0]}
+                </span>
+                <span className="pie-pagina__sesion-icono" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M5 13l4 4L19 7"
+                      stroke="currentColor"
+                      strokeWidth="2.4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+              </div>
             ) : (
               <>
                 <Link to={RUTAS.INICIAR_SESION}>Iniciar sesión</Link>
@@ -52,11 +73,13 @@ export default function Footer() {
             )}
           </div>
 
-          <div className="pie-pagina__columna">
-            <span className="pie-pagina__columna-titulo">Legal</span>
-            <Link to={RUTAS.NO_ENCONTRADA}>Términos y condiciones</Link>
-            <Link to={RUTAS.NO_ENCONTRADA}>Política de privacidad</Link>
-          </div>
+          {!estaAutenticado && (
+            <div className="pie-pagina__columna">
+              <span className="pie-pagina__columna-titulo">Legal</span>
+              <Link to={RUTAS.NO_ENCONTRADA}>Términos y condiciones</Link>
+              <Link to={RUTAS.NO_ENCONTRADA}>Política de privacidad</Link>
+            </div>
+          )}
         </div>
       </div>
 

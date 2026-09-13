@@ -61,7 +61,13 @@ export default function Menu() {
         >
           {estaAutenticado && (
             <>
-              <Link to={RUTAS.INICIO} onClick={() => setMenuAbierto(false)}>
+              <Link
+                to={RUTAS.INICIO}
+                onClick={() => {
+                  setMenuAbierto(false);
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+              >
                 Inicio
               </Link>
               <Link to={RUTAS.PRODUCTOS} onClick={() => setMenuAbierto(false)}>
