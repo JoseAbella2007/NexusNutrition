@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import RevelarAlDesplazar from "../../common/animaciones/RevelarAlDesplazar";
 import TarjetaInclinada from "../../common/animaciones/TarjetaInclinada";
 import FondoSeccion from "../../common/FondoSeccion";
+import { useAutenticacion } from "../../../context/ContextoAutenticacion";
 import { RUTAS } from "../../../routes/rutas";
 import "./Categorias.css";
 
@@ -63,6 +64,13 @@ const CATEGORIAS = [
 ];
 
 export default function Categorias() {
+  const { estaAutenticado, esAdministrador } = useAutenticacion();
+  const destino = esAdministrador
+    ? RUTAS.ADMIN
+    : estaAutenticado
+      ? RUTAS.PRODUCTOS
+      : RUTAS.REGISTRO;
+
   return (
     <section className="seccion categorias">
       <FondoSeccion />
@@ -78,9 +86,13 @@ export default function Categorias() {
           {CATEGORIAS.map((categoria, indice) => (
             <RevelarAlDesplazar key={categoria.nombre} retraso={indice * 0.08}>
               <Link
-                to={RUTAS.REGISTRO}
+                to={destino}
                 className="tarjeta-categoria__enlace"
-                aria-label={`Ver ${categoria.nombre}: creá tu cuenta para acceder`}
+                aria-label={
+                  estaAutenticado
+                    ? `Ver ${categoria.nombre}`
+                    : `Ver ${categoria.nombre}: creá tu cuenta para acceder`
+                }
               >
                 <TarjetaInclinada claseCss="tarjeta-categoria" intensidad={8}>
                   <div className="tarjeta-categoria__imagen">

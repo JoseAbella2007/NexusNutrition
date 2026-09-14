@@ -1,0 +1,134 @@
+.admin {
+  position: relative;
+  min-height: 100vh;
+  padding-top: 140px;
+}
+
+.admin__contenido {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+.admin__encabezado {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 640px;
+}
+
+.admin__titulo {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+}
+
+.admin__texto {
+  font-size: 0.98rem;
+}
+
+.admin__bloque {
+  padding: 32px;
+  border-radius: 24px;
+  background: var(--bg-1);
+  border: 1px solid var(--border-soft);
+}
+
+.admin__bloque-encabezado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.admin__bloque-encabezado h2 {
+  font-size: 1.3rem;
+}
+
+.admin__vacio {
+  font-size: 0.92rem;
+  color: var(--grey-mute);
+}
+
+.admin__tabla-envoltorio {
+  overflow-x: auto;
+}
+
+.admin__tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.admin__tabla th {
+  text-align: left;
+  padding: 10px 14px;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--grey-mute);
+  border-bottom: 1px solid var(--border-soft);
+  white-space: nowrap;
+}
+
+.admin__tabla td {
+  padding: 14px;
+  border-bottom: 1px solid var(--border-soft);
+  color: var(--white-soft);
+  vertical-align: middle;
+}
+
+.admin__tabla tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.admin__tabla tbody tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.admin__rol {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border: 1px solid var(--border-soft);
+  color: var(--green-lime);
+}
+
+.admin__acciones {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  white-space: nowrap;
+}
+
+.admin__acciones .boton {
+  padding: 8px 16px;
+  font-size: 0.68rem;
+}
+
+.admin__boton-borrar {
+  color: #ff8080;
+  border-color: rgba(255, 90, 90, 0.3);
+}
+
+.admin__boton-borrar:hover {
+  color: #ff9d9d;
+}
+
+@media (max-width: 700px) {
+  .admin {
+    padding-top: 120px;
+  }
+
+  .admin__bloque {
+    padding: 22px;
+  }
+}

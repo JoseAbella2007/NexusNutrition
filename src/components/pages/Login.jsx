@@ -8,10 +8,14 @@ const EXPRESION_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function validar(formulario) {
   const errores = {};
+  const esUsuarioAdmin = formulario.correo.trim() === "admin";
 
   if (!formulario.correo.trim()) {
     errores.correo = "Ingresá tu email.";
-  } else if (!EXPRESION_EMAIL.test(formulario.correo.trim())) {
+  } else if (
+    !esUsuarioAdmin &&
+    !EXPRESION_EMAIL.test(formulario.correo.trim())
+  ) {
     errores.correo = "Ingresá un email válido.";
   }
 
@@ -58,8 +62,13 @@ export default function Login() {
     if (Object.keys(erroresDeValidacion).length > 0) return;
 
     try {
-      iniciarSesion(formulario.correo, formulario.contrasena);
-      const rutaDestino = ubicacion.state?.from ?? RUTAS.PRODUCTOS;
+      const usuarioLogueado = iniciarSesion(
+        formulario.correo,
+        formulario.contrasena,
+      );
+      const destinoPorDefecto =
+        usuarioLogueado.rol === "administrador" ? RUTAS.ADMIN : RUTAS.PRODUCTOS;
+      const rutaDestino = ubicacion.state?.from ?? destinoPorDefecto;
       navegar(rutaDestino, { replace: true });
     } catch (error) {
       setErrorFormulario(error.message);

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
+import { useAutenticacion } from "../../context/ContextoAutenticacion";
 import { RUTAS } from "../../routes/rutas";
 import "./Footer.css";
 
@@ -8,6 +9,13 @@ function irAlComienzo() {
 }
 
 export default function Footer() {
+  const { estaAutenticado, esAdministrador, usuario } = useAutenticacion();
+  const destinoProductos = esAdministrador
+    ? RUTAS.ADMIN
+    : estaAutenticado
+      ? RUTAS.PRODUCTOS
+      : RUTAS.REGISTRO;
+
   return (
     <footer className="pie-pagina">
       <div className="contenedor pie-pagina__interior">
@@ -27,20 +35,51 @@ export default function Footer() {
             <Link to={RUTAS.INICIO} onClick={irAlComienzo}>
               Inicio
             </Link>
-            <Link to={RUTAS.REGISTRO}>Productos</Link>
+            <Link to={destinoProductos}>Productos</Link>
           </div>
+
+          {estaAutenticado && (
+            <div className="pie-pagina__columna">
+              <span className="pie-pagina__columna-titulo">Legal</span>
+              <Link to={RUTAS.NO_ENCONTRADA}>Términos y condiciones</Link>
+              <Link to={RUTAS.NO_ENCONTRADA}>Política de privacidad</Link>
+            </div>
+          )}
 
           <div className="pie-pagina__columna">
             <span className="pie-pagina__columna-titulo">Cuenta</span>
-            <Link to={RUTAS.INICIAR_SESION}>Iniciar sesión</Link>
-            <Link to={RUTAS.REGISTRO}>Crear cuenta</Link>
+            {estaAutenticado ? (
+              <div className="pie-pagina__sesion">
+                <span className="pie-pagina__sesion-texto">
+                  Sesión iniciada como {usuario.nombre.split(" ")[0]}
+                </span>
+                <span className="pie-pagina__sesion-icono" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M5 13l4 4L19 7"
+                      stroke="currentColor"
+                      strokeWidth="2.4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+              </div>
+            ) : (
+              <>
+                <Link to={RUTAS.INICIAR_SESION}>Iniciar sesión</Link>
+                <Link to={RUTAS.REGISTRO}>Crear cuenta</Link>
+              </>
+            )}
           </div>
 
-          <div className="pie-pagina__columna">
-            <span className="pie-pagina__columna-titulo">Legal</span>
-            <Link to={RUTAS.NO_ENCONTRADA}>Términos y condiciones</Link>
-            <Link to={RUTAS.NO_ENCONTRADA}>Política de privacidad</Link>
-          </div>
+          {!estaAutenticado && (
+            <div className="pie-pagina__columna">
+              <span className="pie-pagina__columna-titulo">Legal</span>
+              <Link to={RUTAS.NO_ENCONTRADA}>Términos y condiciones</Link>
+              <Link to={RUTAS.NO_ENCONTRADA}>Política de privacidad</Link>
+            </div>
+          )}
         </div>
       </div>
 

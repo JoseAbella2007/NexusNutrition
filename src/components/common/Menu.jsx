@@ -6,7 +6,8 @@ import { RUTAS } from "../../routes/rutas";
 import "./Menu.css";
 
 export default function Menu() {
-  const { estaAutenticado, usuario, cerrarSesion } = useAutenticacion();
+  const { estaAutenticado, esAdministrador, usuario, cerrarSesion } =
+    useAutenticacion();
   const [conScroll, setConScroll] = useState(false);
   const [menuAbierto, setMenuAbierto] = useState(false);
   const navegar = useNavigate();
@@ -60,12 +61,23 @@ export default function Menu() {
         >
           {estaAutenticado && (
             <>
-              <Link to={RUTAS.INICIO} onClick={() => setMenuAbierto(false)}>
+              <Link
+                to={RUTAS.INICIO}
+                onClick={() => {
+                  setMenuAbierto(false);
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+              >
                 Inicio
               </Link>
               <Link to={RUTAS.PRODUCTOS} onClick={() => setMenuAbierto(false)}>
                 Productos
               </Link>
+              {esAdministrador && (
+                <Link to={RUTAS.ADMIN} onClick={() => setMenuAbierto(false)}>
+                  Admin
+                </Link>
+              )}
             </>
           )}
 
