@@ -72,7 +72,7 @@ export default function Categorias() {
       : RUTAS.REGISTRO;
 
   return (
-    <section className="seccion categorias">
+    <section className="seccion categorias_nexus">
       <FondoSeccion />
       <div className="contenedor">
         <RevelarAlDesplazar claseCss="categorias__encabezado">
