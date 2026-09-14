@@ -3,12 +3,14 @@ import productosIniciales from '../../data/productos';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import FormularioProducto from './FormularioProducto';
 import ItemProducto from './ItemProducto';
+import ConfirmarEliminar from './ConfirmarEliminar';
 import './AdminProductos.css';
 
 function AdminProductos() {
   const [productos, setProductos] = useLocalStorage('productos', productosIniciales);
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
   const [productoEditar, setProductoEditar] = useState(null);
+  const [productoAEliminar, setProductoAEliminar] = useState(null);
 
   function abrirAlta() {
     setProductoEditar(null);
@@ -34,11 +36,14 @@ function AdminProductos() {
     cerrarFormulario();
   }
 
-  function eliminarProducto(id) {
-    const confirmar = window.confirm('¿Seguro que querés eliminar este producto?');
-    if (confirmar) {
-      setProductos(productos.filter((p) => p.id !== id));
-    }
+  function pedirConfirmacionBorrado(id) {
+    const producto = productos.find((p) => p.id === id);
+    setProductoAEliminar(producto);
+  }
+
+  function confirmarEliminacion() {
+    setProductos(productos.filter((p) => p.id !== productoAEliminar.id));
+    setProductoAEliminar(null);
   }
 
   return (
@@ -70,7 +75,7 @@ function AdminProductos() {
                 key={producto.id}
                 producto={producto}
                 onEditar={abrirEdicion}
-                onEliminar={eliminarProducto}
+                onEliminar={pedirConfirmacionBorrado}
               />
             ))}
           </tbody>
@@ -83,6 +88,14 @@ function AdminProductos() {
           productosExistentes={productos}
           onGuardar={guardarProducto}
           onCancelar={cerrarFormulario}
+        />
+      )}
+
+      {productoAEliminar && (
+        <ConfirmarEliminar
+          producto={productoAEliminar}
+          onConfirmar={confirmarEliminacion}
+          onCancelar={() => setProductoAEliminar(null)}
         />
       )}
     </div>
