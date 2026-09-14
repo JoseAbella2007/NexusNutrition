@@ -50,14 +50,24 @@ function AdminProductos() {
     <div className="admin-productos">
       <div className="admin-productos__header">
         <h1 className="admin-productos__titulo">Gestión de Productos</h1>
-        <button className="admin-productos__boton-alta" onClick={abrirAlta}>
-          + Agregar producto
-        </button>
       </div>
 
       <p className="admin-productos__contador">{productos.length} productos cargados</p>
 
       <div className="admin-productos__tabla-wrapper">
+        <div className="admin-productos__tabla-header">
+          <button
+            className="admin-productos__boton-icono"
+            onClick={abrirAlta}
+            title="Agregar producto"
+            aria-label="Agregar producto"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+          </button>
+        </div>
+
         <table className="admin-productos__tabla">
           <thead>
             <tr>

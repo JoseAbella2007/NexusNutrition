@@ -1,18 +1,27 @@
 .admin-productos {
+  position: relative;
   max-width: var(--container-width, 1240px);
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 140px 20px 60px;
   min-height: 100vh;
-  background-color: var(--bg-0, #050505);
+}
+
+/* Fondo con la imagen + degradado oscuro encima para que el texto siga
+   siendo legible (igual criterio que usamos en el Hero de la Home) */
+.admin-productos::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(180deg, rgba(5, 5, 5, 0.88) 0%, rgba(5, 5, 5, 0.94) 100%),
+    url('/admin-productos-fondo.jpeg');
+  background-size: cover;
+  background-position: center;
 }
 
 .admin-productos__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin-bottom: 8px;
-  flex-wrap: wrap;
-  gap: 12px;
 }
 
 .admin-productos__titulo {
@@ -21,28 +30,51 @@
   margin: 0;
 }
 
-.admin-productos__boton-alta {
-  background-color: var(--green-lime, #b7ff00);
-  color: #050505;
-  border: none;
-  border-radius: 999px;
-  padding: 12px 22px;
-  font-family: 'Manrope', 'Inter', sans-serif;
-  font-weight: 700;
-  cursor: pointer;
-}
-
 .admin-productos__contador {
   color: var(--grey-mute, #8a8a8a);
   font-family: 'Manrope', 'Inter', sans-serif;
   font-size: 0.9rem;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .admin-productos__tabla-wrapper {
-  overflow-x: auto;
   border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
   border-radius: 16px;
+  overflow: hidden;
+  background-color: rgba(8, 8, 8, 0.85);
+  backdrop-filter: blur(6px);
+}
+
+.admin-productos__tabla-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 14px;
+  background-color: rgba(8, 8, 8, 0.6);
+  border-bottom: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
+}
+
+.admin-productos__boton-icono {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--green-lime, #b7ff00);
+  color: #050505;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.admin-productos__boton-icono svg {
+  width: 18px;
+  height: 18px;
+}
+
+.admin-productos__boton-icono:hover {
+  transform: rotate(90deg);
+  opacity: 0.9;
 }
 
 .admin-productos__tabla {
@@ -52,7 +84,7 @@
 }
 
 .admin-productos__tabla thead {
-  background-color: var(--bg-1, #080808);
+  background-color: rgba(8, 8, 8, 0.6);
 }
 
 .admin-productos__tabla th {
@@ -101,7 +133,7 @@
 }
 
 .item-producto__editar {
-  background-color: var(--bg-2, #0d0d0d);
+  background-color: rgba(13, 13, 13, 0.8);
   color: var(--white-soft, #e5e5e5);
   border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
 }
