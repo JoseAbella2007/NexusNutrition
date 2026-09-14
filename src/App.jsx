@@ -1,9 +1,5 @@
 import Nosotros from "./components/pages/Nosotros"
-function App() {
-  return <Nosotros />;
-}
-
-export default App;import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { RUTAS } from "./routes/rutas";
 import DisenoSitio from "./components/common/DisenoSitio";
 import RutaAdministrador from "./routes/RutaAdministrador";
@@ -14,6 +10,7 @@ import Administrador from "./components/pages/Administrador";
 import InicioProductos from "./pages/Inicio";
 import CategoriaProductos from "./pages/productos/CategoriaProductos";
 import DetalleDeProducto from "./pages/productos/DetalleDeProducto";
+
 
 export default function App() {
   return (
@@ -26,7 +23,10 @@ export default function App() {
           element={<CategoriaProductos />}
         />
         <Route path="/producto/:id" element={<DetalleDeProducto />} />
-
+        <Route 
+        path="/nosotros"
+        element={<Nosotros/>}
+        />
         <Route element={<RutaAdministrador />}>
           <Route path={RUTAS.ADMIN} element={<Administrador />} />
         </Route>
@@ -36,4 +36,5 @@ export default function App() {
       <Route path={RUTAS.REGISTRO} element={<Registro />} />
     </Routes>
   );
+  
 }
