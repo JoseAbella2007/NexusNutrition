@@ -9,7 +9,7 @@ import Administrador from "./components/pages/Administrador";
 import InicioProductos from "./pages/Inicio";
 import CategoriaProductos from "./pages/productos/CategoriaProductos";
 import DetalleDeProducto from "./pages/productos/DetalleDeProducto";
-import AdminProductos from './pages/productos/AdminProductos';
+import AdminProductos from "./pages/productos/AdminProductos";
 
 export default function App() {
   return (
@@ -25,10 +25,11 @@ export default function App() {
 
         <Route element={<RutaAdministrador />}>
           <Route path={RUTAS.ADMIN} element={<Administrador />} />
+          <Route path="/admin/productos" element={<AdminProductos />} />
         </Route>
       </Route>
       <Route path={RUTAS.INICIAR_SESION} element={<Login />} />
       <Route path={RUTAS.REGISTRO} element={<Registro />} />
-<Route path="/admin/productos" element={<AdminProductos />} />    </Routes>
+    </Routes>
   );
 }
