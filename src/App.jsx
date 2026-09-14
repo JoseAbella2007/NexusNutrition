@@ -1,4 +1,9 @@
-import { Route, Routes } from "react-router-dom";
+import Nosotros from "./components/pages/Nosotros"
+function App() {
+  return <Nosotros />;
+}
+
+export default App;import { Route, Routes } from "react-router-dom";
 import { RUTAS } from "./routes/rutas";
 import DisenoSitio from "./components/common/DisenoSitio";
 import RutaAdministrador from "./routes/RutaAdministrador";

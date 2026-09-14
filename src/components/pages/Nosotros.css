@@ -1,0 +1,114 @@
+/* Usa las variables globales del proyecto (--bg-0, --green-lime, etc.)
+   definidas en :root — no se redefinen acá para que siempre tomen
+   el valor oficial de la paleta. */
+
+.about-page {
+  background: var(--bg-1);
+  color: var(--white-soft);
+  font-family: var(--font-body);
+  padding: 64px 24px;
+  max-width: var(--container-width);
+  margin-inline: auto;
+  align-self: stretch;
+  width: 100%;
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.about-eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--green-lime);
+  letter-spacing: 0.02em;
+}
+
+.about-header h1 {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  margin: 8px 0 8px;
+  background: var(--gradient-green-purple);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.about-header p {
+  color: var(--grey-mute);
+}
+
+.about-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 24px;
+}
+
+.about-card {
+  background: var(--bg-2);
+  border: 1px solid var(--border-soft);
+  border-radius: 16px;
+  padding: 28px 20px;
+  text-align: center;
+  transition: transform 0.4s var(--ease-premium), border-color 0.4s var(--ease-premium);
+}
+
+.about-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--purple-2);
+}
+
+.about-photo {
+  width: 92px;
+  height: 92px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  padding: 2px;
+  background: var(--gradient-green-purple);
+}
+
+.about-photo img,
+.about-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-photo img {
+  object-fit: cover;
+}
+
+.about-photo-placeholder {
+  background: var(--bg-0);
+  color: var(--green-lime);
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.about-card h3 {
+  font-family: var(--font-display);
+  margin: 4px 0 2px;
+  font-size: 1.1rem;
+  color: var(--white);
+}
+
+.about-card p {
+  margin: 0;
+  color: var(--grey-mute);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 480px) {
+  .about-page {
+    padding: 40px 16px;
+  }
+
+  .about-header h1 {
+    font-size: 1.9rem;
+  }
+}
