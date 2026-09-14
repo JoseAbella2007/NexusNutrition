@@ -78,7 +78,6 @@ function formatearPrecio(precio) {
   return precio.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 });
 }
 
-// Cuenta desde 0 hasta el precio real cuando el producto aparece en pantalla.
 function usePrecioAnimado(precioFinal) {
   const [valor, setValor] = useState(0);
 
@@ -101,16 +100,6 @@ function usePrecioAnimado(precioFinal) {
   return valor;
 }
 
-// Rayos de luz diagonales del fondo: mismo lenguaje visual que el hero de
-// CategoriaProductos, pero repetido varias veces a lo ancho de toda la página.
-const RAYOS = [
-  { left: '6%', angulo: '16deg', color: 'var(--green-lime)', sombra: 'rgba(183,255,0,0.35)', delay: '0s' },
-  { left: '24%', angulo: '-14deg', color: 'var(--purple-1)', sombra: 'rgba(123,44,255,0.3)', delay: '0.7s' },
-  { left: '48%', angulo: '18deg', color: 'var(--green-classic)', sombra: 'rgba(57,255,20,0.3)', delay: '1.4s' },
-  { left: '70%', angulo: '-16deg', color: 'var(--purple-2)', sombra: 'rgba(168,85,247,0.3)', delay: '2.1s' },
-  { left: '90%', angulo: '14deg', color: 'var(--green-lime)', sombra: 'rgba(183,255,0,0.25)', delay: '0.35s' },
-];
-
 export default function DetalleDeProducto() {
   const { id } = useParams();
   const [productos] = useLocalStorage('productos', productosIniciales);
@@ -130,6 +119,7 @@ export default function DetalleDeProducto() {
   const sinStock = producto.stock === 0;
   const stockBajo = producto.stock > 0 && producto.stock <= 5;
   const slugCategoria = normalizarCategoria(producto.categoria);
+  const esVioleta = producto.categoria === 'Salud y Bienestar';
 
   function aumentarCantidad() {
     setCantidad((c) => Math.min(c + 1, producto.stock));
@@ -192,30 +182,29 @@ export default function DetalleDeProducto() {
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[var(--bg-0)]">
-      {/* Fondo de toda la página: rayos de luz diagonales verde/violeta, igual estética que el resto del sitio */}
       <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-        {RAYOS.map((rayo, i) => (
-          <span
-            key={i}
-            className="absolute top-[-15%] h-[140%] w-[2px] animate-[nxPulso_4s_ease-in-out_infinite]"
-            style={{
-              left: rayo.left,
-              backgroundColor: rayo.color,
-              boxShadow: `0 0 30px 6px ${rayo.sombra}, 0 0 70px 16px ${rayo.sombra}`,
-              transform: `rotate(${rayo.angulo})`,
-              animationDelay: rayo.delay,
-            }}
-          />
-        ))}
-        {/* Viñeta para que el centro con el texto no compita con las luces */}
         <div
-          className="absolute inset-0"
-          style={{ background: 'radial-gradient(circle at 50% 35%, transparent 0%, var(--bg-0) 72%)' }}
+          className={`absolute h-[600px] w-[600px] rounded-full opacity-20 blur-[120px] animate-[driftUno_20s_ease-in-out_infinite] ${
+            esVioleta ? 'bg-[var(--purple-2)]' : 'bg-[var(--green-lime)]'
+          }`}
+          style={{ top: '-180px', left: '-120px' }}
+        />
+        <div
+          className={`absolute h-[560px] w-[560px] rounded-full opacity-15 blur-[120px] animate-[driftDos_24s_ease-in-out_infinite] ${
+            esVioleta ? 'bg-[var(--green-classic)]' : 'bg-[var(--purple-1)]'
+          }`}
+          style={{ bottom: '-160px', right: '-120px' }}
+        />
+        <div
+          className="absolute -inset-[10%] opacity-40 animate-[driftLineas_30s_linear_infinite]"
+          style={{
+            backgroundImage:
+              'repeating-linear-gradient(115deg, rgba(183,255,0,0.05) 0px, rgba(183,255,0,0.05) 1px, transparent 1px, transparent 90px)',
+          }}
         />
       </div>
 
       <div className="relative z-10 mx-auto max-w-[var(--container-width)] px-5 py-10 md:px-10">
-        {/* Volver + breadcrumb — siempre visible, también en mobile */}
         <div className="mb-12 flex flex-col gap-3 animate-[fadeInUp_0.4s_ease-out_both] sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
           <Link
             to={`/categoria/${slugCategoria}`}
@@ -247,29 +236,27 @@ export default function DetalleDeProducto() {
         </div>
 
         <div className="grid grid-cols-1 gap-10 pt-2 md:grid-cols-2 md:gap-16">
-          {/* Imagen: sin caja/borde detrás, flota directo sobre el fondo */}
-          <div className="relative flex animate-[fadeInUp_0.5s_ease-out_both] items-center justify-center">
-            <div className="pointer-events-none absolute bottom-4 left-1/2 h-6 w-1/2 -translate-x-1/2 rounded-full bg-black/40 blur-xl" />
+          <div className="relative flex animate-[fadeInUp_0.5s_ease-out_both] items-center justify-center overflow-hidden rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-1)] p-6 md:p-10 aspect-square">
+            <div className="pointer-events-none absolute bottom-8 left-1/2 h-6 w-2/3 -translate-x-1/2 rounded-full bg-black/40 blur-xl" />
 
             <img
               src={producto.imagen}
               alt={producto.nombre}
-              className="relative z-10 h-auto max-h-[420px] w-auto max-w-full object-contain drop-shadow-2xl animate-[floatY_4s_ease-in-out_infinite] transition-transform duration-500 hover:scale-105"
+              className="relative z-10 h-3/4 w-3/4 object-contain drop-shadow-2xl animate-[floatY_4s_ease-in-out_infinite] transition-transform duration-500 hover:scale-105"
             />
 
             {stockBajo && (
-              <span className="absolute left-0 top-0 z-10 animate-pulse rounded-full bg-[var(--green-lime)] px-3 py-1 text-xs font-bold text-[var(--bg-0)]">
+              <span className="absolute left-4 top-4 z-10 animate-pulse rounded-full bg-[var(--green-lime)] px-3 py-1 text-xs font-bold text-[var(--bg-0)]">
                 ¡Últimas {producto.stock} unidades!
               </span>
             )}
             {sinStock && (
-              <span className="absolute left-0 top-0 z-10 rounded-full border border-[var(--border-soft)] bg-[var(--bg-2)] px-3 py-1 text-xs font-bold text-[var(--grey-mute)]">
+              <span className="absolute left-4 top-4 z-10 rounded-full border border-[var(--border-soft)] bg-[var(--bg-2)] px-3 py-1 text-xs font-bold text-[var(--grey-mute)]">
                 Sin stock
               </span>
             )}
           </div>
 
-          {/* Info */}
           <div className="flex flex-col items-center gap-4 text-center">
             <span className="w-fit animate-[fadeInUp_0.5s_0.05s_ease-out_both,pulseGlow_2.5s_ease-in-out_0.6s_infinite] rounded-full border border-[var(--green-lime)]/40 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-[var(--green-lime)]">
               {producto.categoria}
