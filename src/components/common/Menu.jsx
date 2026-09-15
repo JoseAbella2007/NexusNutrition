@@ -59,7 +59,7 @@ export default function Menu() {
         <nav
           className={`barra-navegacion__enlaces ${menuAbierto ? "barra-navegacion__enlaces--abierto" : ""}`}
         >
-          {estaAutenticado && (
+          {estaAutenticado && !esAdministrador && (
             <>
               <Link
                 to={RUTAS.INICIO}
@@ -73,11 +73,6 @@ export default function Menu() {
               <Link to={RUTAS.PRODUCTOS} onClick={() => setMenuAbierto(false)}>
                 Productos
               </Link>
-              {esAdministrador && (
-                <Link to={RUTAS.ADMIN} onClick={() => setMenuAbierto(false)}>
-                  Admin
-                </Link>
-              )}
             </>
           )}
 
