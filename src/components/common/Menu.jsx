@@ -46,7 +46,7 @@ export default function Menu() {
     >
       <div className="contenedor barra-navegacion__interior">
         <Link
-          to={RUTAS.INICIO}
+          to={esAdministrador ? RUTAS.ADMIN : RUTAS.INICIO}
           className="barra-navegacion__logo"
           onClick={() => {
             setMenuAbierto(false);
