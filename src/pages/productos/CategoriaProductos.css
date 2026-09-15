@@ -415,39 +415,64 @@
 
 .categoria-productos__paginacion {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 16px;
+  justify-content: center;
+  gap: 22px;
   margin-top: 40px;
 }
 
-.categoria-productos__paginacion button {
-  background-color: rgba(8, 8, 8, 0.8);
-  backdrop-filter: blur(4px);
+.categoria-productos__flecha {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
   border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
-  border-radius: 999px;
-  padding: 8px 20px;
-  color: var(--white-soft, #e5e5e5);
-  font-family: 'Manrope', 'Inter', sans-serif;
+  background: var(--bg-1, #080808);
+  color: var(--white, #ffffff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: all 0.25s var(--ease-premium, cubic-bezier(0.16, 1, 0.3, 1));
+  transition: border-color 0.3s ease, color 0.3s ease;
 }
 
-.categoria-productos__paginacion button:disabled {
+.categoria-productos__flecha:hover:not(:disabled) {
+  border-color: var(--green-lime, #b7ff00);
+  color: var(--green-lime, #b7ff00);
+}
+
+.categoria-productos__flecha:disabled {
   opacity: 0.35;
   cursor: not-allowed;
 }
 
-.categoria-productos__paginacion button:not(:disabled):hover {
-  background-color: var(--green-lime, #b7ff00);
-  color: #050505;
-  transform: translateY(-2px);
+.categoria-productos__flecha svg {
+  width: 20px;
+  height: 20px;
 }
 
-.categoria-productos__paginacion span {
-  color: var(--grey-mute, #8a8a8a);
-  font-family: 'Manrope', 'Inter', sans-serif;
-  font-size: 0.9rem;
+.categoria-productos__puntos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  max-width: 260px;
+}
+
+.categoria-productos__punto {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: var(--border-soft, rgba(255, 255, 255, 0.08));
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.categoria-productos__punto--activo {
+  background: var(--green-lime, #b7ff00);
+  transform: scale(1.3);
 }
 
 @media (max-width: 700px) {

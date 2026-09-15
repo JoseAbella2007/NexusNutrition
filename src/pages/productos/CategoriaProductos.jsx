@@ -249,17 +249,42 @@ function CategoriaProductos() {
 
         {totalPaginas > 1 && (
           <div className="categoria-productos__paginacion">
-            <button onClick={() => setPaginaActual((p) => p - 1)} disabled={paginaActual === 1}>
-              ← Anterior
-            </button>
-            <span>
-              Página {paginaActual} de {totalPaginas}
-            </span>
             <button
-              onClick={() => setPaginaActual((p) => p + 1)}
-              disabled={paginaActual === totalPaginas}
+              type="button"
+              className="categoria-productos__flecha"
+              onClick={() => setPaginaActual((p) => Math.max(p - 1, 1))}
+              disabled={paginaActual === 1}
+              aria-label="Página anterior"
             >
-              Siguiente →
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+
+            <div className="categoria-productos__puntos">
+              {Array.from({ length: totalPaginas }, (_, indice) => (
+                <button
+                  key={indice}
+                  type="button"
+                  className={`categoria-productos__punto ${
+                    paginaActual === indice + 1 ? 'categoria-productos__punto--activo' : ''
+                  }`}
+                  onClick={() => setPaginaActual(indice + 1)}
+                  aria-label={`Ir a la página ${indice + 1}`}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              className="categoria-productos__flecha"
+              onClick={() => setPaginaActual((p) => Math.min(p + 1, totalPaginas))}
+              disabled={paginaActual === totalPaginas}
+              aria-label="Página siguiente"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </button>
           </div>
         )}
