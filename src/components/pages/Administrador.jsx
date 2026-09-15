@@ -1,11 +1,21 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { RUTAS } from "../../routes/rutas";
 import Logo from "../common/Logo";
+import fondoAdmin from "../../assets/imagenes/fondoEntrenamiento.webp";
 import "./Administrador.css";
 
 export default function Administrador() {
   return (
     <div className="admin-layout">
+      <div className="admin-fondo">
+        <img
+          className="admin-fondo__imagen"
+          src={fondoAdmin}
+          alt=""
+          aria-hidden="true"
+        />
+      </div>
+
       <aside className="admin-sidebar">
         <span className="admin-sidebar__titulo">Panel Admin</span>
         <nav className="admin-sidebar__nav">

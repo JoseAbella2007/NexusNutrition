@@ -1,4 +1,38 @@
 .admin-layout {
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-fondo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.admin-fondo__imagen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.5;
+}
+
+.admin-fondo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(5, 5, 5, 0.55) 0%,
+    rgba(5, 5, 5, 0.3) 40%,
+    rgba(5, 5, 5, 0.75) 100%
+  );
+}
+
+.admin-layout {
   display: flex;
   min-height: 100vh;
   padding-top: 84px;
@@ -9,9 +43,12 @@
   flex-shrink: 0;
   align-self: flex-start;
   position: sticky;
+  z-index: 1;
   top: 84px;
   height: calc(100vh - 84px);
-  background: var(--bg-1);
+  background: rgba(8, 8, 8, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-right: 1px solid var(--border-soft);
   padding: 32px 20px;
   display: flex;
@@ -73,6 +110,8 @@
 }
 
 .admin-main {
+  position: relative;
+  z-index: 1;
   flex: 1;
   min-width: 0;
 }
