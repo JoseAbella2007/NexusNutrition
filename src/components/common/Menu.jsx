@@ -83,6 +83,28 @@ export default function Menu() {
                   <span className="barra-navegacion__usuario-punto" />
                   Hola, {usuario.nombre.split(" ")[0]}
                 </span>
+                {esAdministrador && (
+                  <Link
+                    to={RUTAS.ADMIN}
+                    className="boton boton-fantasma barra-navegacion__panel"
+                    onClick={() => setMenuAbierto(false)}
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      width="16"
+                      height="16"
+                    >
+                      <rect x="3" y="3" width="7" height="7" rx="1.5" />
+                      <rect x="14" y="3" width="7" height="7" rx="1.5" />
+                      <rect x="3" y="14" width="7" height="7" rx="1.5" />
+                      <rect x="14" y="14" width="7" height="7" rx="1.5" />
+                    </svg>
+                    Panel
+                  </Link>
+                )}
                 <button
                   className="boton boton-secundario"
                   onClick={manejarCerrarSesion}
@@ -118,6 +140,27 @@ export default function Menu() {
                 <span className="barra-navegacion__usuario-punto" />
                 Hola, {usuario.nombre.split(" ")[0]}
               </span>
+              {esAdministrador && (
+                <Link
+                  to={RUTAS.ADMIN}
+                  className="boton boton-fantasma barra-navegacion__panel"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    width="16"
+                    height="16"
+                  >
+                    <rect x="3" y="3" width="7" height="7" rx="1.5" />
+                    <rect x="14" y="3" width="7" height="7" rx="1.5" />
+                    <rect x="3" y="14" width="7" height="7" rx="1.5" />
+                    <rect x="14" y="14" width="7" height="7" rx="1.5" />
+                  </svg>
+                  Panel
+                </Link>
+              )}
               <button
                 className="boton boton-secundario"
                 onClick={manejarCerrarSesion}
