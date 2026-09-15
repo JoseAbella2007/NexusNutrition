@@ -79,9 +79,6 @@ function CategoriaProductos() {
   const [orden, setOrden] = useState('');
   const [paginaActual, setPaginaActual] = useState(1);
 
-  // La categoría activa viene SIEMPRE de la URL, no de un estado propio.
-  // Esto evita cualquier desincronización: si la URL dice "suplementacion",
-  // la página muestra suplementacion. Punto.
   const categoriaActual = nombreCategoria;
 
   function irACategoria(slug) {
@@ -115,8 +112,6 @@ function CategoriaProductos() {
     return 0;
   });
 
-  // Cada vez que cambia la categoría (URL), o la búsqueda, o el orden,
-  // volvemos a la página 1.
   useEffect(() => {
     setPaginaActual(1);
   }, [categoriaActual, busqueda, orden]);
@@ -140,22 +135,23 @@ function CategoriaProductos() {
 
   return (
     <div className="categoria-productos">
-      {/* FONDO ANIMADO DE TODA LA PÁGINA */}
-      <div className="fondo-animado">
-        <span className="fondo-animado__blob fondo-animado__blob--verde"></span>
-        <span className="fondo-animado__blob fondo-animado__blob--violeta"></span>
-        <span className="fondo-animado__lineas"></span>
-      </div>
-
-      {/* HERO DE CATEGORÍA */}
+      {/* El hero (banner) queda intacto: título, tagline y el fondo-animado
+          ahora viven todos DENTRO de este bloque, así no se filtran a la
+          sección de productos de abajo. */}
       <div className={`categoria-hero categoria-hero--${info.acento}`}>
+        <div className="fondo-animado">
+          <span className="fondo-animado__blob fondo-animado__blob--verde"></span>
+          <span className="fondo-animado__blob fondo-animado__blob--violeta"></span>
+          <span className="fondo-animado__lineas"></span>
+        </div>
+
         <span className="categoria-hero__icono">{info.icono}</span>
         <h1 className="categoria-hero__titulo">{nombreVisible}</h1>
         <p className="categoria-hero__tagline">{info.tagline}</p>
       </div>
 
+      {/* Acá abajo va la foto de fondo nueva (ver ::before en el .css) */}
       <div className="categoria-productos__contenido">
-        {/* CHIPS RÁPIDOS DE CATEGORÍA (ahora navegan de verdad) */}
         <div className="categoria-chips">
           <button
             className={`categoria-chip ${categoriaActual === 'todas' ? 'categoria-chip--activo' : ''}`}
@@ -177,7 +173,6 @@ function CategoriaProductos() {
           })}
         </div>
 
-        {/* BARRA DE FILTROS */}
         <div className="categoria-productos__filtros">
           <div className="campo-buscar">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="campo-buscar__icono">
@@ -231,7 +226,6 @@ function CategoriaProductos() {
           Se encontraron <strong>{productosFiltrados.length}</strong> productos
         </p>
 
-        {/* GRID DE PRODUCTOS */}
         {productosDeLaPagina.length > 0 ? (
           <div
             className="categoria-productos__grid"
@@ -253,7 +247,6 @@ function CategoriaProductos() {
           </div>
         )}
 
-        {/* PAGINACIÓN */}
         {totalPaginas > 1 && (
           <div className="categoria-productos__paginacion">
             <button onClick={() => setPaginaActual((p) => p - 1)} disabled={paginaActual === 1}>
