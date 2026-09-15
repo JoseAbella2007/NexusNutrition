@@ -17,7 +17,6 @@ function normalizarCategoria(texto) {
 }
 
 const CATEGORIAS = ['Entrenamiento', 'Nutrición y Dietas', 'Salud y Bienestar', 'Suplementación'];
-const PRODUCTOS_POR_PAGINA = 4;
 
 const INFO_CATEGORIAS = {
   entrenamiento: {
@@ -81,6 +80,10 @@ function CategoriaProductos() {
 
   const categoriaActual = nombreCategoria;
 
+  // En "Todos los productos" mostramos más por página (12), y en una
+  // categoría puntual seguimos con 4, como pedía el criterio original.
+  const productosPorPagina = categoriaActual === 'todas' ? 12 : 4;
+
   function irACategoria(slug) {
     navigate(`/categoria/${slug}`);
   }
@@ -116,11 +119,11 @@ function CategoriaProductos() {
     setPaginaActual(1);
   }, [categoriaActual, busqueda, orden]);
 
-  const totalPaginas = Math.ceil(productosFiltrados.length / PRODUCTOS_POR_PAGINA);
-  const indiceInicio = (paginaActual - 1) * PRODUCTOS_POR_PAGINA;
+  const totalPaginas = Math.ceil(productosFiltrados.length / productosPorPagina);
+  const indiceInicio = (paginaActual - 1) * productosPorPagina;
   const productosDeLaPagina = productosFiltrados.slice(
     indiceInicio,
-    indiceInicio + PRODUCTOS_POR_PAGINA
+    indiceInicio + productosPorPagina
   );
 
   function limpiarFiltros() {
@@ -235,7 +238,7 @@ function CategoriaProductos() {
               <div
                 key={producto.id}
                 className="card-entrada"
-                style={{ animationDelay: `${index * 0.08}s` }}
+                style={{ animationDelay: `${index * 0.06}s` }}
               >
                 <CardProducto producto={producto} />
               </div>
