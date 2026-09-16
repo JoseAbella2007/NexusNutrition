@@ -1,159 +1,3 @@
-.admin-productos {
-  position: relative;
-  z-index: 0;
-  max-width: var(--container-width, 1240px);
-  margin: 0 auto;
-  padding: 140px 20px 60px;
-  min-height: 100vh;
-}
-
-/* Fondo con la imagen + degradado oscuro encima para que el texto siga
-   siendo legible (igual criterio que usamos en el Hero de la Home) */
-.admin-productos::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 100vw;
-  transform: translateX(-50%);
-  z-index: -1;
-  background-image:
-    linear-gradient(180deg, rgba(5, 5, 5, 0.88) 0%, rgba(5, 5, 5, 0.94) 100%),
-    url('https://i.ibb.co/Sw9Q4ZL5/publicadmin-productos-fondo-2-jpeg.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.admin-productos__header {
-  margin-bottom: 8px;
-}
-
-/* ===== Botón "Volver al sitio" =====
-   En reposo: círculo compacto con un pulso tipo radar para que se note
-   que hay algo ahí sin ser invasivo.
-   Al hover: se expande en píldora, revela el texto, y la flecha da un
-   "paso atrás" doble como micro-feedback de la acción. */
-.admin-productos__volver {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  height: 44px;
-  width: 44px;
-  padding: 0 13px;
-  margin-bottom: 20px;
-  border-radius: 999px;
-  border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
-  background-color: var(--bg-1, #080808);
-  color: var(--white-soft, #e5e5e5);
-  text-decoration: none;
-  overflow: hidden;
-  transition: width 0.4s var(--ease-premium, cubic-bezier(0.16, 1, 0.3, 1)),
-    border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
-}
-
-.admin-productos__volver:hover {
-  width: 172px;
-  border-color: var(--green-lime, #b7ff00);
-  background-color: var(--bg-2, #0d0d0d);
-  color: var(--green-lime, #b7ff00);
-}
-
-.admin-productos__volver-anillo {
-  position: absolute;
-  inset: -6px;
-  border-radius: 999px;
-  border: 1px solid var(--green-lime, #b7ff00);
-  opacity: 0;
-  animation: admin-volver-ping 3s ease-out infinite;
-  pointer-events: none;
-}
-
-@keyframes admin-volver-ping {
-  0% {
-    transform: scale(0.9);
-    opacity: 0.5;
-  }
-  70% {
-    transform: scale(1.35);
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-.admin-productos__volver:hover .admin-productos__volver-anillo {
-  animation: none;
-  opacity: 0;
-}
-
-.admin-productos__volver-icono {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-}
-
-.admin-productos__volver-icono svg {
-  width: 18px;
-  height: 18px;
-}
-
-.admin-productos__volver:hover .admin-productos__volver-icono {
-  animation: admin-volver-nudge 0.6s ease;
-}
-
-@keyframes admin-volver-nudge {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(-5px);
-  }
-  50% {
-    transform: translateX(0);
-  }
-  75% {
-    transform: translateX(-5px);
-  }
-}
-
-.admin-productos__volver-texto {
-  max-width: 0;
-  margin-left: 0;
-  opacity: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  font-family: 'Manrope', 'Inter', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 600;
-  transition: max-width 0.4s var(--ease-premium, cubic-bezier(0.16, 1, 0.3, 1)),
-    margin-left 0.4s ease, opacity 0.25s ease 0.1s;
-}
-
-.admin-productos__volver:hover .admin-productos__volver-texto {
-  max-width: 160px;
-  margin-left: 8px;
-  opacity: 1;
-}
-
-.admin-productos__titulo {
-  font-family: 'Space Grotesk', 'Sora', sans-serif;
-  color: var(--white, #ffffff);
-  margin: 0;
-}
-
-.admin-productos__contador {
-  color: var(--grey-mute, #8a8a8a);
-  font-family: 'Manrope', 'Inter', sans-serif;
-  font-size: 0.9rem;
-  margin-bottom: 16px;
-}
-
 /* ===== Barra de filtros (mismo lenguaje visual que categoria-productos__filtros) ===== */
 .admin-productos__filtros {
   display: flex;
@@ -192,10 +36,12 @@
   border-radius: 999px;
   padding: 10px 16px 10px 38px;
   color: var(--white-soft, #e5e5e5);
-  font-family: 'Manrope', 'Inter', sans-serif;
+  font-family: "Manrope", "Inter", sans-serif;
   font-size: 0.9rem;
   outline: none;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s;
 }
 
 .admin-productos__input:focus {
@@ -208,7 +54,7 @@
 }
 
 .admin-productos__campo-select::after {
-  content: '';
+  content: "";
   position: absolute;
   right: 14px;
   top: 50%;
@@ -232,7 +78,7 @@
   border-radius: 999px;
   padding: 10px 34px 10px 16px;
   color: var(--white-soft, #e5e5e5);
-  font-family: 'Manrope', 'Inter', sans-serif;
+  font-family: "Manrope", "Inter", sans-serif;
   font-size: 0.9rem;
   outline: none;
   cursor: pointer;
@@ -250,7 +96,7 @@
   border-radius: 999px;
   padding: 10px 18px;
   color: var(--grey-mute, #8a8a8a);
-  font-family: 'Manrope', 'Inter', sans-serif;
+  font-family: "Manrope", "Inter", sans-serif;
   font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.25s;
@@ -265,17 +111,16 @@
 .admin-productos__vacio {
   text-align: center;
   color: var(--grey-mute, #8a8a8a);
-  font-family: 'Manrope', 'Inter', sans-serif;
+  font-family: "Manrope", "Inter", sans-serif;
   padding: 40px 20px;
 }
 
 /* ===== Tabla ===== */
 .admin-productos__tabla-wrapper {
-  border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
-  border-radius: 16px;
-  overflow: hidden;
-  background-color: rgba(8, 8, 8, 0.85);
-  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 50vh;
 }
 
 .admin-productos__tabla-header {
@@ -297,7 +142,9 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .admin-productos__boton-icono svg {
@@ -313,7 +160,7 @@
 .admin-productos__tabla {
   width: 100%;
   border-collapse: collapse;
-  font-family: 'Manrope', 'Inter', sans-serif;
+  font-family: "Manrope", "Inter", sans-serif;
 }
 
 .admin-productos__tabla thead {
@@ -361,7 +208,7 @@
   border-radius: 999px;
   padding: 6px 14px;
   font-size: 0.8rem;
-  font-family: 'Manrope', 'Inter', sans-serif;
+  font-family: "Manrope", "Inter", sans-serif;
   cursor: pointer;
 }
 

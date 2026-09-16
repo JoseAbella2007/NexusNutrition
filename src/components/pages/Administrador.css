@@ -1,10 +1,11 @@
 .admin-layout {
-  position: relative;
-  overflow: hidden;
+  display: flex;
+  min-height: 100vh;
+  padding-top: 84px;
 }
 
 .admin-fondo {
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
@@ -41,11 +42,8 @@
 .admin-sidebar {
   width: 260px;
   flex-shrink: 0;
-  align-self: flex-start;
-  position: sticky;
+  position: relative;
   z-index: 1;
-  top: 84px;
-  height: calc(100vh - 84px);
   background: rgba(8, 8, 8, 0.45);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -143,17 +141,20 @@
 }
 
 .admin__contenido {
-  padding: 64px 48px 80px;
+  padding: 40px 48px 40px;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
 }
 
 .admin__encabezado {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: 16px;
   max-width: 640px;
+  margin: 0 auto;
 }
 
 .admin__titulo {
