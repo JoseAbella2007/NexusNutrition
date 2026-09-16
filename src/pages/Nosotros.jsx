@@ -1,14 +1,18 @@
 import"./nosotros.css";
 import React from "react";
+import fotoJose from "../assets/imagenes/team/fotoJose.jpeg";
+import fotoMariano from "../assets/imagenes/team/fotoMariano.jpeg";
+import fotoPilar from "../assets/imagenes/team/fotoPilar.jpeg";
+import fotoAgus from "../assets/imagenes/team/fotoAgus.jpeg";
 
 // ── Datos del equipo ──────────────────────────────────────────────
 // Reemplazá "foto" por la ruta real de cada imagen cuando la tengan
 // (ej: import fotoJose from "../assets/team/jose.jpg")
 const equipo = [
-  { nombre: "Jose", rol: "Tech Lead", foto: null },
-  { nombre: "Mariano", rol: "Desarrollador", foto: null },
-  { nombre: "Pilar", rol: "Scrum Master", foto: null },
-  { nombre: "Agus", rol: "Desarrollador", foto: null },
+  { nombre: "Jose", rol: "Tech Lead", foto: fotoJose },
+  { nombre: "Mariano", rol: "Desarrollador", foto: fotoMariano },
+  { nombre: "Pilar", rol: "Scrum Master", foto: fotoPilar },
+  { nombre: "Agus", rol: "Desarrollador", foto: fotoAgus },
 ];
 export default function About() {
   return (
