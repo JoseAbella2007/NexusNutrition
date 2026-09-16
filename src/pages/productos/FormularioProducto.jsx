@@ -3,6 +3,13 @@ import './FormularioProducto.css';
 
 const CATEGORIAS = ['Entrenamiento', 'Nutrición y Dietas', 'Salud y Bienestar', 'Suplementación'];
 
+function quitarAcentos(texto) {
+  return texto
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+}
+
 function FormularioProducto({ productoEditar, productosExistentes, onGuardar, onCancelar }) {
   const [datos, setDatos] = useState({
     nombre: '',
@@ -29,6 +36,11 @@ function FormularioProducto({ productoEditar, productosExistentes, onGuardar, on
 
   function actualizarCampo(campo, valor) {
     setDatos((prev) => ({ ...prev, [campo]: valor }));
+    // Apenas el usuario toca un campo con error, se lo sacamos de encima:
+    // no hace falta esperar al próximo submit para que desaparezca el cartel.
+    if (errores[campo]) {
+      setErrores((prev) => ({ ...prev, [campo]: undefined }));
+    }
   }
 
   function validar() {
@@ -36,10 +48,26 @@ function FormularioProducto({ productoEditar, productosExistentes, onGuardar, on
 
     if (!datos.nombre.trim()) {
       nuevosErrores.nombre = 'El nombre es obligatorio.';
+    } else {
+      // "Código único": no puede haber dos productos con el mismo nombre
+      // (sin distinguir mayúsculas/tildes), salvo que sea el mismo que
+      // se está editando.
+      const nombreNormalizado = quitarAcentos(datos.nombre.trim());
+      const yaExiste = productosExistentes.some(
+        (p) =>
+          quitarAcentos(p.nombre.trim()) === nombreNormalizado &&
+          p.id !== productoEditar?.id
+      );
+      if (yaExiste) {
+        nuevosErrores.nombre = 'Ya existe un producto con ese nombre.';
+      }
     }
-    if (!datos.precio || Number(datos.precio) <= 0) {
-      nuevosErrores.precio = 'El precio debe ser mayor a 0.';
+
+    const precioNum = Number(datos.precio);
+    if (datos.precio === '' || Number.isNaN(precioNum) || precioNum <= 0) {
+      nuevosErrores.precio = 'El precio debe ser un número mayor a 0.';
     }
+
     if (!datos.categoria) {
       nuevosErrores.categoria = 'Elegí una categoría.';
     }
@@ -49,8 +77,10 @@ function FormularioProducto({ productoEditar, productosExistentes, onGuardar, on
     if (!datos.descripcion.trim()) {
       nuevosErrores.descripcion = 'La descripción es obligatoria.';
     }
-    if (datos.stock === '' || Number(datos.stock) < 0) {
-      nuevosErrores.stock = 'El stock no puede ser negativo.';
+
+    const stockNum = Number(datos.stock);
+    if (datos.stock === '' || Number.isNaN(stockNum) || stockNum < 0 || !Number.isInteger(stockNum)) {
+      nuevosErrores.stock = 'El stock debe ser un número entero, 0 o más.';
     }
 
     setErrores(nuevosErrores);
@@ -119,6 +149,7 @@ function FormularioProducto({ productoEditar, productosExistentes, onGuardar, on
             <input
               type="number"
               min="0"
+              step="1"
               value={datos.stock}
               onChange={(e) => actualizarCampo('stock', e.target.value)}
             />
