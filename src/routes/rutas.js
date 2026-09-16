@@ -6,5 +6,4 @@ export const RUTAS = {
   ADMIN: "/admin",
   ACERCA_DE: "/acerca-de",
   NO_ENCONTRADA: "/404",
-  CARRITO: "/Carrito"
 };
