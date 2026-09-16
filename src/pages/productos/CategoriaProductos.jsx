@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import productosIniciales from '../../data/productos';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import CardProducto from './CardProducto';
+import CarruselMasVendidos from '../../components/common/CarruselMasVendidos';
 import './CategoriaProductos.css';
 
 function quitarAcentos(texto) {
@@ -132,28 +133,36 @@ function CategoriaProductos() {
     navigate('/categoria/todas');
   }
 
+  // Los primeros 10 productos del catálogo completo, con la forma que
+  // espera el carrusel de tu compañero (id, nombre, imagen).
+  const productosParaCarrusel = productos.slice(0, 10).map((p) => ({
+    id: p.id,
+    nombre: p.nombre,
+    imagen: p.imagen,
+  }));
+
   const info = INFO_CATEGORIAS[categoriaActual] || INFO_CATEGORIAS.todas;
   const nombreVisible =
     categoriaActual === 'todas' ? 'Todos los productos' : categoriaActual.replace(/-/g, ' ');
 
   return (
     <div className="categoria-productos">
-      {/* El hero (banner) queda intacto: título, tagline y el fondo-animado
-          ahora viven todos DENTRO de este bloque, así no se filtran a la
-          sección de productos de abajo. */}
-      <div className={`categoria-hero categoria-hero--${info.acento}`}>
-        <div className="fondo-animado">
-          <span className="fondo-animado__blob fondo-animado__blob--verde"></span>
-          <span className="fondo-animado__blob fondo-animado__blob--violeta"></span>
-          <span className="fondo-animado__lineas"></span>
+      {categoriaActual === 'todas' ? (
+        <CarruselMasVendidos productos={productosParaCarrusel} />
+      ) : (
+        <div className={`categoria-hero categoria-hero--${info.acento}`}>
+          <div className="fondo-animado">
+            <span className="fondo-animado__blob fondo-animado__blob--verde"></span>
+            <span className="fondo-animado__blob fondo-animado__blob--violeta"></span>
+            <span className="fondo-animado__lineas"></span>
+          </div>
+
+          <span className="categoria-hero__icono">{info.icono}</span>
+          <h1 className="categoria-hero__titulo">{nombreVisible}</h1>
+          <p className="categoria-hero__tagline">{info.tagline}</p>
         </div>
+      )}
 
-        <span className="categoria-hero__icono">{info.icono}</span>
-        <h1 className="categoria-hero__titulo">{nombreVisible}</h1>
-        <p className="categoria-hero__tagline">{info.tagline}</p>
-      </div>
-
-      {/* Acá abajo va la foto de fondo nueva (ver ::before en el .css) */}
       <div className="categoria-productos__contenido">
         <div className="categoria-chips">
           <button
