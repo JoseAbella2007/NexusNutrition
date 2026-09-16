@@ -162,7 +162,22 @@ function CategoriaProductos() {
           <p className="categoria-hero__tagline">{info.tagline}</p>
         </div>
       )}
+      {/* El hero (banner) queda intacto: título, tagline y el fondo-animado
+          ahora viven todos DENTRO de este bloque, así no se filtran a la
+          sección de productos de abajo. */}
+      <div className={`categoria-hero categoria-hero--${info.acento}`}>
+        <div className="fondo-animado">
+          <span className="fondo-animado__blob fondo-animado__blob--verde"></span>
+          <span className="fondo-animado__blob fondo-animado__blob--violeta"></span>
+          <span className="fondo-animado__lineas"></span>
+        </div>
 
+        <span className="categoria-hero__icono">{info.icono}</span>
+        <h1 className="categoria-hero__titulo">{nombreVisible}</h1>
+        <p className="categoria-hero__tagline">{info.tagline}</p>
+      </div>
+
+      {/* Acá abajo va la foto de fondo nueva (ver ::before en el .css) */}
       <div className="categoria-productos__contenido">
         <div className="categoria-chips">
           <button

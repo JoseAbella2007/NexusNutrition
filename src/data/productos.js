@@ -115,7 +115,7 @@ const productos = [
     nombre: "Bandas de Resistencia (Set x5)",
     precio: 12500,
     categoria: "Entrenamiento",
-    imagen: "https://i.ibb.co/QFwk5w8f/training-05.webp",
+    imagen: "https://i.ibb.co/8DNNrpD1/training-05.webp",
     descripcion: "Set de 5 bandas de distinta resistencia, ideales para entrenamiento funcional.",
     stock: 24
   },
