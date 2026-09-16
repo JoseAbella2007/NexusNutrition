@@ -73,6 +73,13 @@ export default function Menu() {
               <Link to={RUTAS.PRODUCTOS} onClick={() => setMenuAbierto(false)}>
                 Productos
               </Link>
+              <Link
+               to={RUTAS.CARRITO}
+               className="bg-none border-0 cursor-pointer text-xl flex items-center justify-center"
+               onClick={() => setMenuAbierto(false)}>
+               <i className="fas fa-shopping-cart relative inline-block"></i>
+               <span className="absolute top-[-3.5px] -right-0.75 rounded-full w-4.5 h-4.5 flex items-center justify-center text-[10px] text-white bg-(--purple-1)">0</span>
+               </Link>
               {esAdministrador && (
                 <Link to={RUTAS.ADMIN} onClick={() => setMenuAbierto(false)}>
                   Admin

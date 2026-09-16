@@ -2,7 +2,7 @@
 
 .categoria-productos {
   position: relative;
-  overflow-x: hidden;
+  overflow: hidden;
   background-color: var(--bg-0, #050505);
   min-height: 100vh;
 }
