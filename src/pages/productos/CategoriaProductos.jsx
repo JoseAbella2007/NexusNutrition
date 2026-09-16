@@ -17,7 +17,6 @@ function normalizarCategoria(texto) {
 }
 
 const CATEGORIAS = ['Entrenamiento', 'Nutrición y Dietas', 'Salud y Bienestar', 'Suplementación'];
-const PRODUCTOS_POR_PAGINA = 4;
 
 const INFO_CATEGORIAS = {
   entrenamiento: {
@@ -79,10 +78,11 @@ function CategoriaProductos() {
   const [orden, setOrden] = useState('');
   const [paginaActual, setPaginaActual] = useState(1);
 
-  // La categoría activa viene SIEMPRE de la URL, no de un estado propio.
-  // Esto evita cualquier desincronización: si la URL dice "suplementacion",
-  // la página muestra suplementacion. Punto.
   const categoriaActual = nombreCategoria;
+
+  // En "Todos los productos" mostramos más por página (12), y en una
+  // categoría puntual seguimos con 4, como pedía el criterio original.
+  const productosPorPagina = categoriaActual === 'todas' ? 12 : 4;
 
   function irACategoria(slug) {
     navigate(`/categoria/${slug}`);
@@ -115,17 +115,15 @@ function CategoriaProductos() {
     return 0;
   });
 
-  // Cada vez que cambia la categoría (URL), o la búsqueda, o el orden,
-  // volvemos a la página 1.
   useEffect(() => {
     setPaginaActual(1);
   }, [categoriaActual, busqueda, orden]);
 
-  const totalPaginas = Math.ceil(productosFiltrados.length / PRODUCTOS_POR_PAGINA);
-  const indiceInicio = (paginaActual - 1) * PRODUCTOS_POR_PAGINA;
+  const totalPaginas = Math.ceil(productosFiltrados.length / productosPorPagina);
+  const indiceInicio = (paginaActual - 1) * productosPorPagina;
   const productosDeLaPagina = productosFiltrados.slice(
     indiceInicio,
-    indiceInicio + PRODUCTOS_POR_PAGINA
+    indiceInicio + productosPorPagina
   );
 
   function limpiarFiltros() {
@@ -140,22 +138,23 @@ function CategoriaProductos() {
 
   return (
     <div className="categoria-productos">
-      {/* FONDO ANIMADO DE TODA LA PÁGINA */}
-      <div className="fondo-animado">
-        <span className="fondo-animado__blob fondo-animado__blob--verde"></span>
-        <span className="fondo-animado__blob fondo-animado__blob--violeta"></span>
-        <span className="fondo-animado__lineas"></span>
-      </div>
-
-      {/* HERO DE CATEGORÍA */}
+      {/* El hero (banner) queda intacto: título, tagline y el fondo-animado
+          ahora viven todos DENTRO de este bloque, así no se filtran a la
+          sección de productos de abajo. */}
       <div className={`categoria-hero categoria-hero--${info.acento}`}>
+        <div className="fondo-animado">
+          <span className="fondo-animado__blob fondo-animado__blob--verde"></span>
+          <span className="fondo-animado__blob fondo-animado__blob--violeta"></span>
+          <span className="fondo-animado__lineas"></span>
+        </div>
+
         <span className="categoria-hero__icono">{info.icono}</span>
         <h1 className="categoria-hero__titulo">{nombreVisible}</h1>
         <p className="categoria-hero__tagline">{info.tagline}</p>
       </div>
 
+      {/* Acá abajo va la foto de fondo nueva (ver ::before en el .css) */}
       <div className="categoria-productos__contenido">
-        {/* CHIPS RÁPIDOS DE CATEGORÍA (ahora navegan de verdad) */}
         <div className="categoria-chips">
           <button
             className={`categoria-chip ${categoriaActual === 'todas' ? 'categoria-chip--activo' : ''}`}
@@ -177,7 +176,6 @@ function CategoriaProductos() {
           })}
         </div>
 
-        {/* BARRA DE FILTROS */}
         <div className="categoria-productos__filtros">
           <div className="campo-buscar">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="campo-buscar__icono">
@@ -231,7 +229,6 @@ function CategoriaProductos() {
           Se encontraron <strong>{productosFiltrados.length}</strong> productos
         </p>
 
-        {/* GRID DE PRODUCTOS */}
         {productosDeLaPagina.length > 0 ? (
           <div
             className="categoria-productos__grid"
@@ -241,7 +238,7 @@ function CategoriaProductos() {
               <div
                 key={producto.id}
                 className="card-entrada"
-                style={{ animationDelay: `${index * 0.08}s` }}
+                style={{ animationDelay: `${index * 0.06}s` }}
               >
                 <CardProducto producto={producto} />
               </div>
@@ -253,20 +250,44 @@ function CategoriaProductos() {
           </div>
         )}
 
-        {/* PAGINACIÓN */}
         {totalPaginas > 1 && (
           <div className="categoria-productos__paginacion">
-            <button onClick={() => setPaginaActual((p) => p - 1)} disabled={paginaActual === 1}>
-              ← Anterior
-            </button>
-            <span>
-              Página {paginaActual} de {totalPaginas}
-            </span>
             <button
-              onClick={() => setPaginaActual((p) => p + 1)}
-              disabled={paginaActual === totalPaginas}
+              type="button"
+              className="categoria-productos__flecha"
+              onClick={() => setPaginaActual((p) => Math.max(p - 1, 1))}
+              disabled={paginaActual === 1}
+              aria-label="Página anterior"
             >
-              Siguiente →
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+
+            <div className="categoria-productos__puntos">
+              {Array.from({ length: totalPaginas }, (_, indice) => (
+                <button
+                  key={indice}
+                  type="button"
+                  className={`categoria-productos__punto ${
+                    paginaActual === indice + 1 ? 'categoria-productos__punto--activo' : ''
+                  }`}
+                  onClick={() => setPaginaActual(indice + 1)}
+                  aria-label={`Ir a la página ${indice + 1}`}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              className="categoria-productos__flecha"
+              onClick={() => setPaginaActual((p) => Math.min(p + 1, totalPaginas))}
+              disabled={paginaActual === totalPaginas}
+              aria-label="Página siguiente"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </button>
           </div>
         )}
