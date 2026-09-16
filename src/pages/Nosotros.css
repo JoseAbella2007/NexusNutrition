@@ -1,16 +1,20 @@
 .about-page {
-  background: var(--bg-1);
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
   color: var(--white-soft);
   font-family: var(--font-body);
   padding: 64px 24px;
-  max-width: var(--container-width);
-  margin-inline: auto;
-  align-self: stretch;
-  width: 100%;
+  background: var(--bg-1);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-blend-mode: overlay;
+}
+
+.about-content {
+  max-width: var(--container-width);
+  margin-inline: auto;
 }
 
 .about-header {
