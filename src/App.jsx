@@ -10,6 +10,7 @@ import InicioProductos from "./pages/Inicio";
 import CategoriaProductos from "./pages/productos/CategoriaProductos";
 import DetalleDeProducto from "./pages/productos/DetalleDeProducto";
 import AdminProductos from "./pages/productos/AdminProductos";
+import Error404 from "./pages/Error404";
 
 export default function App() {
   return (
@@ -30,6 +31,8 @@ export default function App() {
       </Route>
       <Route path={RUTAS.INICIAR_SESION} element={<Login />} />
       <Route path={RUTAS.REGISTRO} element={<Registro />} />
+
+      <Route path="*" element={<Error404 />} />
     </Routes>
   );
 }
