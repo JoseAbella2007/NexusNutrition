@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import productosIniciales from '../../data/productos';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import FormularioProducto from './FormularioProducto';
@@ -82,6 +83,16 @@ function AdminProductos() {
 
   return (
     <div className="admin-productos">
+      <Link to="/" className="admin-productos__volver" aria-label="Volver al sitio">
+        <span className="admin-productos__volver-anillo" aria-hidden="true"></span>
+        <span className="admin-productos__volver-icono" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+            <path d="M19 12H5M12 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </span>
+        <span className="admin-productos__volver-texto">Volver al sitio</span>
+      </Link>
+
       <div className="admin-productos__header">
         <h1 className="admin-productos__titulo">Gestión de Productos</h1>
       </div>

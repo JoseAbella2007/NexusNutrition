@@ -29,6 +29,118 @@
   margin-bottom: 8px;
 }
 
+/* ===== Botón "Volver al sitio" =====
+   En reposo: círculo compacto con un pulso tipo radar para que se note
+   que hay algo ahí sin ser invasivo.
+   Al hover: se expande en píldora, revela el texto, y la flecha da un
+   "paso atrás" doble como micro-feedback de la acción. */
+.admin-productos__volver {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  width: 44px;
+  padding: 0 13px;
+  margin-bottom: 20px;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
+  background-color: var(--bg-1, #080808);
+  color: var(--white-soft, #e5e5e5);
+  text-decoration: none;
+  overflow: hidden;
+  transition: width 0.4s var(--ease-premium, cubic-bezier(0.16, 1, 0.3, 1)),
+    border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.admin-productos__volver:hover {
+  width: 172px;
+  border-color: var(--green-lime, #b7ff00);
+  background-color: var(--bg-2, #0d0d0d);
+  color: var(--green-lime, #b7ff00);
+}
+
+.admin-productos__volver-anillo {
+  position: absolute;
+  inset: -6px;
+  border-radius: 999px;
+  border: 1px solid var(--green-lime, #b7ff00);
+  opacity: 0;
+  animation: admin-volver-ping 3s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes admin-volver-ping {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.5;
+  }
+  70% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.admin-productos__volver:hover .admin-productos__volver-anillo {
+  animation: none;
+  opacity: 0;
+}
+
+.admin-productos__volver-icono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.admin-productos__volver-icono svg {
+  width: 18px;
+  height: 18px;
+}
+
+.admin-productos__volver:hover .admin-productos__volver-icono {
+  animation: admin-volver-nudge 0.6s ease;
+}
+
+@keyframes admin-volver-nudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+}
+
+.admin-productos__volver-texto {
+  max-width: 0;
+  margin-left: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: 'Manrope', 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: max-width 0.4s var(--ease-premium, cubic-bezier(0.16, 1, 0.3, 1)),
+    margin-left 0.4s ease, opacity 0.25s ease 0.1s;
+}
+
+.admin-productos__volver:hover .admin-productos__volver-texto {
+  max-width: 160px;
+  margin-left: 8px;
+  opacity: 1;
+}
+
 .admin-productos__titulo {
   font-family: 'Space Grotesk', 'Sora', sans-serif;
   color: var(--white, #ffffff);
