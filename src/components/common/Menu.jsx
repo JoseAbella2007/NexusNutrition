@@ -59,6 +59,9 @@ export default function Menu() {
         <nav
           className={`barra-navegacion__enlaces ${menuAbierto ? "barra-navegacion__enlaces--abierto" : ""}`}
         >
+           <Link to="/nosotros" onClick={() => setMenuAbierto(false)}>
+             Nosotros
+           </Link>
           {estaAutenticado && (
             <>
               <Link
