@@ -1,4 +1,4 @@
-import"./nosotros.css";
+import"./Nosotros.css";
 import React from "react";
 import fotoJose from "../assets/imagenes/team/fotoJose.jpeg";
 import fotoMariano from "../assets/imagenes/team/fotoMariano.jpeg";

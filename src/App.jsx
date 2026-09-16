@@ -1,4 +1,4 @@
-import Nosotros from "./components/pages/Nosotros"
+import Nosotros from "./pages/Nosotros"
 import { Route, Routes } from "react-router-dom";
 import { RUTAS } from "./routes/rutas";
 import DisenoSitio from "./components/common/DisenoSitio";
