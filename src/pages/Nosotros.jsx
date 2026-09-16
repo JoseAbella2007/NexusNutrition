@@ -4,6 +4,7 @@ import fotoJose from "../assets/imagenes/team/fotoJose.jpeg";
 import fotoMariano from "../assets/imagenes/team/fotoMariano.jpeg";
 import fotoPilar from "../assets/imagenes/team/fotoPilar.jpeg";
 import fotoAgus from "../assets/imagenes/team/fotoAgus.jpeg";
+import fondoNosotros from "../assets/imagenes/team/fondoNosotros.jpeg";
 
 // ── Datos del equipo ──────────────────────────────────────────────
 // Reemplazá "foto" por la ruta real de cada imagen cuando la tengan
@@ -16,7 +17,10 @@ const equipo = [
 ];
 export default function About() {
   return (
-    <section className="about-page">
+     <section
+       className="about-page"
+       style={{ backgroundImage: `url(${fondoNosotros})` }}
+       >
       <div className="about-header">
         <span className="about-eyebrow">Nexus Nutrition</span>
         <h1>El equipo</h1>
