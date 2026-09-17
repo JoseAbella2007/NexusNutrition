@@ -5,7 +5,7 @@ import { useAutenticacion } from "../../context/ContextoAutenticacion";
 import { RUTAS } from "../../routes/rutas";
 import "./Menu.css";
 
-export default function Menu() {
+export default function Menu({setCarritoAbierto}) {
   const { estaAutenticado, esAdministrador, usuario, cerrarSesion } =
     useAutenticacion();
   const [conScroll, setConScroll] = useState(false);
