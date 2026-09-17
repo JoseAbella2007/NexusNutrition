@@ -274,3 +274,27 @@ img {
     padding: 64px 0;
   }
 }
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--green-lime) var(--bg-1);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-0);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--green-mid), var(--green-lime));
+  border-radius: 999px;
+  border: 2px solid var(--bg-0);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--green-lime);
+}

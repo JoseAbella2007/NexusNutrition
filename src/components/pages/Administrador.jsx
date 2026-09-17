@@ -1,85 +1,135 @@
-import { useState } from "react";
-import { useAutenticacion } from "../../context/ContextoAutenticacion";
-import { servicioAutenticacion } from "../../services/servicioAutenticacion";
-import FondoSeccion from "../common/FondoSeccion";
+import { Link, NavLink, Outlet } from "react-router-dom";
+import { RUTAS } from "../../routes/rutas";
+import Logo from "../common/Logo";
+import fondoAdmin from "../../assets/imagenes/fondoEntrenamiento.webp";
 import "./Administrador.css";
 
 export default function Administrador() {
-  const { usuario } = useAutenticacion();
-  const [usuarios, setUsuarios] = useState(() =>
-    servicioAutenticacion.obtenerUsuarios(),
-  );
-
-  const manejarEliminar = (usuarioAEliminar) => {
-    const confirmado = window.confirm(
-      `¿Seguro que querés eliminar a ${usuarioAEliminar.nombre}? Va a perder el acceso a su cuenta.`,
-    );
-    if (!confirmado) return;
-
-    servicioAutenticacion.eliminarUsuario(usuarioAEliminar.id);
-    setUsuarios(servicioAutenticacion.obtenerUsuarios());
-  };
-
   return (
-    <main className="seccion admin">
-      <FondoSeccion />
-      <div className="contenedor admin__contenido">
-        <div className="admin__encabezado">
-          <span className="antetitulo">Panel</span>
-          <h1 className="admin__titulo">
-            Administración <span className="texto-degradado">Nexus</span>
-          </h1>
-          <p className="admin__texto">
-            Gestioná los usuarios registrados en el sitio.
-          </p>
-        </div>
-
-        <section className="admin__bloque">
-          <div className="admin__bloque-encabezado">
-            <h2>Usuarios registrados</h2>
-          </div>
-
-          {usuarios.length === 0 ? (
-            <p className="admin__vacio">
-              Todavía no se registró ningún usuario.
-            </p>
-          ) : (
-            <div className="admin__tabla-envoltorio">
-              <table className="admin__tabla">
-                <thead>
-                  <tr>
-                    <th>Nombre</th>
-                    <th>Email</th>
-                    <th>Rol</th>
-                    <th aria-label="Acciones" />
-                  </tr>
-                </thead>
-                <tbody>
-                  {usuarios.map((fila) => (
-                    <tr key={fila.id}>
-                      <td>{fila.nombre}</td>
-                      <td>{fila.correo}</td>
-                      <td>
-                        <span className="admin__rol">{fila.rol}</span>
-                      </td>
-                      <td className="admin__acciones">
-                        {fila.id !== usuario.id && (
-                          <button
-                            className="boton boton-fantasma admin__boton-borrar"
-                            onClick={() => manejarEliminar(fila)}
-                          >
-                            Eliminar
-                          </button>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </section>
+    <div className="admin-layout">
+      <div className="admin-fondo">
+        <img
+          className="admin-fondo__imagen"
+          src={fondoAdmin}
+          alt=""
+          aria-hidden="true"
+        />
       </div>
-    </main>
+
+      <aside className="admin-sidebar">
+        <span className="admin-sidebar__titulo">Panel Admin</span>
+        <nav className="admin-sidebar__nav">
+          <NavLink
+            to={RUTAS.ADMIN}
+            end
+            className={({ isActive }) =>
+              `admin-sidebar__link ${isActive ? "admin-sidebar__link--activo" : ""}`
+            }
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path
+                d="M3 11.5 12 4l9 7.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            Inicio
+          </NavLink>
+
+          <NavLink
+            to={RUTAS.ADMIN_USUARIOS}
+            className={({ isActive }) =>
+              `admin-sidebar__link ${isActive ? "admin-sidebar__link--activo" : ""}`
+            }
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path
+                d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <circle cx="9" cy="7" r="4" />
+              <path
+                d="M23 21v-2a4 4 0 0 0-3-3.87"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M16 3.13a4 4 0 0 1 0 7.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            Usuarios
+          </NavLink>
+
+          <NavLink
+            to={RUTAS.ADMIN_PRODUCTOS}
+            className={({ isActive }) =>
+              `admin-sidebar__link ${isActive ? "admin-sidebar__link--activo" : ""}`
+            }
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path
+                d="M21 8 12 3 3 8l9 5 9-5Z"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M3 8v8l9 5 9-5V8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path d="M12 13v8" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            Productos
+          </NavLink>
+        </nav>
+
+        <Link to={RUTAS.INICIO} className="admin-sidebar__ir-web">
+          <span>Ir a la Web</span>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <path
+              d="M5 12h14M13 6l6 6-6 6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </Link>
+
+        <div className="admin-sidebar__pie">
+          <Logo size="sm" />
+        </div>
+      </aside>
+
+      <main className="admin-main">
+        <Outlet />
+      </main>
+    </div>
   );
 }
