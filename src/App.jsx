@@ -6,7 +6,6 @@ import Inicio from "./components/pages/Inicio";
 import Login from "./components/pages/Login";
 import Registro from "./components/pages/Registro";
 import Administrador from "./components/pages/Administrador";
-import InicioProductos from "./pages/Inicio";
 import CategoriaProductos from "./pages/productos/CategoriaProductos";
 import DetalleDeProducto from "./pages/productos/DetalleDeProducto";
 import AdminProductos from "./pages/productos/AdminProductos";
@@ -16,7 +15,6 @@ export default function App() {
     <Routes>
       <Route element={<DisenoSitio />}>
         <Route path={RUTAS.INICIO} element={<Inicio />} />
-        <Route path={RUTAS.PRODUCTOS} element={<InicioProductos />} />
         <Route
           path="/categoria/:nombreCategoria"
           element={<CategoriaProductos />}
