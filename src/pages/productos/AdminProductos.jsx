@@ -92,7 +92,7 @@ function AdminProductos() {
     busqueda.trim() !== "" || categoriaFiltro !== "todas" || orden !== "";
 
   return (
-    <div className="admin__contenido">
+    <div className="admin__contenido admin__contenido--fijo">
       <div className="admin__encabezado">
         <span className="antetitulo">Panel</span>
         <h1 className="admin__titulo">
@@ -105,7 +105,7 @@ function AdminProductos() {
         </p>
       </div>
 
-      <section className="admin__bloque">
+      <section className="admin__bloque admin__bloque--flexible">
         <div className="admin-productos__filtros">
           <div className="admin-productos__campo-buscar">
             <svg

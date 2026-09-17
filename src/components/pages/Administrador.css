@@ -1,6 +1,7 @@
 .admin-layout {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   padding-top: 84px;
 }
 
@@ -33,12 +34,6 @@
   );
 }
 
-.admin-layout {
-  display: flex;
-  min-height: 100vh;
-  padding-top: 84px;
-}
-
 .admin-sidebar {
   width: 260px;
   flex-shrink: 0;
@@ -52,6 +47,7 @@
   display: flex;
   flex-direction: column;
   gap: 28px;
+  overflow-y: auto;
 }
 
 .admin-sidebar__titulo {
@@ -112,6 +108,8 @@
   z-index: 1;
   flex: 1;
   min-width: 0;
+  height: 100%;
+  overflow: hidden;
 }
 
 .admin-bienvenida {
@@ -145,6 +143,18 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+
+.admin__contenido--fijo {
+  height: 100%;
+  min-height: 0;
+}
+
+.admin__bloque--flexible {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .admin__encabezado {
@@ -310,7 +320,23 @@
 @media (max-width: 900px) {
   .admin-layout {
     flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
     padding-top: 84px;
+  }
+
+  .admin-main {
+    height: auto;
+    overflow: visible;
+  }
+
+  .admin__contenido--fijo {
+    height: auto;
+  }
+
+  .admin__bloque--flexible {
+    flex: initial;
   }
 
   .admin-sidebar {
