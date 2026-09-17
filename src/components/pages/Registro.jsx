@@ -64,6 +64,8 @@ export default function Registro() {
   const [tocado, setTocado] = useState({});
   const [errorFormulario, setErrorFormulario] = useState("");
   const [exito, setExito] = useState(false);
+  const [verContrasena, setVerContrasena] = useState(false);
+  const [verConfirmar, setVerConfirmar] = useState(false);
 
   const manejarCambio = (campo) => (evento) => {
     const formularioActualizado = {
@@ -185,15 +187,64 @@ export default function Registro() {
           className={`campo-autenticacion ${mostrarError("contrasena") ? "campo-autenticacion--error" : ""}`}
         >
           <label htmlFor="contrasena">Contraseña</label>
-          <input
-            id="contrasena"
-            type="password"
-            placeholder="Mínimo 6 caracteres"
-            value={formulario.contrasena}
-            onChange={manejarCambio("contrasena")}
-            onBlur={manejarDesenfoque("contrasena")}
-            autoComplete="new-password"
-          />
+          <div className="campo-autenticacion__contrasena-envoltorio">
+            <input
+              id="contrasena"
+              type={verContrasena ? "text" : "password"}
+              placeholder="Mínimo 6 caracteres"
+              value={formulario.contrasena}
+              onChange={manejarCambio("contrasena")}
+              onBlur={manejarDesenfoque("contrasena")}
+              autoComplete="new-password"
+            />
+            <button
+              type="button"
+              className="campo-autenticacion__ojo"
+              onClick={() => setVerContrasena((previo) => !previo)}
+              aria-label={
+                verContrasena ? "Ocultar contraseña" : "Mostrar contraseña"
+              }
+            >
+              {verContrasena ? (
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a18.5 18.5 0 0 1 5.06-5.94M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M14.12 14.12a3 3 0 1 1-4.24-4.24"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M1 1l22 22"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              )}
+            </button>
+          </div>
           {mostrarError("contrasena") ? (
             <span className="campo-autenticacion__error">
               {errores.contrasena}
@@ -209,15 +260,64 @@ export default function Registro() {
           className={`campo-autenticacion ${mostrarError("confirmarContrasena") ? "campo-autenticacion--error" : ""}`}
         >
           <label htmlFor="confirmarContrasena">Confirmar contraseña</label>
-          <input
-            id="confirmarContrasena"
-            type="password"
-            placeholder="Repetí tu contraseña"
-            value={formulario.confirmarContrasena}
-            onChange={manejarCambio("confirmarContrasena")}
-            onBlur={manejarDesenfoque("confirmarContrasena")}
-            autoComplete="new-password"
-          />
+          <div className="campo-autenticacion__contrasena-envoltorio">
+            <input
+              id="confirmarContrasena"
+              type={verConfirmar ? "text" : "password"}
+              placeholder="Repetí tu contraseña"
+              value={formulario.confirmarContrasena}
+              onChange={manejarCambio("confirmarContrasena")}
+              onBlur={manejarDesenfoque("confirmarContrasena")}
+              autoComplete="new-password"
+            />
+            <button
+              type="button"
+              className="campo-autenticacion__ojo"
+              onClick={() => setVerConfirmar((previo) => !previo)}
+              aria-label={
+                verConfirmar ? "Ocultar contraseña" : "Mostrar contraseña"
+              }
+            >
+              {verConfirmar ? (
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a18.5 18.5 0 0 1 5.06-5.94M9.9 4.24A10.94 10.94 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M14.12 14.12a3 3 0 1 1-4.24-4.24"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M1 1l22 22"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
+              )}
+            </button>
+          </div>
           {mostrarError("confirmarContrasena") && (
             <span className="campo-autenticacion__error">
               {errores.confirmarContrasena}
