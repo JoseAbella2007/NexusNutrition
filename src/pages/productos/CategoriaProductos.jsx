@@ -147,24 +147,10 @@ function CategoriaProductos() {
 
   return (
     <div className="categoria-productos">
-      {categoriaActual === 'todas' ? (
-        <CarruselMasVendidos productos={productosParaCarrusel} />
-      ) : (
-        <div className={`categoria-hero categoria-hero--${info.acento}`}>
-          <div className="fondo-animado">
-            <span className="fondo-animado__blob fondo-animado__blob--verde"></span>
-            <span className="fondo-animado__blob fondo-animado__blob--violeta"></span>
-            <span className="fondo-animado__lineas"></span>
-          </div>
-
-          <span className="categoria-hero__icono">{info.icono}</span>
-          <h1 className="categoria-hero__titulo">{nombreVisible}</h1>
-          <p className="categoria-hero__tagline">{info.tagline}</p>
-        </div>
-      )}
-      {/* El hero (banner) queda intacto: título, tagline y el fondo-animado
-          ahora viven todos DENTRO de este bloque, así no se filtran a la
-          sección de productos de abajo. */}
+    {/* Muestra el Carrusel solo en 'todas' o el Hero en las categorías individuales */}
+    {categoriaActual === 'todas' ? (
+      <CarruselMasVendidos productos={productosParaCarrusel} />
+    ) : (
       <div className={`categoria-hero categoria-hero--${info.acento}`}>
         <div className="fondo-animado">
           <span className="fondo-animado__blob fondo-animado__blob--verde"></span>
@@ -176,147 +162,148 @@ function CategoriaProductos() {
         <h1 className="categoria-hero__titulo">{nombreVisible}</h1>
         <p className="categoria-hero__tagline">{info.tagline}</p>
       </div>
+    )}
 
-      {/* Acá abajo va la foto de fondo nueva (ver ::before en el .css) */}
-      <div className="categoria-productos__contenido">
-        <div className="categoria-chips">
-          <button
-            className={`categoria-chip ${categoriaActual === 'todas' ? 'categoria-chip--activo' : ''}`}
-            onClick={() => irACategoria('todas')}
+    {/* Sección de productos y filtros */}
+    <div className="categoria-productos__contenido">
+      <div className="categoria-chips">
+        <button
+          className={`categoria-chip ${categoriaActual === 'todas' ? 'categoria-chip--activo' : ''}`}
+          onClick={() => irACategoria('todas')}
+        >
+          Todas
+        </button>
+        {CATEGORIAS.map((cat) => {
+          const slug = normalizarCategoria(cat);
+          return (
+            <button
+              key={cat}
+              className={`categoria-chip ${categoriaActual === slug ? 'categoria-chip--activo' : ''}`}
+              onClick={() => irACategoria(slug)}
+            >
+              {cat}
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="categoria-productos__filtros">
+        <div className="campo-buscar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="campo-buscar__icono">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <input
+            type="text"
+            className="categoria-productos__input"
+            placeholder="Buscar por nombre..."
+            value={busqueda}
+            onChange={(e) => setBusqueda(e.target.value)}
+          />
+        </div>
+
+        <div className="campo-select">
+          <select
+            className="categoria-productos__select"
+            value={categoriaActual}
+            onChange={(e) => irACategoria(e.target.value)}
           >
-            Todas
-          </button>
-          {CATEGORIAS.map((cat) => {
-            const slug = normalizarCategoria(cat);
-            return (
-              <button
-                key={cat}
-                className={`categoria-chip ${categoriaActual === slug ? 'categoria-chip--activo' : ''}`}
-                onClick={() => irACategoria(slug)}
-              >
+            <option value="todas">Todas las categorías</option>
+            {CATEGORIAS.map((cat) => (
+              <option key={cat} value={normalizarCategoria(cat)}>
                 {cat}
-              </button>
-            );
-          })}
+              </option>
+            ))}
+          </select>
         </div>
 
-        <div className="categoria-productos__filtros">
-          <div className="campo-buscar">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="campo-buscar__icono">
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
-            <input
-              type="text"
-              className="categoria-productos__input"
-              placeholder="Buscar por nombre..."
-              value={busqueda}
-              onChange={(e) => setBusqueda(e.target.value)}
-            />
-          </div>
-
-          <div className="campo-select">
-            <select
-              className="categoria-productos__select"
-              value={categoriaActual}
-              onChange={(e) => irACategoria(e.target.value)}
-            >
-              <option value="todas">Todas las categorías</option>
-              {CATEGORIAS.map((cat) => (
-                <option key={cat} value={normalizarCategoria(cat)}>
-                  {cat}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="campo-select">
-            <select
-              className="categoria-productos__select"
-              value={orden}
-              onChange={(e) => setOrden(e.target.value)}
-            >
-              <option value="">Ordenar por...</option>
-              <option value="precio-asc">Precio: menor a mayor</option>
-              <option value="precio-desc">Precio: mayor a menor</option>
-              <option value="nombre-asc">Nombre: A-Z</option>
-              <option value="nombre-desc">Nombre: Z-A</option>
-            </select>
-          </div>
-
-          <button className="categoria-productos__boton-limpiar" onClick={limpiarFiltros}>
-            Limpiar filtros
-          </button>
-        </div>
-
-        <p className="categoria-productos__resultado">
-          Se encontraron <strong>{productosFiltrados.length}</strong> productos
-        </p>
-
-        {productosDeLaPagina.length > 0 ? (
-          <div
-            className="categoria-productos__grid"
-            key={`${categoriaActual}-${busqueda}-${orden}-${paginaActual}`}
+        <div className="campo-select">
+          <select
+            className="categoria-productos__select"
+            value={orden}
+            onChange={(e) => setOrden(e.target.value)}
           >
-            {productosDeLaPagina.map((producto, index) => (
-              <div
-                key={producto.id}
-                className="card-entrada"
-                style={{ animationDelay: `${index * 0.06}s` }}
-              >
-                <CardProducto producto={producto} />
-              </div>
+            <option value="">Ordenar por...</option>
+            <option value="precio-asc">Precio: menor a mayor</option>
+            <option value="precio-desc">Precio: mayor a menor</option>
+            <option value="nombre-asc">Nombre: A-Z</option>
+            <option value="nombre-desc">Nombre: Z-A</option>
+          </select>
+        </div>
+
+        <button className="categoria-productos__boton-limpiar" onClick={limpiarFiltros}>
+          Limpiar filtros
+        </button>
+      </div>
+
+      <p className="categoria-productos__resultado">
+        Se encontraron <strong>{productosFiltrados.length}</strong> productos
+      </p>
+
+      {productosDeLaPagina.length > 0 ? (
+        <div
+          className="categoria-productos__grid"
+          key={`${categoriaActual}-${busqueda}-${orden}-${paginaActual}`}
+        >
+          {productosDeLaPagina.map((producto, index) => (
+            <div
+              key={producto.id}
+              className="card-entrada"
+              style={{ animationDelay: `${index * 0.06}s` }}
+            >
+              <CardProducto producto={producto} />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="categoria-productos__vacio">
+          No se encontraron productos con esos filtros.
+        </div>
+      )}
+
+      {totalPaginas > 1 && (
+        <div className="categoria-productos__paginacion">
+          <button
+            type="button"
+            className="categoria-productos__flecha"
+            onClick={() => setPaginaActual((p) => Math.max(p - 1, 1))}
+            disabled={paginaActual === 1}
+            aria-label="Página anterior"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+
+          <div className="categoria-productos__puntos">
+            {Array.from({ length: totalPaginas }, (_, indice) => (
+              <button
+                key={indice}
+                type="button"
+                className={`categoria-productos__punto ${
+                  paginaActual === indice + 1 ? 'categoria-productos__punto--activo' : ''
+                }`}
+                onClick={() => setPaginaActual(indice + 1)}
+                aria-label={`Ir a la página ${indice + 1}`}
+              />
             ))}
           </div>
-        ) : (
-          <div className="categoria-productos__vacio">
-            No se encontraron productos con esos filtros.
-          </div>
-        )}
 
-        {totalPaginas > 1 && (
-          <div className="categoria-productos__paginacion">
-            <button
-              type="button"
-              className="categoria-productos__flecha"
-              onClick={() => setPaginaActual((p) => Math.max(p - 1, 1))}
-              disabled={paginaActual === 1}
-              aria-label="Página anterior"
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
-
-            <div className="categoria-productos__puntos">
-              {Array.from({ length: totalPaginas }, (_, indice) => (
-                <button
-                  key={indice}
-                  type="button"
-                  className={`categoria-productos__punto ${
-                    paginaActual === indice + 1 ? 'categoria-productos__punto--activo' : ''
-                  }`}
-                  onClick={() => setPaginaActual(indice + 1)}
-                  aria-label={`Ir a la página ${indice + 1}`}
-                />
-              ))}
-            </div>
-
-            <button
-              type="button"
-              className="categoria-productos__flecha"
-              onClick={() => setPaginaActual((p) => Math.min(p + 1, totalPaginas))}
-              disabled={paginaActual === totalPaginas}
-              aria-label="Página siguiente"
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
-          </div>
-        )}
-      </div>
+          <button
+            type="button"
+            className="categoria-productos__flecha"
+            onClick={() => setPaginaActual((p) => Math.min(p + 1, totalPaginas))}
+            disabled={paginaActual === totalPaginas}
+            aria-label="Página siguiente"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        </div>
+      )}
     </div>
+  </div>
   );
 }
 
