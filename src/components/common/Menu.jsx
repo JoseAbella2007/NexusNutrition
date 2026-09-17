@@ -80,11 +80,11 @@ export default function Menu({setCarritoAbierto}) {
             {estaAutenticado ? (
               <>
               <button
-               type="button"
-               className="barra-navegacion__carrito"
-               onClick={() => {
-               setMenuAbierto(false);
-               setCarritoAbierto(true);
+              type="button"
+              className="barra-navegacion__carrito"
+              onClick={(manejarAgregarAlCarrito) => {
+              setMenuAbierto(false);
+              setCarritoAbierto(true);
               }}>
                   <i className="fas fa-shopping-cart relative inline-block text-lg"></i>
                  <span className="absolute top-[-3.5px] -right-2 rounded-full w-4.5 h-4.5 flex items-center justify-center text-[10px] text-white bg-(--purple-1)">

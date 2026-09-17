@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 import productosIniciales from '../data/productos';
 import useLocalStorage from '../hooks/useLocalStorage';
 import CardProducto from './productos/CardProducto';
@@ -55,7 +55,7 @@ const CATEGORIAS_HOME = [
 
 function Inicio() {
   const [productos] = useLocalStorage('productos', productosIniciales);
-
+  const { agregarAlCarrito } = useOutletContext();
   const PRODUCTOS_DESTACADOS = CATEGORIAS_HOME.map((cat) =>
     productos.find((p) => p.categoria === cat.nombre)
   );
@@ -127,7 +127,7 @@ function Inicio() {
 
         <div className="catalogo-home__grid">
           {PRODUCTOS_DESTACADOS.map(
-            (producto) => producto && <CardProducto key={producto.id} producto={producto} />
+            (producto) => producto && <CardProducto key={producto.id} producto={producto} agregarAlCarrito={agregarAlCarrito} />
           )}
         </div>
 
