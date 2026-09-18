@@ -340,28 +340,7 @@
   }
 
   .admin-sidebar {
-    position: static;
-    height: auto;
-    width: 100%;
-    flex-direction: row;
-    align-items: center;
-    overflow-x: auto;
-    border-right: none;
-    border-bottom: 1px solid var(--border-soft);
-    padding: 16px 20px;
-    gap: 16px;
-  }
-
-  .admin-sidebar__titulo {
     display: none;
-  }
-
-  .admin-sidebar__nav {
-    flex-direction: row;
-  }
-
-  .admin-sidebar__link {
-    white-space: nowrap;
   }
 
   .admin-bienvenida {
@@ -374,5 +353,69 @@
 
   .admin__bloque {
     padding: 22px;
+  }
+
+  /* ===== Tabla de usuarios -> cards ===== */
+  .admin__tabla-envoltorio {
+    overflow-x: visible;
+  }
+
+  .admin__tabla {
+    display: block;
+    width: 100%;
+  }
+
+  .admin__tabla thead {
+    display: none;
+  }
+
+  .admin__tabla tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .admin__tabla tbody tr {
+    display: block;
+    border: 1px solid var(--border-soft);
+    border-radius: 18px;
+    overflow: hidden;
+    background: linear-gradient(
+      165deg,
+      rgba(24, 24, 24, 0.92),
+      rgba(6, 6, 6, 0.96)
+    );
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+  }
+
+  .admin__tabla tbody tr td {
+    display: block;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+
+  .admin__tabla tbody tr td::before {
+    content: attr(data-label);
+    display: block;
+    color: var(--grey-mute);
+    font-size: 0.64rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 4px;
+  }
+
+  .admin__tabla tbody tr td:nth-child(1) {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--white);
+  }
+
+  .admin__tabla tbody tr td:last-child {
+    border-bottom: none;
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .admin__acciones {
+    justify-content: flex-start;
   }
 }

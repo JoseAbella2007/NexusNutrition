@@ -186,6 +186,12 @@
     border-color: var(--green-lime);
   }
 
+  .barra-navegacion__enlaces a.barra-navegacion__enlace-activo {
+    color: var(--green-lime);
+    border-color: rgba(183, 255, 0, 0.4);
+    background: rgba(183, 255, 0, 0.08);
+  }
+
   .barra-navegacion__autenticacion--movil {
     display: flex;
     flex-direction: column;
@@ -216,4 +222,14 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
+}
+
+.barra-navegacion__enlaces-admin {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .barra-navegacion__enlaces-admin {
+    display: contents;
+  }
 }

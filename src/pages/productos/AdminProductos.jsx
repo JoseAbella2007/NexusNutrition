@@ -180,6 +180,9 @@ function AdminProductos() {
               >
                 <path d="M12 5v14M5 12h14" />
               </svg>
+              <span className="admin-productos__boton-icono-texto">
+                Agregar producto
+              </span>
             </button>
           </div>
 

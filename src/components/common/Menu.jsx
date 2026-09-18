@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import Logo from "./Logo";
 import { useAutenticacion } from "../../context/ContextoAutenticacion";
 import { RUTAS } from "../../routes/rutas";
@@ -74,6 +74,42 @@ export default function Menu() {
                 Productos
               </Link>
             </>
+          )}
+
+          {estaAutenticado && esAdministrador && (
+            <div className="barra-navegacion__enlaces-admin">
+              <NavLink
+                to={RUTAS.ADMIN}
+                end
+                onClick={() => setMenuAbierto(false)}
+                className={({ isActive }) =>
+                  isActive ? "barra-navegacion__enlace-activo" : ""
+                }
+              >
+                Inicio
+              </NavLink>
+              <NavLink
+                to={RUTAS.ADMIN_USUARIOS}
+                onClick={() => setMenuAbierto(false)}
+                className={({ isActive }) =>
+                  isActive ? "barra-navegacion__enlace-activo" : ""
+                }
+              >
+                Usuarios
+              </NavLink>
+              <NavLink
+                to={RUTAS.ADMIN_PRODUCTOS}
+                onClick={() => setMenuAbierto(false)}
+                className={({ isActive }) =>
+                  isActive ? "barra-navegacion__enlace-activo" : ""
+                }
+              >
+                Productos
+              </NavLink>
+              <Link to={RUTAS.INICIO} onClick={() => setMenuAbierto(false)}>
+                Ir a la web
+              </Link>
+            </div>
           )}
 
           <div className="barra-navegacion__autenticacion barra-navegacion__autenticacion--movil">
