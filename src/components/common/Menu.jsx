@@ -73,6 +73,9 @@ export default function Menu() {
               <Link to={RUTAS.PRODUCTOS} onClick={() => setMenuAbierto(false)}>
                 Productos
               </Link>
+              <Link to={RUTAS.ACERCA_DE} onClick={() => setMenuAbierto(false)}>
+                Nosotros
+              </Link>
             </>
           )}
 
