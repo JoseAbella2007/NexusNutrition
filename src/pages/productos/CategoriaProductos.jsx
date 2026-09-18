@@ -1,15 +1,14 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import productosIniciales from '../../data/productos';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import CardProducto from './CardProducto';
+import CarruselMasVendidos from '../../components/common/CarruselMasVendidos';
+import PalabrasFlotantes from '../../components/common/PalabrasFlotantes';
 import './CategoriaProductos.css';
 
 function quitarAcentos(texto) {
-  return texto
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '');
+  return texto ? texto.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '') : '';
 }
 
 function normalizarCategoria(texto) {
@@ -22,6 +21,7 @@ const INFO_CATEGORIAS = {
   entrenamiento: {
     tagline: 'Fuerza que se construye, repetición a repetición.',
     acento: 'verde',
+    palabras: ['FUERZA', 'RESISTENCIA', 'PESO', 'POTENCIA', 'DISCIPLINA', 'RUTINA', 'SERIES', 'HIPERTROFIA'],
     icono: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" />
@@ -31,6 +31,7 @@ const INFO_CATEGORIAS = {
   'nutricion-y-dietas': {
     tagline: 'Combustible real para objetivos reales.',
     acento: 'verde',
+    palabras: ['PROTEÍNA', 'MACROS', 'CALORÍAS', 'ENERGÍA', 'DIETA', 'NUTRICIÓN', 'BALANCE', 'HABITOS'],
     icono: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
@@ -42,6 +43,7 @@ const INFO_CATEGORIAS = {
   'salud-y-bienestar': {
     tagline: 'Cuidar el cuerpo también es entrenar la mente.',
     acento: 'violeta',
+    palabras: ['BALANCE', 'VITALIDAD', 'REGENERACIÓN', 'MENTE', 'DESCANSO', 'SALUD', 'BIENESTAR', 'RELAX'],
     icono: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M12 22s8-4.5 8-11.8A5.2 5.2 0 0 0 12 6a5.2 5.2 0 0 0-8 4.2C4 17.5 12 22 12 22z" />
@@ -51,6 +53,7 @@ const INFO_CATEGORIAS = {
   suplementacion: {
     tagline: 'La precisión detrás de cada resultado.',
     acento: 'verde',
+    palabras: ['CREATINA', 'AMINOÁCIDOS', 'RECOVERY', 'RENDIMIENTO', 'GEL', 'FOCUS', 'WHEY', 'CREATINE'],
     icono: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
@@ -60,6 +63,7 @@ const INFO_CATEGORIAS = {
   todas: {
     tagline: 'Todo lo que necesitás para tu mejor versión.',
     acento: 'verde',
+    palabras: [],
     icono: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <circle cx="12" cy="12" r="9" />
@@ -69,7 +73,15 @@ const INFO_CATEGORIAS = {
   },
 };
 
-function CategoriaProductos() {
+const TITULOS_CATEGORIAS = {
+  entrenamiento: { blanco: '', verde: 'Entrenamiento' },
+  'nutricion-y-dietas': { blanco: 'Nutrición', verde: 'y Dietas' },
+  'salud-y-bienestar': { blanco: 'Salud', verde: 'y Bienestar' },
+  suplementacion: { blanco: '', verde: 'Suplementación' },
+  todas: { blanco: 'Todos los', verde: 'productos' },
+};
+
+export default function CategoriaProductos() {
   const { nombreCategoria } = useParams();
   const navigate = useNavigate();
   const [productos] = useLocalStorage('productos', productosIniciales);
@@ -78,10 +90,7 @@ function CategoriaProductos() {
   const [orden, setOrden] = useState('');
   const [paginaActual, setPaginaActual] = useState(1);
 
-  const categoriaActual = nombreCategoria;
-
-  // En "Todos los productos" mostramos más por página (12), y en una
-  // categoría puntual seguimos con 4, como pedía el criterio original.
+  const categoriaActual = nombreCategoria || 'todas';
   const productosPorPagina = categoriaActual === 'todas' ? 12 : 4;
 
   function irACategoria(slug) {
@@ -100,18 +109,10 @@ function CategoriaProductos() {
   );
 
   const productosFiltrados = [...productosBuscados].sort((a, b) => {
-    if (orden === 'precio-asc') {
-      return a.precio - b.precio;
-    }
-    if (orden === 'precio-desc') {
-      return b.precio - a.precio;
-    }
-    if (orden === 'nombre-asc') {
-      return a.nombre.localeCompare(b.nombre);
-    }
-    if (orden === 'nombre-desc') {
-      return b.nombre.localeCompare(a.nombre);
-    }
+    if (orden === 'precio-asc') return a.precio - b.precio;
+    if (orden === 'precio-desc') return b.precio - a.precio;
+    if (orden === 'nombre-asc') return a.nombre.localeCompare(b.nombre);
+    if (orden === 'nombre-desc') return b.nombre.localeCompare(a.nombre);
     return 0;
   });
 
@@ -132,28 +133,36 @@ function CategoriaProductos() {
     navigate('/categoria/todas');
   }
 
+  const productosParaCarrusel = productos.slice(0, 10).map((p) => ({
+    id: p.id,
+    nombre: p.nombre,
+    imagen: p.imagen,
+  }));
+
   const info = INFO_CATEGORIAS[categoriaActual] || INFO_CATEGORIAS.todas;
-  const nombreVisible =
-    categoriaActual === 'todas' ? 'Todos los productos' : categoriaActual.replace(/-/g, ' ');
+  const titulo = TITULOS_CATEGORIAS[categoriaActual] || TITULOS_CATEGORIAS.todas;
 
   return (
     <div className="categoria-productos">
-      {/* El hero (banner) queda intacto: título, tagline y el fondo-animado
-          ahora viven todos DENTRO de este bloque, así no se filtran a la
-          sección de productos de abajo. */}
-      <div className={`categoria-hero categoria-hero--${info.acento}`}>
-        <div className="fondo-animado">
-          <span className="fondo-animado__blob fondo-animado__blob--verde"></span>
-          <span className="fondo-animado__blob fondo-animado__blob--violeta"></span>
-          <span className="fondo-animado__lineas"></span>
+      {categoriaActual === 'todas' ? (
+        <CarruselMasVendidos productos={productosParaCarrusel} />
+      ) : (
+        <div className={`categoria-hero categoria-hero--${info.acento}`}>
+          {info.palabras && info.palabras.length > 0 && (
+            <PalabrasFlotantes palabras={info.palabras} />
+          )}
+
+          <span className="categoria-hero__icono">{info.icono}</span>
+          <h1 className="categoria-hero__titulo">
+            {titulo.blanco && (
+              <span className="categoria-hero__titulo-blanco">{titulo.blanco} </span>
+            )}
+            <span className="categoria-hero__titulo-verde">{titulo.verde}</span>
+          </h1>
+          <p className="categoria-hero__tagline">{info.tagline}</p>
         </div>
+      )}
 
-        <span className="categoria-hero__icono">{info.icono}</span>
-        <h1 className="categoria-hero__titulo">{nombreVisible}</h1>
-        <p className="categoria-hero__tagline">{info.tagline}</p>
-      </div>
-
-      {/* Acá abajo va la foto de fondo nueva (ver ::before en el .css) */}
       <div className="categoria-productos__contenido">
         <div className="categoria-chips">
           <button
@@ -295,5 +304,3 @@ function CategoriaProductos() {
     </div>
   );
 }
-
-export default CategoriaProductos;
