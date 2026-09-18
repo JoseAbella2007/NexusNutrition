@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useOutletContext } from 'react-router-dom';
 import productosIniciales from '../../data/productos';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import CardProducto from './CardProducto';
@@ -71,6 +71,7 @@ const INFO_CATEGORIAS = {
 
 function CategoriaProductos() {
   const { nombreCategoria } = useParams();
+  const { agregarAlCarrito } = useOutletContext();
   const navigate = useNavigate();
   const [productos] = useLocalStorage('productos', productosIniciales);
 
@@ -240,7 +241,7 @@ function CategoriaProductos() {
                 className="card-entrada"
                 style={{ animationDelay: `${index * 0.06}s` }}
               >
-                <CardProducto producto={producto} />
+                <CardProducto producto={producto} agregarAlCarrito={agregarAlCarrito}/>
               </div>
             ))}
           </div>
