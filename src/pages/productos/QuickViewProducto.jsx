@@ -9,6 +9,7 @@ function QuickViewProducto({ producto, onCerrar }) {
   const [cantidad, setCantidad] = useState(1);
 
   const sinStock = producto.stock === 0;
+  const esVioleta = producto.categoria === 'Salud y Bienestar';
 
   function aumentarCantidad() {
     setCantidad((c) => Math.min(c + 1, producto.stock));
@@ -50,7 +51,12 @@ function QuickViewProducto({ producto, onCerrar }) {
 
   const modal = (
     <div className="quickview-overlay" onClick={onCerrar}>
-      <div className="quickview-tarjeta" onClick={(e) => e.stopPropagation()}>
+      <div
+        className={`quickview-tarjeta quickview-tarjeta--${esVioleta ? 'violeta' : 'verde'}`}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <span className="quickview-resplandor"></span>
+
         <button className="quickview-cerrar" onClick={onCerrar} aria-label="Cerrar">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" />
@@ -67,7 +73,14 @@ function QuickViewProducto({ producto, onCerrar }) {
           <p className="quickview-precio">${producto.precio.toLocaleString('es-AR')}</p>
           <p className="quickview-descripcion">{producto.descripcion}</p>
           <p className="quickview-stock">
-            {sinStock ? 'Sin stock disponible' : `Stock disponible: ${producto.stock} unidades`}
+            {sinStock ? (
+              'Sin stock disponible'
+            ) : (
+              <>
+                <span className="quickview-punto-stock"></span>
+                Stock disponible: {producto.stock} unidades
+              </>
+            )}
           </p>
 
           <div className="quickview-selector">
@@ -76,7 +89,9 @@ function QuickViewProducto({ producto, onCerrar }) {
               <button onClick={disminuirCantidad} disabled={sinStock || cantidad <= 1}>
                 −
               </button>
-              <span>{cantidad}</span>
+              <span key={cantidad} className="quickview-cantidad__numero">
+                {cantidad}
+              </span>
               <button onClick={aumentarCantidad} disabled={sinStock || cantidad >= producto.stock}>
                 +
               </button>

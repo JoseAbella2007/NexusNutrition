@@ -3,6 +3,7 @@
   inset: 0;
   z-index: 200;
   background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(3px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,6 +18,7 @@
 
 .quickview-tarjeta {
   position: relative;
+  overflow: hidden;
   background-color: var(--bg-1, #080808);
   border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
   border-radius: 20px;
@@ -28,13 +30,13 @@
   align-items: center;
   text-align: center;
   gap: 10px;
-  animation: quickview-tarjeta-aparece 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: quickview-tarjeta-aparece 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes quickview-tarjeta-aparece {
   from {
     opacity: 0;
-    transform: scale(0.95) translateY(10px);
+    transform: scale(0.92) translateY(16px);
   }
   to {
     opacity: 1;
@@ -42,10 +44,40 @@
   }
 }
 
+/* Resplandor de fondo pulsante, mismo lenguaje visual que el banner de categoría */
+.quickview-resplandor {
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.3;
+  z-index: 0;
+  pointer-events: none;
+  animation: quickview-pulso 3s ease-in-out infinite;
+}
+
+.quickview-tarjeta--verde .quickview-resplandor {
+  background: var(--green-lime, #b7ff00);
+}
+
+.quickview-tarjeta--violeta .quickview-resplandor {
+  background: var(--purple-2, #a855f7);
+}
+
+@keyframes quickview-pulso {
+  0%, 100% { opacity: 0.22; transform: translateX(-50%) scale(1); }
+  50% { opacity: 0.4; transform: translateX(-50%) scale(1.1); }
+}
+
 .quickview-cerrar {
   position: absolute;
   top: 14px;
   right: 14px;
+  z-index: 2;
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -71,6 +103,8 @@
 }
 
 .quickview-imagen-wrapper {
+  position: relative;
+  z-index: 1;
   width: 140px;
   height: 140px;
   border-radius: 14px;
@@ -78,15 +112,23 @@
   background-color: var(--bg-2, #0d0d0d);
   border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
   margin-top: 8px;
+  animation: quickview-elemento 0.4s 0.05s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .quickview-imagen {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.quickview-imagen-wrapper:hover .quickview-imagen {
+  transform: scale(1.08);
 }
 
 .quickview-info {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -100,6 +142,13 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  text-shadow: 0 0 12px rgba(183, 255, 0, 0.5);
+  animation: quickview-elemento 0.4s 0.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.quickview-tarjeta--violeta .quickview-categoria {
+  color: var(--purple-2, #a855f7);
+  text-shadow: 0 0 12px rgba(168, 85, 247, 0.5);
 }
 
 .quickview-nombre {
@@ -107,6 +156,7 @@
   color: var(--white, #ffffff);
   font-size: 1.15rem;
   margin: 0;
+  animation: quickview-elemento 0.4s 0.15s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .quickview-precio {
@@ -115,6 +165,7 @@
   font-size: 1.3rem;
   font-weight: 700;
   margin: 0;
+  animation: quickview-elemento 0.4s 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .quickview-descripcion {
@@ -123,13 +174,32 @@
   font-size: 0.82rem;
   line-height: 1.4;
   margin: 0;
+  animation: quickview-elemento 0.4s 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .quickview-stock {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   color: var(--grey-mute, #8a8a8a);
   font-family: 'Manrope', 'Inter', sans-serif;
   font-size: 0.78rem;
   margin: 2px 0 0;
+  animation: quickview-elemento 0.4s 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.quickview-punto-stock {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--green-lime, #b7ff00);
+  box-shadow: 0 0 6px var(--green-lime, #b7ff00);
+  animation: quickview-punto-titila 1.6s ease-in-out infinite;
+}
+
+@keyframes quickview-punto-titila {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
 }
 
 .quickview-selector {
@@ -137,6 +207,7 @@
   align-items: center;
   gap: 12px;
   margin-top: 8px;
+  animation: quickview-elemento 0.4s 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .quickview-selector span:first-child {
@@ -163,7 +234,7 @@
   background-color: transparent;
   color: var(--white, #ffffff);
   cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
+  transition: background-color 0.2s, color 0.2s, transform 0.15s;
 }
 
 .quickview-cantidad button:hover:not(:disabled) {
@@ -171,18 +242,29 @@
   color: #050505;
 }
 
+.quickview-cantidad button:active:not(:disabled) {
+  transform: scale(0.85);
+}
+
 .quickview-cantidad button:disabled {
   opacity: 0.3;
   cursor: not-allowed;
 }
 
-.quickview-cantidad span {
+.quickview-cantidad__numero {
   min-width: 22px;
   text-align: center;
   color: var(--white, #ffffff);
   font-family: 'Manrope', 'Inter', sans-serif;
   font-weight: 600;
   font-size: 0.9rem;
+  display: inline-block;
+  animation: quickview-numero-bump 0.3s ease-out;
+}
+
+@keyframes quickview-numero-bump {
+  0% { transform: scale(1.4); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 .quickview-comprar {
@@ -197,14 +279,31 @@
   font-size: 0.9rem;
   cursor: pointer;
   margin-top: 10px;
-  transition: opacity 0.25s;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  animation: quickview-elemento 0.4s 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .quickview-comprar:hover:not(:disabled) {
-  opacity: 0.88;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(183, 255, 0, 0.3);
+}
+
+.quickview-comprar:active:not(:disabled) {
+  transform: translateY(-1px);
 }
 
 .quickview-comprar:disabled {
   opacity: 0.35;
   cursor: not-allowed;
+}
+
+@keyframes quickview-elemento {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
