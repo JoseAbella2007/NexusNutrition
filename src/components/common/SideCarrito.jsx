@@ -1,4 +1,4 @@
-export default function SideCarrito({ abierto, setAbierto, carrito }) {
+export default function SideCarrito({ abierto, setAbierto, carrito, setCarrito}) {
 const cantidadProductos = carrito.reduce(
     (total, producto) => total + producto.cantidad,
     0
@@ -7,6 +7,23 @@ const total = carrito.reduce(
     (total, producto) => total + producto.precio * producto.cantidad,
     0
 );
+const eliminarProducto = (id) => {
+    setCarrito((carritoActual) =>
+    carritoActual.filter((producto) => producto.id !== id)
+);
+};
+const cambiarCantidad = (id, cambio) => {
+    setCarrito((carritoActual) =>
+    carritoActual.map((producto) =>
+    producto.id === id
+        ? {
+        ...producto,
+        cantidad: Math.max(1, producto.cantidad + cambio),
+        }
+        : producto
+    )
+);
+};
 return (
     <>
     {abierto && (
@@ -30,13 +47,11 @@ return (
             <h2 className="text-xl font-bold text-white">
             Mi carrito
             </h2>
-
             <p className="text-sm text-gray-400">
             {cantidadProductos}{" "}
             {cantidadProductos === 1 ? "producto" : "productos"}
             </p>
         </div>
-
         <button
             onClick={() => setAbierto(false)}
             className="text-gray-400 text-xl hover:text-[#39ff14] transition"
@@ -56,24 +71,46 @@ return (
             key={producto.id}
             className="flex gap-3 p-3 rounded-lg bg-[#0d0d0d]"
                 >
-            <img
-                    src={producto.imagen}
-                    alt={producto.nombre}
-                    className="w-20 h-20 object-cover rounded-md"
-            />
-            <div className="flex-1">
-            <h3 className="text-white font-semibold">
-            {producto.nombre}
-            </h3>
-            <p className="text-gray-400 text-sm">
-            Cantidad: {producto.cantidad}
-            </p>
-            <p className="text-[#39ff14] font-bold mt-1">
-            $ {(producto.precio * producto.cantidad).toLocaleString("es-AR")}
-            </p>
-            </div>
-        </div>
-        ))}
+    <img
+    src={producto.imagen}
+    alt={producto.nombre}
+    className="w-20 h-20 object-cover rounded-md"
+    />
+
+    <div className="flex-1 min-w-0">
+    <h3 className="text-white font-semibold">
+        {producto.nombre}
+    </h3>
+
+    <p className="text-[#39ff14] font-bold mt-1">
+        ${" "}
+        {(producto.precio * producto.cantidad).toLocaleString("es-AR")}
+    </p>
+    <div className="flex items-center justify-center gap-2 mt-2">
+        <button
+        onClick={() => cambiarCantidad(producto.id, -1)}
+        className="w-7 h-7 flex items-center justify-center rounded bg-[#1a1a1a] text-white hover:bg-[#39ff14] hover:text-black transition">
+        -
+        </button>
+        <span className="text-gray-300 text-sm min-w-5 text-center">
+        {producto.cantidad}
+        </span>
+        <button
+        onClick={() => cambiarCantidad(producto.id, 1)}
+        className="w-7 h-7 flex items-center justify-center rounded bg-[#1a1a1a] text-white hover:bg-[#39ff14] hover:text-black transition">
+        +
+        </button>
+    </div>
+    </div>
+    <button
+    onClick={() => eliminarProducto(producto.id)}
+    className="text-gray-400 hover:text-red-500 text-lg transition"
+    aria-label="Eliminar producto"
+    >
+    <i className="fas fa-trash"></i>
+    </button>
+</div>
+))}
         </div>
         )}
         </div>

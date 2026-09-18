@@ -46,6 +46,7 @@ export default function DisenoSitio() {
         abierto={carritoAbierto}
         setAbierto={setCarritoAbierto}
         carrito={carrito}
+        setCarrito={setCarrito}
       />
     </>
   );
