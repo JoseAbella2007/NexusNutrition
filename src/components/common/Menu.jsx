@@ -5,13 +5,15 @@ import { useAutenticacion } from "../../context/ContextoAutenticacion";
 import { RUTAS } from "../../routes/rutas";
 import "./Menu.css";
 
-export default function Menu() {
+export default function Menu({ setWishlistAbierta, wishlist }) {
   const { estaAutenticado, esAdministrador, usuario, cerrarSesion } =
     useAutenticacion();
   const [conScroll, setConScroll] = useState(false);
   const [menuAbierto, setMenuAbierto] = useState(false);
   const navegar = useNavigate();
   const ubicacion = useLocation();
+
+  const cantidadWishlist = wishlist.length;
 
   const cerrandoSesionRef = useRef(false);
 
@@ -82,6 +84,31 @@ export default function Menu() {
           <div className="barra-navegacion__autenticacion barra-navegacion__autenticacion--movil">
             {estaAutenticado ? (
               <>
+                {!esAdministrador && (
+                  <button
+                    type="button"
+                    className="barra-navegacion__wishlist"
+                    aria-label="Abrir wishlist"
+                    onClick={() => {
+                      setMenuAbierto(false);
+                      setWishlistAbierta(true);
+                    }}
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      width="18"
+                      height="18"
+                    >
+                      <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
+                    </svg>
+                    <span className="barra-navegacion__wishlist-contador">
+                      {cantidadWishlist}
+                    </span>
+                  </button>
+                )}
                 <span className="barra-navegacion__usuario">
                   <span className="barra-navegacion__usuario-punto" />
                   Hola, {usuario.nombre.split(" ")[0]}
@@ -139,6 +166,28 @@ export default function Menu() {
         <div className="barra-navegacion__autenticacion barra-navegacion__autenticacion--escritorio">
           {estaAutenticado ? (
             <>
+              {!esAdministrador && (
+                <button
+                  type="button"
+                  className="barra-navegacion__wishlist"
+                  aria-label="Abrir wishlist"
+                  onClick={() => setWishlistAbierta(true)}
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    width="18"
+                    height="18"
+                  >
+                    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
+                  </svg>
+                  <span className="barra-navegacion__wishlist-contador">
+                    {cantidadWishlist}
+                  </span>
+                </button>
+              )}
               <span className="barra-navegacion__usuario">
                 <span className="barra-navegacion__usuario-punto" />
                 Hola, {usuario.nombre.split(" ")[0]}
