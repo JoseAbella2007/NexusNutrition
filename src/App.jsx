@@ -11,6 +11,7 @@ import DetalleDeProducto from "./pages/productos/DetalleDeProducto";
 import AdminInicio from "./components/pages/admin/AdminInicio";
 import AdminUsuarios from "./components/pages/admin/AdminUsuarios";
 import AdminProductos from "./pages/productos/AdminProductos";
+import Error404 from "./pages/Error404";
 
 export default function App() {
   return (
@@ -33,6 +34,8 @@ export default function App() {
       </Route>
       <Route path={RUTAS.INICIAR_SESION} element={<Login />} />
       <Route path={RUTAS.REGISTRO} element={<Registro />} />
+
+      <Route path="*" element={<Error404 />} />
     </Routes>
   );
 }
