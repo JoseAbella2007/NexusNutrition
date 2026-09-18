@@ -5,11 +5,7 @@ import { useAutenticacion } from "../../context/ContextoAutenticacion";
 import { RUTAS } from "../../routes/rutas";
 import "./Menu.css";
 
-<<<<<<< HEAD
-export default function Menu({setCarritoAbierto, carrito}) {
-=======
-export default function Menu({ setWishlistAbierta, wishlist }) {
->>>>>>> 97ad9cc3e4eafde9a23a1ee62a1bbb4497bab161
+export default function Menu({setCarritoAbierto, carrito, setWishlistAbierta, wishlist}) {
   const { estaAutenticado, esAdministrador, usuario, cerrarSesion } =
     useAutenticacion();
   const [conScroll, setConScroll] = useState(false);
@@ -91,7 +87,6 @@ export default function Menu({ setWishlistAbierta, wishlist }) {
           <div className="barra-navegacion__autenticacion barra-navegacion__autenticacion--movil">
             {estaAutenticado ? (
               <>
-<<<<<<< HEAD
               <button
               type="button"
               className="barra-navegacion__carrito"
@@ -104,7 +99,6 @@ export default function Menu({ setWishlistAbierta, wishlist }) {
                   {cantidadProductos}
                 </span>
                </button>
-=======
                 {!esAdministrador && (
                   <button
                     type="button"
@@ -130,7 +124,6 @@ export default function Menu({ setWishlistAbierta, wishlist }) {
                     </span>
                   </button>
                 )}
->>>>>>> 97ad9cc3e4eafde9a23a1ee62a1bbb4497bab161
                 <span className="barra-navegacion__usuario">
                   <span className="barra-navegacion__usuario-punto" />
                   Hola, {usuario.nombre.split(" ")[0]}
@@ -188,7 +181,6 @@ export default function Menu({ setWishlistAbierta, wishlist }) {
         <div className="barra-navegacion__autenticacion barra-navegacion__autenticacion--escritorio">
           {estaAutenticado ? (
             <>
-<<<<<<< HEAD
               <button
                  type="button"
                  className="barra-navegacion__carrito relative"
@@ -201,7 +193,6 @@ export default function Menu({ setWishlistAbierta, wishlist }) {
               {cantidadProductos}
               </span>
               </button>
-=======
               {!esAdministrador && (
                 <button
                   type="button"
@@ -224,7 +215,6 @@ export default function Menu({ setWishlistAbierta, wishlist }) {
                   </span>
                 </button>
               )}
->>>>>>> 97ad9cc3e4eafde9a23a1ee62a1bbb4497bab161
               <span className="barra-navegacion__usuario">
                 <span className="barra-navegacion__usuario-punto" />
                 Hola, {usuario.nombre.split(" ")[0]}

@@ -2,14 +2,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './CardProducto.css';
 
-<<<<<<< HEAD
-function CardProducto({ producto, agregarAlCarrito }) {
-  const [enWishlist, setEnWishlist] = useState(false);
-=======
-function CardProducto({ producto, wishlist = [], alternarWishlist: alternarWishlistContexto }) {
->>>>>>> 97ad9cc3e4eafde9a23a1ee62a1bbb4497bab161
+function CardProducto({ producto, agregarAlCarrito, wishlist = [], alternarWishlist: alternarWishlistContexto }) {
   const [agregado, setAgregado] = useState(false);
-
   const enWishlist = wishlist.some((item) => item.id === producto.id);
 
   function alternarWishlist(e) {
