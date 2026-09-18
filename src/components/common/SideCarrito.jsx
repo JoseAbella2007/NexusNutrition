@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import { RUTAS } from "../../routes/rutas";
+
 export default function SideCarrito({ abierto, setAbierto, carrito, setCarrito}) {
 const cantidadProductos = carrito.reduce(
     (total, producto) => total + producto.cantidad,
@@ -60,17 +63,17 @@ return (
             <i className="fas fa-times"></i>
         </button>
         </div>
-        <div className="p-6 overflow-y-auto h-[calc(100%-180px)]">
+        <div className="px-8 pt-10 pb-6 overflow-y-auto h-[calc(100%-180px)]">
         {carrito.length === 0 ? (
             <p className="text-gray-400 text-center">
             Tu carrito está vacío
             </p>
         ) : (
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 items-center">
             {carrito.map((producto) => (
                 <div
             key={producto.id}
-            className="flex gap-4 p-4 rounded-lg bg-[#0d0d0d]"
+            className="w-[90%] -translate-x-3 translate-y-2 flex gap-4 p-4 rounded-lg bg-[#0d0d0d]"
                 >
     <img
     src={producto.imagen}
@@ -115,29 +118,21 @@ return (
         </div>
         )}
         </div>
-        <div className="absolute bottom-0 left-0 w-full p-5 bg-[#0d0d0d] border-t-3 border-[#7b2cff]/30">
-        <div className="flex justify-between items-center mb-4">
-        <span className="text-gray-400">
-        Total
-        </span>
-        <span className="text-xl font-bold text-[#8a8a8a]">
-        ${total.toLocaleString("es-AR")}
-        </span>
-        </div>
-        <button
-            className="
-            w-full
-            py-3
-            bg-[#39ff14]
-            text-[#050505]
-            font-bold
-            hover:bg-white
-            transition
-            "
-        >
-            Finalizar compra
-        </button>
-        </div>
+<div className="absolute bottom-0 left-0 w-full h-30 px-5 py-3 bg-[#0d0d0d] border-t-3 border-[#7b2cff]/30 flex flex-col items-center gap-2">
+  <div className="flex flex-col items-center">
+    <span className="text-gray-400 text-xl">Total</span>
+    <span className="text-xl font-bold text-[#8a8a8a]">
+      ${total.toLocaleString("es-AR")}
+    </span>
+  </div>
+
+  <Link
+    to={RUTAS.NO_ENCONTRADA}
+    className="flex items-center justify-center w-1/2 h-10 rounded-full bg-[#39ff14] text-[#050505]! font-bold text-lg hover:bg-[#7b2cff] hover:text-white! transition"
+  >
+    Finalizar compra
+  </Link>
+</div>
     </aside>
     </>
 );
