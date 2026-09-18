@@ -12,6 +12,7 @@ import AdminInicio from "./components/pages/admin/AdminInicio";
 import AdminUsuarios from "./components/pages/admin/AdminUsuarios";
 import AdminProductos from "./pages/productos/AdminProductos";
 import Error404 from "./pages/Error404";
+import Nosotros from "./pages/Nosotros";
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
           element={<CategoriaProductos />}
         />
         <Route path="/producto/:id" element={<DetalleDeProducto />} />
+        <Route path={RUTAS.ACERCA_DE} element={<Nosotros />} />
 
         <Route element={<RutaAdministrador />}>
           <Route path={RUTAS.ADMIN} element={<Administrador />}>
