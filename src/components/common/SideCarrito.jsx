@@ -125,7 +125,6 @@ return (
       ${total.toLocaleString("es-AR")}
     </span>
   </div>
-
   <Link
     to={RUTAS.NO_ENCONTRADA}
     className="flex items-center justify-center w-1/2 h-10 rounded-full bg-[#39ff14] text-[#050505]! font-bold text-lg hover:bg-[#7b2cff] hover:text-white! transition"

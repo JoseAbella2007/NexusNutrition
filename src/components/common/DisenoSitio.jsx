@@ -9,7 +9,8 @@ import SideWishlist from "./SideWishlist";
 export default function DisenoSitio() {
   const [carritoAbierto, setCarritoAbierto] = useState(false);
   const [carrito, setCarrito] = useLocalStorage("carrito", []);
-  const agregarAlCarrito = (producto) => {
+
+  const agregarAlCarrito = (producto, cantidad = 1) => {
     setCarrito((carritoActual) => {
       const productoExistente = carritoActual.find(
         (item) => item.id === producto.id
@@ -17,20 +18,18 @@ export default function DisenoSitio() {
       if (productoExistente) {
         return carritoActual.map((item) =>
           item.id === producto.id
-            ? { ...item, cantidad: item.cantidad + 1 }
+            ? { ...item, cantidad: item.cantidad + cantidad }
             : item
         );
       }
       return [
         ...carritoActual,
-        {
-          ...producto,
-          cantidad: 1,
-        },
+        { ...producto, cantidad },
       ];
     });
     setCarritoAbierto(true);
   };
+
   const [wishlistAbierta, setWishlistAbierta] = useState(false);
   const [wishlist, setWishlist] = useLocalStorage("wishlist", []);
 
@@ -58,6 +57,7 @@ export default function DisenoSitio() {
           agregarAlCarrito,
           wishlist,
           alternarWishlist,
+          carrito,
         }}
       />
       <Footer />
