@@ -2,15 +2,15 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './CardProducto.css';
 
-function CardProducto({ producto }) {
-  const [enWishlist, setEnWishlist] = useState(false);
+function CardProducto({ producto, wishlist = [], alternarWishlist: alternarWishlistContexto }) {
   const [agregado, setAgregado] = useState(false);
+
+  const enWishlist = wishlist.some((item) => item.id === producto.id);
 
   function alternarWishlist(e) {
     e.preventDefault();
     e.stopPropagation();
-    // TODO: acá se conecta el WishlistContext real cuando esté listo
-    setEnWishlist((prev) => !prev);
+    alternarWishlistContexto?.(producto);
   }
 
   function agregarAlCarrito(e) {

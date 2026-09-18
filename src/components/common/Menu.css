@@ -217,3 +217,32 @@
   align-items: center;
   gap: 6px;
 }
+
+.barra-navegacion__wishlist {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white-soft);
+  transition: color 0.2s ease;
+}
+
+.barra-navegacion__wishlist:hover {
+  color: var(--purple-2);
+}
+
+.barra-navegacion__wishlist-contador {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--purple-1);
+  color: var(--white);
+  font-size: 0.62rem;
+  font-weight: 700;
+}
