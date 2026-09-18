@@ -42,19 +42,19 @@ return (
         ${abierto ? "translate-x-0" : "translate-x-full"}
         `}
     >
-        <div className="flex items-center justify-between p-5 bg-[#0d0d0d] border-b border-[#39ff14]/20">
+        <div className="flex items-center justify-center p-5 bg-[#0d0d0d] border-b border-[#39ff14]/20">
         <div>
             <h2 className="text-xl font-bold text-white">
-            Mi carrito
+            Carrito de Compras
             </h2>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-(purple-2) ">  
             {cantidadProductos}{" "}
             {cantidadProductos === 1 ? "producto" : "productos"}
             </p>
         </div>
         <button
             onClick={() => setAbierto(false)}
-            className="text-gray-400 text-xl hover:text-[#39ff14] transition"
+            className="absolute right-5 text-gray-400 text-xl hover:text-[#39ff14] transition"
         >
             <i className="fas fa-times"></i>
         </button>
