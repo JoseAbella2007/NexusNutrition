@@ -1,14 +1,5 @@
-<<<<<<< HEAD
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, useOutletContext } from 'react-router-dom';
-=======
-import React, { useState, useEffect } from 'react';
-<<<<<<< HEAD
-import { useParams, useNavigate } from 'react-router-dom';
->>>>>>> e9d071d7dba76b90af659cc8ba0123720b5d4108
-=======
-import { useParams, useNavigate, useOutletContext } from 'react-router-dom';
->>>>>>> 97ad9cc3e4eafde9a23a1ee62a1bbb4497bab161
 import productosIniciales from '../../data/productos';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import CardProducto from './CardProducto';
@@ -94,7 +85,6 @@ export default function CategoriaProductos() {
   const { nombreCategoria } = useParams();
   const { agregarAlCarrito } = useOutletContext();
   const navigate = useNavigate();
-  const { wishlist, alternarWishlist } = useOutletContext();
   const [productos] = useLocalStorage('productos', productosIniciales);
 
   const [busqueda, setBusqueda] = useState('');
@@ -260,11 +250,7 @@ export default function CategoriaProductos() {
                 className="card-entrada"
                 style={{ animationDelay: `${index * 0.06}s` }}
               >
-<<<<<<< HEAD
                 <CardProducto producto={producto} agregarAlCarrito={agregarAlCarrito}/>
-=======
-                <CardProducto producto={producto} wishlist={wishlist} alternarWishlist={alternarWishlist} />
->>>>>>> 97ad9cc3e4eafde9a23a1ee62a1bbb4497bab161
               </div>
             ))}
           </div>
