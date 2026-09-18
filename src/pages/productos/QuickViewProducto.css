@@ -1,0 +1,210 @@
+.quickview-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: quickview-overlay-aparece 0.25s ease-out;
+}
+
+@keyframes quickview-overlay-aparece {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.quickview-tarjeta {
+  position: relative;
+  background-color: var(--bg-1, #080808);
+  border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
+  border-radius: 20px;
+  width: 100%;
+  max-width: 380px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  animation: quickview-tarjeta-aparece 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes quickview-tarjeta-aparece {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.quickview-cerrar {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
+  background-color: var(--bg-2, #0d0d0d);
+  color: var(--white-soft, #e5e5e5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.25s, color 0.25s, transform 0.25s;
+}
+
+.quickview-cerrar svg {
+  width: 15px;
+  height: 15px;
+}
+
+.quickview-cerrar:hover {
+  background-color: var(--green-lime, #b7ff00);
+  color: #050505;
+  transform: rotate(90deg);
+}
+
+.quickview-imagen-wrapper {
+  width: 140px;
+  height: 140px;
+  border-radius: 14px;
+  overflow: hidden;
+  background-color: var(--bg-2, #0d0d0d);
+  border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
+  margin-top: 8px;
+}
+
+.quickview-imagen {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.quickview-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.quickview-categoria {
+  color: var(--green-lime, #b7ff00);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.quickview-nombre {
+  font-family: 'Space Grotesk', 'Sora', sans-serif;
+  color: var(--white, #ffffff);
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+.quickview-precio {
+  font-family: 'Manrope', 'Inter', sans-serif;
+  color: var(--green-lime, #b7ff00);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.quickview-descripcion {
+  color: var(--grey-mute, #8a8a8a);
+  font-family: 'Manrope', 'Inter', sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.quickview-stock {
+  color: var(--grey-mute, #8a8a8a);
+  font-family: 'Manrope', 'Inter', sans-serif;
+  font-size: 0.78rem;
+  margin: 2px 0 0;
+}
+
+.quickview-selector {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.quickview-selector span:first-child {
+  color: var(--grey-mute, #8a8a8a);
+  font-family: 'Manrope', 'Inter', sans-serif;
+  font-size: 0.82rem;
+}
+
+.quickview-cantidad {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background-color: var(--bg-2, #0d0d0d);
+  border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
+  border-radius: 999px;
+  padding: 3px;
+}
+
+.quickview-cantidad button {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  color: var(--white, #ffffff);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.quickview-cantidad button:hover:not(:disabled) {
+  background-color: var(--green-lime, #b7ff00);
+  color: #050505;
+}
+
+.quickview-cantidad button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.quickview-cantidad span {
+  min-width: 22px;
+  text-align: center;
+  color: var(--white, #ffffff);
+  font-family: 'Manrope', 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.quickview-comprar {
+  width: 100%;
+  padding: 12px;
+  border-radius: 999px;
+  border: none;
+  background-color: var(--green-lime, #b7ff00);
+  color: #050505;
+  font-family: 'Manrope', 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: opacity 0.25s;
+}
+
+.quickview-comprar:hover:not(:disabled) {
+  opacity: 0.88;
+}
+
+.quickview-comprar:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
