@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, Navigate, Link } from 'react-router-dom';
+import { useParams, Navigate, Link, useOutletContext } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import productosIniciales from '../../data/productos';
 import useLocalStorage from '../../hooks/useLocalStorage';
@@ -113,9 +113,9 @@ const RAYOS = [
 
 export default function DetalleDeProducto() {
   const { id } = useParams();
+  const { wishlist, alternarWishlist: alternarWishlistContexto } = useOutletContext();
   const [productos] = useLocalStorage('productos', productosIniciales);
   const [carrito, setCarrito] = useLocalStorage('carrito', []);
-  const [wishlist, setWishlist] = useLocalStorage('wishlist', []);
   const [cantidad, setCantidad] = useState(1);
   const [agregado, setAgregado] = useState(false);
 
@@ -174,9 +174,7 @@ export default function DetalleDeProducto() {
   }
 
   function alternarWishlist() {
-    setWishlist((actual) =>
-      enWishlist ? actual.filter((p) => p.id !== producto.id) : [...actual, producto]
-    );
+    alternarWishlistContexto(producto);
 
     Swal.fire({
       icon: enWishlist ? 'info' : 'success',

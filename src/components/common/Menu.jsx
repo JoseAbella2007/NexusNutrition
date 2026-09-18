@@ -5,13 +5,19 @@ import { useAutenticacion } from "../../context/ContextoAutenticacion";
 import { RUTAS } from "../../routes/rutas";
 import "./Menu.css";
 
+<<<<<<< HEAD
 export default function Menu({setCarritoAbierto, carrito}) {
+=======
+export default function Menu({ setWishlistAbierta, wishlist }) {
+>>>>>>> 97ad9cc3e4eafde9a23a1ee62a1bbb4497bab161
   const { estaAutenticado, esAdministrador, usuario, cerrarSesion } =
     useAutenticacion();
   const [conScroll, setConScroll] = useState(false);
   const [menuAbierto, setMenuAbierto] = useState(false);
   const navegar = useNavigate();
   const ubicacion = useLocation();
+
+  const cantidadWishlist = wishlist.length;
 
   const cerrandoSesionRef = useRef(false);
 
@@ -76,12 +82,16 @@ export default function Menu({setCarritoAbierto, carrito}) {
               <Link to={RUTAS.PRODUCTOS} onClick={() => setMenuAbierto(false)}>
                 Productos
               </Link>
+              <Link to={RUTAS.ACERCA_DE} onClick={() => setMenuAbierto(false)}>
+                Nosotros
+              </Link>
             </>
           )}
 
           <div className="barra-navegacion__autenticacion barra-navegacion__autenticacion--movil">
             {estaAutenticado ? (
               <>
+<<<<<<< HEAD
               <button
               type="button"
               className="barra-navegacion__carrito"
@@ -94,6 +104,33 @@ export default function Menu({setCarritoAbierto, carrito}) {
                   {cantidadProductos}
                 </span>
                </button>
+=======
+                {!esAdministrador && (
+                  <button
+                    type="button"
+                    className="barra-navegacion__wishlist"
+                    aria-label="Abrir wishlist"
+                    onClick={() => {
+                      setMenuAbierto(false);
+                      setWishlistAbierta(true);
+                    }}
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      width="18"
+                      height="18"
+                    >
+                      <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
+                    </svg>
+                    <span className="barra-navegacion__wishlist-contador">
+                      {cantidadWishlist}
+                    </span>
+                  </button>
+                )}
+>>>>>>> 97ad9cc3e4eafde9a23a1ee62a1bbb4497bab161
                 <span className="barra-navegacion__usuario">
                   <span className="barra-navegacion__usuario-punto" />
                   Hola, {usuario.nombre.split(" ")[0]}
@@ -151,6 +188,7 @@ export default function Menu({setCarritoAbierto, carrito}) {
         <div className="barra-navegacion__autenticacion barra-navegacion__autenticacion--escritorio">
           {estaAutenticado ? (
             <>
+<<<<<<< HEAD
               <button
                  type="button"
                  className="barra-navegacion__carrito relative"
@@ -163,6 +201,30 @@ export default function Menu({setCarritoAbierto, carrito}) {
               {cantidadProductos}
               </span>
               </button>
+=======
+              {!esAdministrador && (
+                <button
+                  type="button"
+                  className="barra-navegacion__wishlist"
+                  aria-label="Abrir wishlist"
+                  onClick={() => setWishlistAbierta(true)}
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    width="18"
+                    height="18"
+                  >
+                    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
+                  </svg>
+                  <span className="barra-navegacion__wishlist-contador">
+                    {cantidadWishlist}
+                  </span>
+                </button>
+              )}
+>>>>>>> 97ad9cc3e4eafde9a23a1ee62a1bbb4497bab161
               <span className="barra-navegacion__usuario">
                 <span className="barra-navegacion__usuario-punto" />
                 Hola, {usuario.nombre.split(" ")[0]}
