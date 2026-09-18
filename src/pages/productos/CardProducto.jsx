@@ -2,9 +2,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './CardProducto.css';
 
-function CardProducto({ producto, wishlist = [], alternarWishlist: alternarWishlistContexto }) {
+function CardProducto({ producto, agregarAlCarrito, wishlist = [], alternarWishlist: alternarWishlistContexto }) {
   const [agregado, setAgregado] = useState(false);
-
   const enWishlist = wishlist.some((item) => item.id === producto.id);
 
   function alternarWishlist(e) {
@@ -13,10 +12,10 @@ function CardProducto({ producto, wishlist = [], alternarWishlist: alternarWishl
     alternarWishlistContexto?.(producto);
   }
 
-  function agregarAlCarrito(e) {
+  function manejarAgregarAlCarrito(e) {
     e.preventDefault();
     e.stopPropagation();
-    // TODO: acá se conecta el CartContext real cuando esté listo
+    agregarAlCarrito(producto);
     setAgregado(true);
     setTimeout(() => setAgregado(false), 600);
   }
@@ -32,7 +31,7 @@ function CardProducto({ producto, wishlist = [], alternarWishlist: alternarWishl
         <div className="card-producto__iconos">
           <button
             className={`card-producto__icono-boton ${agregado ? 'card-producto__icono-boton--activo' : ''}`}
-            onClick={agregarAlCarrito}
+            onClick={manejarAgregarAlCarrito}
             aria-label="Agregar al carrito"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

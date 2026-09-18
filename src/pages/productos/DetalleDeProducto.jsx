@@ -113,9 +113,8 @@ const RAYOS = [
 
 export default function DetalleDeProducto() {
   const { id } = useParams();
-  const { wishlist, alternarWishlist: alternarWishlistContexto } = useOutletContext();
   const [productos] = useLocalStorage('productos', productosIniciales);
-  const [carrito, setCarrito] = useLocalStorage('carrito', []);
+  const { wishlist, alternarWishlist: alternarWishlistContexto, agregarAlCarrito: agregarAlCarritoContexto,} = useOutletContext();
   const [cantidad, setCantidad] = useState(1);
   const [agregado, setAgregado] = useState(false);
 
@@ -139,22 +138,12 @@ export default function DetalleDeProducto() {
     setCantidad((c) => Math.max(c - 1, 1));
   }
 
-  function agregarAlCarrito({ redirigir = false } = {}) {
-    setCarrito((actual) => {
-      const existente = actual.find((item) => item.id === producto.id);
-      if (existente) {
-        return actual.map((item) =>
-          item.id === producto.id ? { ...item, cantidad: item.cantidad + cantidad } : item
-        );
-      }
-      return [...actual, { ...producto, cantidad }];
-    });
-
+function agregarAlCarrito({ redirigir = false } = {}) {
+  agregarAlCarritoContexto(producto, cantidad);
     if (!redirigir) {
       setAgregado(true);
       setTimeout(() => setAgregado(false), 1400);
     }
-
     Swal.fire({
       icon: 'success',
       iconColor: 'var(--green-lime)',

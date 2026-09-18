@@ -5,7 +5,7 @@ import { useAutenticacion } from "../../context/ContextoAutenticacion";
 import { RUTAS } from "../../routes/rutas";
 import "./Menu.css";
 
-export default function Menu({ setWishlistAbierta, wishlist }) {
+export default function Menu({setCarritoAbierto, carrito, setWishlistAbierta, wishlist}) {
   const { estaAutenticado, esAdministrador, usuario, cerrarSesion } =
     useAutenticacion();
   const [conScroll, setConScroll] = useState(false);
@@ -41,7 +41,10 @@ export default function Menu({ setWishlistAbierta, wishlist }) {
     cerrandoSesionRef.current = true;
     navegar(RUTAS.INICIO, { replace: true });
   };
-
+  const cantidadProductos = carrito.reduce(
+  (total, producto) => total + producto.cantidad,
+  0
+);
   return (
     <header
       className={`barra-navegacion ${conScroll ? "barra-navegacion--desplazada" : ""}`}
@@ -84,6 +87,18 @@ export default function Menu({ setWishlistAbierta, wishlist }) {
           <div className="barra-navegacion__autenticacion barra-navegacion__autenticacion--movil">
             {estaAutenticado ? (
               <>
+              <button
+              type="button"
+              className="barra-navegacion__carrito"
+              onClick={(manejarAgregarAlCarrito) => {
+              setMenuAbierto(false);
+              setCarritoAbierto(true);
+              }}>
+                  <i className="fas fa-shopping-cart relative inline-block text-lg"></i>
+                 <span className="absolute top-[-3.5px] -right-2 rounded-full w-4.5 h-4.5 flex items-center justify-center text-[10px] text-white bg-(--purple-1)">
+                  {cantidadProductos}
+                </span>
+               </button>
                 {!esAdministrador && (
                   <button
                     type="button"
@@ -166,6 +181,18 @@ export default function Menu({ setWishlistAbierta, wishlist }) {
         <div className="barra-navegacion__autenticacion barra-navegacion__autenticacion--escritorio">
           {estaAutenticado ? (
             <>
+              <button
+                 type="button"
+                 className="barra-navegacion__carrito relative"
+                 onClick={() => {
+                 setCarritoAbierto(true);
+                }}
+              >
+              <i className="fas fa-shopping-cart relative inline-block text-lg"></i>
+              <span className="absolute top-[-3.5px] -right-2 rounded-full w-4.5 h-4.5 flex items-center justify-center text-[10px] text-white bg-(--purple-1)">
+              {cantidadProductos}
+              </span>
+              </button>
               {!esAdministrador && (
                 <button
                   type="button"
