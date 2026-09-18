@@ -1,6 +1,13 @@
 .categoria-productos {
   position: relative;
   overflow: hidden;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+  background-color: var(--bg-0, #050505);
+=======
+>>>>>>> e9d071d7dba76b90af659cc8ba0123720b5d4108
+>>>>>>> b605dcd88e8cf02539b75036039a8b69b93fe5a4
   min-height: 100vh;
 }
 

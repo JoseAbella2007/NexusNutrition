@@ -1,5 +1,10 @@
+<<<<<<< HEAD
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate, useOutletContext } from 'react-router-dom';
+=======
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+>>>>>>> e9d071d7dba76b90af659cc8ba0123720b5d4108
 import productosIniciales from '../../data/productos';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import CardProducto from './CardProducto';
@@ -83,6 +88,7 @@ const TITULOS_CATEGORIAS = {
 
 export default function CategoriaProductos() {
   const { nombreCategoria } = useParams();
+  const { agregarAlCarrito } = useOutletContext();
   const navigate = useNavigate();
   const [productos] = useLocalStorage('productos', productosIniciales);
 
@@ -249,7 +255,7 @@ export default function CategoriaProductos() {
                 className="card-entrada"
                 style={{ animationDelay: `${index * 0.06}s` }}
               >
-                <CardProducto producto={producto} />
+                <CardProducto producto={producto} agregarAlCarrito={agregarAlCarrito}/>
               </div>
             ))}
           </div>

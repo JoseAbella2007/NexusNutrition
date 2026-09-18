@@ -5,7 +5,7 @@ import { useAutenticacion } from "../../context/ContextoAutenticacion";
 import { RUTAS } from "../../routes/rutas";
 import "./Menu.css";
 
-export default function Menu({setCarritoAbierto}) {
+export default function Menu({setCarritoAbierto, carrito}) {
   const { estaAutenticado, esAdministrador, usuario, cerrarSesion } =
     useAutenticacion();
   const [conScroll, setConScroll] = useState(false);
@@ -39,7 +39,10 @@ export default function Menu({setCarritoAbierto}) {
     cerrandoSesionRef.current = true;
     navegar(RUTAS.INICIO, { replace: true });
   };
-
+  const cantidadProductos = carrito.reduce(
+  (total, producto) => total + producto.cantidad,
+  0
+);
   return (
     <header
       className={`barra-navegacion ${conScroll ? "barra-navegacion--desplazada" : ""}`}
@@ -80,15 +83,15 @@ export default function Menu({setCarritoAbierto}) {
             {estaAutenticado ? (
               <>
               <button
-               type="button"
-               className="barra-navegacion__carrito"
-               onClick={() => {
-               setMenuAbierto(false);
-               setCarritoAbierto(true);
+              type="button"
+              className="barra-navegacion__carrito"
+              onClick={(manejarAgregarAlCarrito) => {
+              setMenuAbierto(false);
+              setCarritoAbierto(true);
               }}>
                   <i className="fas fa-shopping-cart relative inline-block text-lg"></i>
                  <span className="absolute top-[-3.5px] -right-2 rounded-full w-4.5 h-4.5 flex items-center justify-center text-[10px] text-white bg-(--purple-1)">
-                  0
+                  {cantidadProductos}
                 </span>
                </button>
                 <span className="barra-navegacion__usuario">
@@ -157,7 +160,7 @@ export default function Menu({setCarritoAbierto}) {
               >
               <i className="fas fa-shopping-cart relative inline-block text-lg"></i>
               <span className="absolute top-[-3.5px] -right-2 rounded-full w-4.5 h-4.5 flex items-center justify-center text-[10px] text-white bg-(--purple-1)">
-               0
+              {cantidadProductos}
               </span>
               </button>
               <span className="barra-navegacion__usuario">
