@@ -12,6 +12,7 @@ import AdminUsuarios from "./components/pages/admin/AdminUsuarios";
 import AdminProductos from "./pages/productos/AdminProductos";
 import Error404 from "./pages/Error404";
 import Nosotros from "./pages/Nosotros";
+import DetalleDeProducto from "./pages/productos/DetalleDeProducto";
 
 export default function App() {
   return (
