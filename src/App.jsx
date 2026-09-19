@@ -12,7 +12,6 @@ import AdminUsuarios from "./components/pages/admin/AdminUsuarios";
 import AdminProductos from "./pages/productos/AdminProductos";
 import Error404 from "./pages/Error404";
 import Nosotros from "./pages/Nosotros";
-import DetalleDeProducto from "./pages/productos/DetalleDeProducto";
 
 export default function App() {
   return (
@@ -23,7 +22,6 @@ export default function App() {
           path="/categoria/:nombreCategoria"
           element={<CategoriaProductos />}
         />
-        <Route path="/producto/:id" element={<DetalleDeProducto />} />
         <Route path={RUTAS.ACERCA_DE} element={<Nosotros />} />
 
         <Route element={<RutaAdministrador />}>

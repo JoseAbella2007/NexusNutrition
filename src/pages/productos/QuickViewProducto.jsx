@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
-import { useOutletContext } from 'react-router-dom';
+import { useOutletContext, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import './QuickViewProducto.css';
 
 function QuickViewProducto({ producto, onCerrar }) {
+   const navigate = useNavigate();
   const {
     wishlist,
     alternarWishlist,
@@ -32,23 +33,9 @@ function QuickViewProducto({ producto, onCerrar }) {
 
   function comprarAhora() {
     if (sinStock) return;
-    agregarAlCarrito(producto, cantidad);
-    Swal.fire({
-      icon: 'success',
-      iconColor: 'var(--green-lime)',
-      title: '¡Compra exitosa!',
-      text: `${cantidad} × ${producto.nombre} agregado a tu carrito.`,
-      confirmButtonColor: 'var(--green-lime)',
-      confirmButtonText: 'Genial',
-      customClass: {
-        popup: 'swal-nexus-popup',
-        title: 'swal-nexus-title',
-        htmlContainer: 'swal-nexus-text',
-        confirmButton: 'swal-nexus-confirm',
-      },
-      buttonsStyling: false,
-    });
-
+    
+    onCerrar();
+    navigate('/ruta-no-existente');
     onCerrar();
   }
 
@@ -186,30 +173,63 @@ function QuickViewProducto({ producto, onCerrar }) {
               </button>
             </div>
           </div>
+          {/* ICONOS */}
+          <div className="quickview-acciones">
+            {/* Wishlist */}
+            <button
+              className={`quickview-icono ${
+                enWishlist
+                  ? 'quickview-icono--activo'
+                  : ''
+              }`}
+              onClick={handleAlternarWishlist}
+              aria-label={
+                enWishlist
+                  ? 'Quitar de favoritos'
+                  : 'Agregar a favoritos'
+              }
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill={
+                  enWishlist
+                    ? 'currentColor'
+                    : 'none'
+                }
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
+              </svg>
+            </button>
 
+            {/* Carrito */}
+            <button
+              className="quickview-icono"
+              onClick={handleAgregarAlCarrito}
+              disabled={sinStock}
+              aria-label="Agregar al carrito"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <circle cx="9" cy="21" r="1" />
+                <circle cx="20" cy="21" r="1" />
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Comprar */}
           <button
             className="quickview-comprar"
             onClick={comprarAhora}
             disabled={sinStock}
           >
             {sinStock ? 'Sin stock' : 'Comprar ahora'}
-          </button>
-
-          <button
-            className="quickview-wishlist"
-            onClick={handleAlternarWishlist}
-          >
-            {enWishlist
-              ? 'Quitar de favoritos'
-              : 'Agregar a favoritos'}
-          </button>
-
-          <button
-            className="quickview-carrito"
-            onClick={handleAgregarAlCarrito}
-            disabled={sinStock}
-          >
-            Agregar al carrito
           </button>
         </div>
       </div>

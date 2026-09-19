@@ -90,7 +90,7 @@ export default function Menu({setCarritoAbierto, carrito, setWishlistAbierta, wi
               <button
               type="button"
               className="barra-navegacion__carrito"
-              onClick={(manejarAgregarAlCarrito) => {
+              onClick={() => {
               setMenuAbierto(false);
               setCarritoAbierto(true);
               }}>

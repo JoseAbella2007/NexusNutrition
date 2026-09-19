@@ -307,3 +307,74 @@
     transform: translateY(0);
   }
 }
+.quickview-acciones {
+  position: relative;
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
+.quickview-icono {
+  width: 45px;
+  height: 45px;
+
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+
+  background-color: #0d0d0d;
+  color: #ffffff;
+
+  cursor: pointer;
+
+  position: relative;
+  z-index: 10;
+
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.quickview-icono svg {
+  display: block;
+
+  width: 22px;
+  height: 22px;
+
+  min-width: 22px;
+  min-height: 22px;
+
+  color: inherit;
+  stroke: currentColor;
+}
+
+.quickview-icono:hover {
+  color: var(--green-lime, #b7ff00);
+  border-color: var(--green-lime, #b7ff00);
+
+  transform: translateY(-2px);
+}
+
+.quickview-icono--activo {
+  color: var(--green-lime, #b7ff00);
+  border-color: var(--green-lime, #b7ff00);
+}
+
+.quickview-icono:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+}
