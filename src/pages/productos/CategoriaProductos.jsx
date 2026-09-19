@@ -83,7 +83,7 @@ const TITULOS_CATEGORIAS = {
 
 export default function CategoriaProductos() {
   const { nombreCategoria } = useParams();
-  const { agregarAlCarrito } = useOutletContext();
+  const { agregarAlCarrito, wishlist, alternarWishlist } = useOutletContext();
   const navigate = useNavigate();
   const [productos] = useLocalStorage('productos', productosIniciales);
 
@@ -250,7 +250,12 @@ export default function CategoriaProductos() {
                 className="card-entrada"
                 style={{ animationDelay: `${index * 0.06}s` }}
               >
-                <CardProducto producto={producto} agregarAlCarrito={agregarAlCarrito}/>
+                <CardProducto
+                  producto={producto}
+                  agregarAlCarrito={agregarAlCarrito}
+                  wishlist={wishlist}
+                  alternarWishlist={alternarWishlist}
+                />
               </div>
             ))}
           </div>
