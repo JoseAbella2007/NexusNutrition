@@ -41,28 +41,36 @@
   color: var(--white-soft);
 }
 
-.barra-navegacion__enlaces a {
+.barra-navegacion__enlaces a,
+.barra-navegacion__enlaces button,
+.barra-navegacion__carrito{
   position: relative;
   padding: 4px 0;
   transition: color 0.3s ease;
 }
 
-.barra-navegacion__enlaces a::after {
+.barra-navegacion__enlaces a::after,
+.barra-navegacion__enlaces button::after,
+.barra-navegacion__carrito::after{
   content: "";
   position: absolute;
   left: 0;
   bottom: -2px;
   width: 0;
-  height: 1px;
+  height: 2px;
   background: var(--gradient-green);
   transition: width 0.35s var(--ease-premium);
 }
 
-.barra-navegacion__enlaces a:hover {
+.barra-navegacion__enlaces a:hover,
+.barra-navegacion__enlaces button:hover,
+.barra-navegacion__carrito:hover{
   color: var(--white);
 }
 
-.barra-navegacion__enlaces a:hover::after {
+.barra-navegacion__enlaces a:hover::after, 
+.barra-navegacion__enlaces button:hover::after,
+.barra-navegacion__carrito:hover::after{
   width: 100%;
 }
 
@@ -164,7 +172,9 @@
     transform: translateY(0);
   }
 
-  .barra-navegacion__enlaces a {
+  .barra-navegacion__enlaces a,
+  .barra-navegacion__enlaces button,
+  .barra-navegacion__carrito{
     font-size: 1.1rem;
     font-weight: 600;
     padding: 14px 40px;
@@ -178,11 +188,15 @@
       color 0.3s ease;
   }
 
-  .barra-navegacion__enlaces a::after {
+  .barra-navegacion__enlaces a::after, 
+  .barra-navegacion__enlaces button::after,
+  .barra-navegacion__carrito::after{ 
     display: none;
   }
 
-  .barra-navegacion__enlaces a:hover {
+  .barra-navegacion__enlaces a:hover,
+  .barra-navegacion__enlaces button:hover,
+  .barra-navegacion__carrito:hover{ 
     border-color: var(--green-lime);
   }
 
@@ -216,4 +230,33 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
+}
+
+.barra-navegacion__wishlist {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white-soft);
+  transition: color 0.2s ease;
+}
+
+.barra-navegacion__wishlist:hover {
+  color: var(--purple-2);
+}
+
+.barra-navegacion__wishlist-contador {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--purple-1);
+  color: var(--white);
+  font-size: 0.62rem;
+  font-weight: 700;
 }
