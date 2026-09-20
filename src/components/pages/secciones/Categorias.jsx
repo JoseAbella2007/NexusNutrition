@@ -9,6 +9,7 @@ import "./Categorias.css";
 const CATEGORIAS = [
   {
     nombre: "Entrenamiento",
+    slug: "entrenamiento",
     variantes: [
       "Rutinas de gimnasio",
       "Fuerza y musculación",
@@ -21,6 +22,7 @@ const CATEGORIAS = [
   },
   {
     nombre: "Nutrición y dietas",
+    slug: "nutricion-y-dietas",
     variantes: [
       "Alimentación saludable",
       "Planes alimentarios",
@@ -35,6 +37,7 @@ const CATEGORIAS = [
   },
   {
     nombre: "Salud y bienestar",
+    slug: "salud-y-bienestar",
     variantes: [
       "Bienestar",
       "Sueño y descanso",
@@ -49,6 +52,7 @@ const CATEGORIAS = [
   },
   {
     nombre: "Suplementación",
+    slug: "suplementacion",
     variantes: [
       "Proteínas",
       "Creatina",
@@ -65,11 +69,12 @@ const CATEGORIAS = [
 
 export default function Categorias() {
   const { estaAutenticado, esAdministrador } = useAutenticacion();
-  const destino = esAdministrador
-    ? RUTAS.ADMIN
-    : estaAutenticado
-      ? RUTAS.PRODUCTOS
-      : RUTAS.REGISTRO;
+
+  const obtenerDestino = (slug) => {
+    if (esAdministrador) return RUTAS.ADMIN;
+    if (estaAutenticado) return `/categoria/${slug}`;
+    return RUTAS.REGISTRO;
+  };
 
   return (
     <section className="seccion categorias_nexus">
@@ -86,7 +91,7 @@ export default function Categorias() {
           {CATEGORIAS.map((categoria, indice) => (
             <RevelarAlDesplazar key={categoria.nombre} retraso={indice * 0.08}>
               <Link
-                to={destino}
+                to={obtenerDestino(categoria.slug)}
                 className="tarjeta-categoria__enlace"
                 aria-label={
                   estaAutenticado
