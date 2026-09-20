@@ -23,7 +23,6 @@ export default function App() {
           element={<CategoriaProductos />}
         />
         <Route path={RUTAS.ACERCA_DE} element={<Nosotros />} />
-
         <Route element={<RutaAdministrador />}>
           <Route path={RUTAS.ADMIN} element={<Administrador />}>
             <Route index element={<AdminInicio />} />
