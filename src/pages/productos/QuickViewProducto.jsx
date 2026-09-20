@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useOutletContext, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { RUTAS } from '../../routes/rutas';
 import './QuickViewProducto.css';
 
 function QuickViewProducto({ producto, onCerrar }) {
@@ -33,10 +34,8 @@ function QuickViewProducto({ producto, onCerrar }) {
 
   function comprarAhora() {
     if (sinStock) return;
-    
     onCerrar();
-    navigate('/ruta-no-existente');
-    onCerrar();
+    navigate(RUTAS.NO_ENCONTRADA);
   }
 
   function handleAgregarAlCarrito() {
@@ -240,4 +239,3 @@ function QuickViewProducto({ producto, onCerrar }) {
 }
 
 export default QuickViewProducto;
-
