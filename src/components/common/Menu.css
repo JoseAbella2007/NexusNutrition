@@ -260,3 +260,65 @@
   font-size: 0.62rem;
   font-weight: 700;
 }
+.barra-navegacion__acciones {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+@media (min-width: 861px) {
+  .barra-navegacion__acciones {
+    display: none;
+  }
+}
+
+.barra-navegacion__acciones .barra-navegacion__carrito,
+.barra-navegacion__acciones .barra-navegacion__wishlist {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.barra-navegacion__acciones .barra-navegacion__carrito i {
+  font-size: 18px;
+}
+
+.barra-navegacion__acciones .barra-navegacion__wishlist svg {
+  width: 18px;
+  height: 18px;
+}
+
+.barra-navegacion__acciones .barra-navegacion__carrito > span {
+  position: absolute;
+  top: -3px;
+  right: -4px;
+  width: 17px;
+  height: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+}
+
+.barra-navegacion__acciones .barra-navegacion__wishlist-contador {
+  position: absolute;
+  top: -3px;
+  right: -4px;
+  width: 17px;
+  height: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+}
+.barra-navegacion__mobil-derecha {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}

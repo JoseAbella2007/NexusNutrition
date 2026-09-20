@@ -87,41 +87,6 @@ export default function Menu({setCarritoAbierto, carrito, setWishlistAbierta, wi
           <div className="barra-navegacion__autenticacion barra-navegacion__autenticacion--movil">
             {estaAutenticado ? (
               <>
-              <button
-              type="button"
-              className="barra-navegacion__carrito"
-              onClick={() => {
-              setMenuAbierto(false);
-              setCarritoAbierto(true);
-              }}>
-                  <i className="fas fa-shopping-cart relative inline-block text-lg"></i>
-                 <span className="absolute top-[-3.5px] -right-2 rounded-full w-4.5 h-4.5 flex items-center justify-center text-[10px] text-white bg-(--purple-1)">
-                  {cantidadProductos}
-                </span>
-               </button>
-                <button
-                  type="button"
-                  className="barra-navegacion__wishlist"
-                  aria-label="Abrir wishlist"
-                  onClick={() => {
-                    setMenuAbierto(false);
-                    setWishlistAbierta(true);
-                  }}
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    width="18"
-                    height="18"
-                  >
-                    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
-                  </svg>
-                  <span className="barra-navegacion__wishlist-contador">
-                    {cantidadWishlist}
-                  </span>
-                </button>
                 <span className="barra-navegacion__usuario">
                   <span className="barra-navegacion__usuario-punto" />
                   Hola, {usuario.nombre.split(" ")[0]}
@@ -255,16 +220,57 @@ export default function Menu({setCarritoAbierto, carrito, setWishlistAbierta, wi
           )}
         </div>
 
-        <button
-          className={`barra-navegacion__hamburguesa ${menuAbierto ? "barra-navegacion__hamburguesa--abierta" : ""}`}
-          onClick={() => setMenuAbierto((abierto) => !abierto)}
-          aria-label="Abrir menú"
-        >
-          <span />
-          <span />
-          <span />
-        </button>
+        <div className="barra-navegacion__mobil-derecha">
+          <div className="barra-navegacion__acciones">
+            {estaAutenticado && (
+              <>
+                <button
+                  type="button"
+                  className="barra-navegacion__carrito relative"
+                  onClick={() => setCarritoAbierto(true)}
+                  aria-label="Abrir carrito"
+                >
+                  <i className="fas fa-shopping-cart relative inline-block text-lg"></i>
+                  <span className="absolute top-[-3.5px] -right-2 rounded-full w-4.5 h-4.5 flex items-center justify-center text-[10px] text-white bg-(--purple-1)">
+                    {cantidadProductos}
+                  </span>
+                </button>
+                <button
+                  type="button"
+                  className="barra-navegacion__wishlist"
+                  aria-label="Abrir wishlist"
+                  onClick={() => setWishlistAbierta(true)}
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    width="18"
+                    height="18"
+                  >
+                    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
+                  </svg>
+                  <span className="barra-navegacion__wishlist-contador">
+                    {cantidadWishlist}
+                  </span>
+                </button>
+              </>
+            )}
+          </div>
+
+          <button
+            className={`barra-navegacion__hamburguesa ${menuAbierto ? "barra-navegacion__hamburguesa--abierta" : ""}`}
+            onClick={() => setMenuAbierto((abierto) => !abierto)}
+            aria-label="Abrir menú"
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
       </div>
     </header>
   );
 }
+
