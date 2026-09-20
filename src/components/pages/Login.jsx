@@ -68,7 +68,7 @@ export default function Login() {
         formulario.contrasena,
       );
       const destinoPorDefecto =
-        usuarioLogueado.rol === "administrador" ? RUTAS.ADMIN : RUTAS.PRODUCTOS;
+        usuarioLogueado.rol === "administrador" ? RUTAS.ADMIN : RUTAS.INICIO;
       const rutaDestino = ubicacion.state?.from ?? destinoPorDefecto;
       navegar(rutaDestino, { replace: true });
     } catch (error) {
