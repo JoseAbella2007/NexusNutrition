@@ -1,0 +1,251 @@
+.carrito-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(100%, 400px);
+  background: var(--bg-1);
+  border-left: 4px solid rgba(123, 44, 255, 0.3);
+  box-shadow: -12px 0 40px rgba(168, 85, 247, 0.35);
+  z-index: 201;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.carrito-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: var(--bg-2);
+  border-bottom: 3px solid rgba(123, 44, 255, 0.3);
+}
+
+.carrito-titulo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--white);
+  text-align: center;
+}
+
+.carrito-contador {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: var(--purple-2);
+}
+
+.carrito-cerrar {
+  position: absolute;
+  right: 20px;
+  color: var(--grey-mute);
+  transition: color 0.2s ease;
+}
+
+.carrito-cerrar:hover {
+  color: var(--green-classic);
+}
+
+.carrito-body {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.carrito-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.carrito-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--bg-2);
+}
+
+.carrito-imagen {
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.carrito-nombre {
+  color: var(--white);
+  font-weight: 600;
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.carrito-precio {
+  color: var(--grey-mute);
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.carrito-cantidad-btn {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  background: #1a1a1a;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.carrito-cantidad-btn:hover {
+  background: var(--green-classic);
+  color: black;
+}
+
+.carrito-cantidad-valor {
+  min-width: 20px;
+  text-align: center;
+  color: var(--grey-mute);
+  font-size: 0.875rem;
+}
+
+.carrito-eliminar {
+  color: var(--grey-mute);
+  transition: color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.carrito-eliminar:hover {
+  color: #ff4747;
+}
+
+.carrito-footer {
+  width: 100%;
+  padding: 16px 20px;
+  background: var(--bg-2);
+  border-top: 3px solid rgba(123, 44, 255, 0.3);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.carrito-total-label {
+  color: var(--grey-mute);
+  font-size: 1.1rem;
+}
+
+.carrito-total-valor {
+  color: var(--white);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.carrito-finalizar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 80%;
+  height: 40px;
+
+  border-radius: 999px;
+  background: var(--green-classic);
+  color: var(--bg-0);
+
+  font-size: 1rem;
+  font-weight: 700;
+
+  transition: all 0.2s ease;
+}
+
+.carrito-finalizar:hover {
+  background: var(--purple-1);
+  color: white;
+}
+
+@media (max-width: 374px) {
+  .carrito-header {
+    padding: 12px;
+  }
+
+  .carrito-titulo {
+    font-size: 1.1rem;
+  }
+
+  .carrito-contador {
+    font-size: 0.75rem;
+  }
+
+  .carrito-cerrar {
+    right: 12px;
+  }
+
+  .carrito-body {
+    padding: 12px;
+  }
+
+  .carrito-lista {
+    gap: 12px;
+  }
+
+  .carrito-item {
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .carrito-imagen {
+    width: 55px;
+    height: 55px;
+  }
+
+  .carrito-nombre {
+    font-size: 0.8rem;
+  }
+
+  .carrito-precio {
+    font-size: 0.85rem;
+  }
+
+  .carrito-cantidad-btn {
+    width: 24px;
+    height: 24px;
+  }
+
+  .carrito-cantidad-valor {
+    font-size: 0.75rem;
+  }
+
+  .carrito-eliminar {
+    font-size: 1rem;
+  }
+
+  .carrito-footer {
+    padding: 12px;
+  }
+
+  .carrito-total-label,
+  .carrito-total-valor {
+    font-size: 1rem;
+  }
+
+  .carrito-finalizar {
+    width: 85%;
+    font-size: 0.9rem;
+  }
+}
+.carrito-panel-abierto {
+  transform: translateX(0);
+}
