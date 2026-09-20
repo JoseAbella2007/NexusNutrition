@@ -7,10 +7,34 @@ import fotoPilar from "../assets/imagenes/team/fotoPilar.jpeg";
 import fotoAgus from "../assets/imagenes/team/fotoAgus.jpeg";
 
 const equipo = [
-  { nombre: "José Abella", rol: "Tech Lead", foto: fotoJose },
-  { nombre: "Mariano De Filippo", rol: "Desarrollador", foto: fotoMariano },
-  { nombre: "Pilar Molina", rol: "Scrum Master", foto: fotoPilar },
-  { nombre: "Agustín Penza", rol: "Desarrollador", foto: fotoAgus },
+  {
+    nombre: "José Abella",
+    rol: "Tech Lead",
+    foto: fotoJose,
+    descripcion:
+      "Líder técnico del equipo. Se encargó de la gestión del repositorio en Git y de revisar y aprobar el código del equipo. Además desarrolló el carrito de compras, con la modificación de cantidades y la eliminación de ítems.",
+  },
+  {
+    nombre: "Mariano De Filippo",
+    rol: "Desarrollador",
+    foto: fotoMariano,
+    descripcion:
+      "Desarrollador del equipo. Implementó el CRUD de usuarios, el login simulado con persistencia de sesión, el layout general del panel de administración y las rutas protegidas.",
+  },
+  {
+    nombre: "Pilar Molina",
+    rol: "Scrum Master",
+    foto: fotoPilar,
+    descripcion:
+      "Scrum Master del equipo. Coordinó la organización del trabajo en Trello, las reuniones diarias y la gestión de las tarjetas. También desarrolló código: el CRUD de productos, el panel de administración y el detalle de producto.",
+  },
+  {
+    nombre: "Agustín Penza",
+    rol: "Desarrollador",
+    foto: fotoAgus,
+    descripcion:
+      "Desarrollador del equipo. Implementó el CRUD de la wishlist, la página Nosotros y la página de error 404.",
+  },
 ];
 
 export default function Nosotros() {
@@ -107,6 +131,7 @@ export default function Nosotros() {
             <span className="about-modal__etiqueta">Integrante del equipo</span>
             <h2>{seleccionado.nombre}</h2>
             <p className="about-modal__rol">{seleccionado.rol}</p>
+            <p className="about-modal__descripcion">{seleccionado.descripcion}</p>
           </div>
         </div>
       )}

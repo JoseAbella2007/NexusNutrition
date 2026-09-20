@@ -324,3 +324,19 @@
   from { opacity: 0; transform: translateY(20px) scale(0.96); }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
+
+.about-modal__descripcion {
+  margin: 18px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--border-soft);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--white-soft);
+  text-align: center;
+}
+
+.about-modal {
+  width: min(100%, 440px);
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+}
