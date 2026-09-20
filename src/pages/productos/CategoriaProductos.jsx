@@ -3,6 +3,7 @@ import { useParams, useNavigate, useOutletContext } from 'react-router-dom';
 import productosIniciales from '../../data/productos';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import CardProducto from './CardProducto';
+import QuickViewProducto from './QuickViewProducto';
 import CarruselMasVendidos from '../../components/common/CarruselMasVendidos';
 import PalabrasFlotantes from '../../components/common/PalabrasFlotantes';
 import './CategoriaProductos.css';
@@ -90,6 +91,7 @@ export default function CategoriaProductos() {
   const [busqueda, setBusqueda] = useState('');
   const [orden, setOrden] = useState('');
   const [paginaActual, setPaginaActual] = useState(1);
+  const [idProductoSeleccionado, setIdProductoSeleccionado] = useState(null);
 
   const categoriaActual = nombreCategoria || 'todas';
   const productosPorPagina = categoriaActual === 'todas' ? 12 : 4;
@@ -140,13 +142,20 @@ export default function CategoriaProductos() {
     imagen: p.imagen,
   }));
 
+  const productoSeleccionado = productos.find(
+    (p) => p.id === idProductoSeleccionado
+  );
+
   const info = INFO_CATEGORIAS[categoriaActual] || INFO_CATEGORIAS.todas;
   const titulo = TITULOS_CATEGORIAS[categoriaActual] || TITULOS_CATEGORIAS.todas;
 
   return (
     <div className="categoria-productos">
       {categoriaActual === 'todas' ? (
-        <CarruselMasVendidos productos={productosParaCarrusel} />
+        <CarruselMasVendidos
+          productos={productosParaCarrusel}
+          onSeleccionar={(p) => setIdProductoSeleccionado(p.id)}
+        />
       ) : (
         <div className={`categoria-hero categoria-hero--${info.acento}`}>
           {info.palabras && info.palabras.length > 0 && (
@@ -307,6 +316,13 @@ export default function CategoriaProductos() {
           </div>
         )}
       </div>
+
+      {productoSeleccionado && (
+        <QuickViewProducto
+          producto={productoSeleccionado}
+          onCerrar={() => setIdProductoSeleccionado(null)}
+        />
+      )}
     </div>
   );
 }

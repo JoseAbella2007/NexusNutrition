@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
 import FondoSeccion from "./FondoSeccion";
 import { usePrefiereMovimientoReducido } from "../../hooks/usePrefiereMovimientoReducido";
 import imagenCorredor from "../../assets/imagenes/corredor.webp";
@@ -36,6 +35,7 @@ export default function CarruselMasVendidos({
   productos = PRODUCTOS_DEMO,
   radio = 340,
   duracion = 30,
+  onSeleccionar,
 }) {
   const movimientoReducido = usePrefiereMovimientoReducido();
   const cantidad = productos.length;
@@ -45,6 +45,8 @@ export default function CarruselMasVendidos({
   const arrastrandoRef = useRef(false);
   const pausadoRef = useRef(false);
   const ultimoXRef = useRef(0);
+  const inicioXRef = useRef(0);
+  const huboArrastreRef = useRef(false);
   const escenaRef = useRef(null);
 
   useEffect(() => {
@@ -70,12 +72,23 @@ export default function CarruselMasVendidos({
 
   const manejarPointerDown = (evento) => {
     arrastrandoRef.current = true;
+    huboArrastreRef.current = false;
+    inicioXRef.current = evento.clientX;
     ultimoXRef.current = evento.clientX;
-    evento.currentTarget.setPointerCapture(evento.pointerId);
   };
 
   const manejarPointerMove = (evento) => {
     if (!arrastrandoRef.current) return;
+
+    // Recién cuando se mueve más de 6px lo consideramos un arrastre
+    if (!huboArrastreRef.current) {
+      if (Math.abs(evento.clientX - inicioXRef.current) < 6) return;
+      huboArrastreRef.current = true;
+      evento.currentTarget.setPointerCapture(evento.pointerId);
+      ultimoXRef.current = evento.clientX;
+      return;
+    }
+
     const deltaX = evento.clientX - ultimoXRef.current;
     ultimoXRef.current = evento.clientX;
     setRotacion((previo) => previo - deltaX * 0.4);
@@ -83,6 +96,11 @@ export default function CarruselMasVendidos({
 
   const manejarPointerUp = () => {
     arrastrandoRef.current = false;
+  };
+
+  const seleccionar = (producto) => {
+    if (huboArrastreRef.current) return; // si fue un arrastre, no abrir
+    onSeleccionar?.(producto);
   };
 
   useEffect(() => {
@@ -133,14 +151,21 @@ export default function CarruselMasVendidos({
           style={{ transform: `rotateY(${rotacion}deg)` }}
         >
           {productos.map((producto, indice) => (
-            <Link
+            <div
               key={producto.id}
-              to={`/producto/${producto.id}`}
+              role="button"
+              tabIndex={0}
               className="carrusel-mas-vendidos__item"
               style={{
                 transform: `rotateY(${anguloPorItem * indice}deg) translateZ(${radio}px)`,
               }}
-              draggable={false}
+              onClick={() => seleccionar(producto)}
+              onKeyDown={(evento) => {
+                if (evento.key === "Enter" || evento.key === " ") {
+                  evento.preventDefault();
+                  seleccionar(producto);
+                }
+              }}
             >
               <img
                 src={producto.imagen}
@@ -156,7 +181,7 @@ export default function CarruselMasVendidos({
                   Ver detalle →
                 </span>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>
