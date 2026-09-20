@@ -11,7 +11,7 @@ function irAlComienzo() {
 export default function Footer() {
   const { estaAutenticado, esAdministrador, usuario } = useAutenticacion();
   const destinoProductos = esAdministrador
-    ? RUTAS.ADMIN
+    ? RUTAS.ADMIN_PRODUCTOS
     : estaAutenticado
       ? RUTAS.PRODUCTOS
       : RUTAS.REGISTRO;
