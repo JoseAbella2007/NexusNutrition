@@ -6,10 +6,10 @@ import fotoPilar from "../assets/imagenes/team/fotoPilar.jpeg";
 import fotoAgus from "../assets/imagenes/team/fotoAgus.jpeg";
 
 const equipo = [
-  { nombre: "Jose", rol: "Tech Lead", foto: fotoJose },
-  { nombre: "Mariano", rol: "Desarrollador", foto: fotoMariano },
-  { nombre: "Pilar", rol: "Scrum Master", foto: fotoPilar },
-  { nombre: "Agus", rol: "Desarrollador", foto: fotoAgus },
+  { nombre: "José Abella", rol: "Tech Lead", foto: fotoJose },
+  { nombre: "Mariano De Filippo", rol: "Desarrollador", foto: fotoMariano },
+  { nombre: "Pilar Molina", rol: "Scrum Master", foto: fotoPilar },
+  { nombre: "Agustín Penza", rol: "Desarrollador", foto: fotoAgus },
 ];
 
 export default function Nosotros() {
@@ -29,18 +29,26 @@ export default function Nosotros() {
           <p>Las personas que construyen el proyecto</p>
         </div>
 
+        <div className="about-historia">
+          <span className="about-historia__etiqueta">Nuestra historia</span>
+          <p>
+            Arrancamos como cuatro estudiantes de RollingCode School con la
+            misma idea: dejar de simular proyectos y construir uno real, de
+            punta a punta. Nexus Nutrition nació de ahí — cada pantalla, cada
+            línea de código y cada decisión de diseño se armó a pulmón, entre
+            clases, code reviews cruzados y bastante prueba y error. Esto es lo
+            que salió.
+          </p>
+        </div>
+
         <div className="about-gallery">
           {equipo.map((persona, indice) => (
             <article
               className="about-miembro"
               key={persona.nombre}
-              tabIndex={0}
               style={{ "--retraso": `${indice * 0.12}s` }}
             >
               <div className="about-circulo">
-                <span className="about-inicial">
-                  {persona.nombre.charAt(0).toUpperCase()}
-                </span>
                 <img
                   className="about-foto"
                   src={persona.foto}
