@@ -20,12 +20,15 @@
   transform: scale(1.08);
 }
 
-/* El degradado ahora es invisible por defecto: solo aparece en hover,
-   al mismo tiempo que el panel de texto. */
 .card-producto__degradado {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(5, 5, 5, 0.95) 0%, rgba(5, 5, 5, 0.5) 45%, transparent 75%);
+  background: linear-gradient(
+    to top,
+    rgba(5, 5, 5, 0.95) 0%,
+    rgba(5, 5, 5, 0.5) 45%,
+    transparent 75%
+  );
   z-index: 1;
   opacity: 0;
   transition: opacity 0.35s ease;
@@ -35,7 +38,6 @@
   opacity: 1;
 }
 
-/* ================= ÍCONOS Y CATEGORÍA (siempre visibles) ================= */
 .card-producto__superior {
   position: absolute;
   top: 12px;
@@ -76,7 +78,10 @@
   justify-content: center;
   cursor: pointer;
   backdrop-filter: blur(4px);
-  transition: background-color 0.25s, color 0.25s, transform 0.25s;
+  transition:
+    background-color 0.25s,
+    color 0.25s,
+    transform 0.25s;
 }
 
 .card-producto__icono-boton svg {
@@ -94,7 +99,6 @@
   border-color: var(--green-lime, #b7ff00);
 }
 
-/* ================= PANEL: oculto del todo por defecto ================= */
 .card-producto__panel {
   position: absolute;
   left: 0;
@@ -105,11 +109,10 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  /* translateY(100%) mueve el panel exactamente su propia altura hacia
-     abajo, sin importar cuánto texto tenga adentro — queda 100% oculto. */
   transform: translateY(100%);
   opacity: 0;
-  transition: transform 0.45s var(--ease-premium, cubic-bezier(0.16, 1, 0.3, 1)),
+  transition:
+    transform 0.45s var(--ease-premium, cubic-bezier(0.16, 1, 0.3, 1)),
     opacity 0.3s ease;
 }
 
@@ -119,7 +122,7 @@
 }
 
 .card-producto__nombre {
-  font-family: 'Space Grotesk', 'Sora', sans-serif;
+  font-family: "Space Grotesk", "Sora", sans-serif;
   font-size: 1rem;
   color: var(--white, #ffffff);
   margin: 0;
@@ -127,7 +130,7 @@
 }
 
 .card-producto__precio {
-  font-family: 'Manrope', 'Inter', sans-serif;
+  font-family: "Manrope", "Inter", sans-serif;
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--green-lime, #b7ff00);
@@ -140,7 +143,7 @@
   border-radius: 999px;
   background-color: var(--green-lime, #b7ff00);
   color: #050505;
-  font-family: 'Manrope', 'Inter', sans-serif;
+  font-family: "Manrope", "Inter", sans-serif;
   font-weight: 700;
   font-size: 0.85rem;
   text-decoration: none;
@@ -149,4 +152,79 @@
 
 .card-producto__boton:hover {
   opacity: 0.85;
+}
+
+@media (max-width: 700px) {
+  .card-producto__degradado {
+    opacity: 1;
+  }
+
+  .card-producto__panel {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 700px) {
+  .categoria-hero__titulo {
+    font-size: 1.8rem;
+  }
+
+  .categoria-productos__contenido::before {
+    background-attachment: scroll;
+  }
+
+  /* ---- Chips de categoría: "Todas" arriba y las demás en 2 columnas ---- */
+  .categoria-productos__contenido .categoria-chips {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .categoria-productos__contenido .categoria-chip {
+    padding: 10px 8px;
+    text-align: center;
+  }
+
+  .categoria-productos__contenido .categoria-chip:first-child {
+    grid-column: 1 / -1;
+  }
+
+  /* ---- Filtros: caja redondeada y campos compactos a ancho completo ---- */
+  .categoria-productos__contenido .categoria-productos__filtros {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 8px;
+    border-radius: 20px;
+    padding: 12px;
+  }
+
+  .categoria-productos__contenido .campo-buscar {
+    flex: none;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .categoria-productos__contenido .campo-select {
+    width: 100%;
+  }
+
+  .categoria-productos__contenido .categoria-productos__input {
+    padding: 8px 14px 8px 36px;
+    font-size: 0.85rem;
+  }
+
+  .categoria-productos__contenido .categoria-productos__select {
+    width: 100%;
+    padding: 8px 32px 8px 14px;
+    font-size: 0.85rem;
+  }
+
+  .categoria-productos__contenido .categoria-productos__boton-limpiar {
+    width: 100%;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
 }
