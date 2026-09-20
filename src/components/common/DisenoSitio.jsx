@@ -30,7 +30,6 @@ export default function DisenoSitio() {
         { ...producto, cantidad },
       ];
     });
-    setCarritoAbierto(true);
   };
 
   const [wishlistAbierta, setWishlistAbierta] = useState(false);

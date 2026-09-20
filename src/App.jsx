@@ -7,7 +7,6 @@ import Login from "./components/pages/Login";
 import Registro from "./components/pages/Registro";
 import Administrador from "./components/pages/Administrador";
 import CategoriaProductos from "./pages/productos/CategoriaProductos";
-import DetalleDeProducto from "./pages/productos/DetalleDeProducto";
 import AdminInicio from "./components/pages/admin/AdminInicio";
 import AdminUsuarios from "./components/pages/admin/AdminUsuarios";
 import AdminProductos from "./pages/productos/AdminProductos";
@@ -23,9 +22,7 @@ export default function App() {
           path="/categoria/:nombreCategoria"
           element={<CategoriaProductos />}
         />
-        <Route path="/producto/:id" element={<DetalleDeProducto />} />
         <Route path={RUTAS.ACERCA_DE} element={<Nosotros />} />
-
         <Route element={<RutaAdministrador />}>
           <Route path={RUTAS.ADMIN} element={<Administrador />}>
             <Route index element={<AdminInicio />} />
