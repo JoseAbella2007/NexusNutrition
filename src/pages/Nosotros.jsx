@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import "./Nosotros.css";
 import fondoNosotros from "../assets/imagenes/team/fondoNosotros.jpeg";
 import fotoJose from "../assets/imagenes/team/fotoJose.jpeg";
@@ -13,6 +14,17 @@ const equipo = [
 ];
 
 export default function Nosotros() {
+  const [seleccionado, setSeleccionado] = useState(null);
+
+  useEffect(() => {
+    if (!seleccionado) return;
+    const cerrarConEscape = (e) => {
+      if (e.key === "Escape") setSeleccionado(null);
+    };
+    window.addEventListener("keydown", cerrarConEscape);
+    return () => window.removeEventListener("keydown", cerrarConEscape);
+  }, [seleccionado]);
+
   return (
     <section
       className="about-page notranslate"
@@ -43,10 +55,13 @@ export default function Nosotros() {
 
         <div className="about-gallery">
           {equipo.map((persona, indice) => (
-            <article
+            <button
+              type="button"
               className="about-miembro"
               key={persona.nombre}
               style={{ "--retraso": `${indice * 0.12}s` }}
+              onClick={() => setSeleccionado(persona)}
+              aria-label={`Ver información de ${persona.nombre}`}
             >
               <div className="about-circulo">
                 <img
@@ -59,10 +74,42 @@ export default function Nosotros() {
                 <h3>{persona.nombre}</h3>
                 <p>{persona.rol}</p>
               </div>
-            </article>
+            </button>
           ))}
         </div>
       </div>
+
+      {seleccionado && (
+        <div
+          className="about-modal__fondo"
+          onClick={() => setSeleccionado(null)}
+        >
+          <div
+            className="about-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-label={seleccionado.nombre}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="about-modal__cerrar"
+              onClick={() => setSeleccionado(null)}
+              aria-label="Cerrar"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="18" height="18">
+                <path d="M18 6 6 18M6 6l12 12" />
+              </svg>
+            </button>
+            <div className="about-modal__foto">
+              <img src={seleccionado.foto} alt={seleccionado.nombre} />
+            </div>
+            <span className="about-modal__etiqueta">Integrante del equipo</span>
+            <h2>{seleccionado.nombre}</h2>
+            <p className="about-modal__rol">{seleccionado.rol}</p>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
