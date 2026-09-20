@@ -6,7 +6,6 @@
   width: min(100%, 400px);
   background: var(--bg-1);
   border-left: 4px solid rgba(123, 44, 255, 0.3);
-  box-shadow: -12px 0 40px rgba(168, 85, 247, 0.35);
   z-index: 201;
   transform: translateX(100%);
   transition: transform 0.3s ease-in-out;
@@ -248,4 +247,5 @@
 }
 .carrito-panel-abierto {
   transform: translateX(0);
+  box-shadow: -12px 0 40px rgba(168, 85, 247, 0.35);
 }
