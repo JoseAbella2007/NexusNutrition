@@ -5,13 +5,15 @@ import { useAutenticacion } from "../../context/ContextoAutenticacion";
 import { RUTAS } from "../../routes/rutas";
 import "./Menu.css";
 
-export default function Menu() {
+export default function Menu({setCarritoAbierto, carrito, setWishlistAbierta, wishlist}) {
   const { estaAutenticado, esAdministrador, usuario, cerrarSesion } =
     useAutenticacion();
   const [conScroll, setConScroll] = useState(false);
   const [menuAbierto, setMenuAbierto] = useState(false);
   const navegar = useNavigate();
   const ubicacion = useLocation();
+
+  const cantidadWishlist = wishlist.length;
 
   const cerrandoSesionRef = useRef(false);
 
@@ -39,7 +41,10 @@ export default function Menu() {
     cerrandoSesionRef.current = true;
     navegar(RUTAS.INICIO, { replace: true });
   };
-
+  const cantidadProductos = carrito.reduce(
+  (total, producto) => total + producto.cantidad,
+  0
+);
   return (
     <header
       className={`barra-navegacion ${conScroll ? "barra-navegacion--desplazada" : ""}`}
@@ -72,6 +77,9 @@ export default function Menu() {
               </Link>
               <Link to={RUTAS.PRODUCTOS} onClick={() => setMenuAbierto(false)}>
                 Productos
+              </Link>
+              <Link to={RUTAS.ACERCA_DE} onClick={() => setMenuAbierto(false)}>
+                Nosotros
               </Link>
             </>
           )}
@@ -115,6 +123,41 @@ export default function Menu() {
           <div className="barra-navegacion__autenticacion barra-navegacion__autenticacion--movil">
             {estaAutenticado ? (
               <>
+              <button
+              type="button"
+              className="barra-navegacion__carrito"
+              onClick={(manejarAgregarAlCarrito) => {
+              setMenuAbierto(false);
+              setCarritoAbierto(true);
+              }}>
+                  <i className="fas fa-shopping-cart relative inline-block text-lg"></i>
+                 <span className="absolute top-[-3.5px] -right-2 rounded-full w-4.5 h-4.5 flex items-center justify-center text-[10px] text-white bg-(--purple-1)">
+                  {cantidadProductos}
+                </span>
+               </button>
+                <button
+                  type="button"
+                  className="barra-navegacion__wishlist"
+                  aria-label="Abrir wishlist"
+                  onClick={() => {
+                    setMenuAbierto(false);
+                    setWishlistAbierta(true);
+                  }}
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    width="18"
+                    height="18"
+                  >
+                    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
+                  </svg>
+                  <span className="barra-navegacion__wishlist-contador">
+                    {cantidadWishlist}
+                  </span>
+                </button>
                 <span className="barra-navegacion__usuario">
                   <span className="barra-navegacion__usuario-punto" />
                   Hola, {usuario.nombre.split(" ")[0]}
@@ -172,6 +215,38 @@ export default function Menu() {
         <div className="barra-navegacion__autenticacion barra-navegacion__autenticacion--escritorio">
           {estaAutenticado ? (
             <>
+              <button
+                 type="button"
+                 className="barra-navegacion__carrito relative"
+                 onClick={() => {
+                 setCarritoAbierto(true);
+                }}
+              >
+              <i className="fas fa-shopping-cart relative inline-block text-lg"></i>
+              <span className="absolute top-[-3.5px] -right-2 rounded-full w-4.5 h-4.5 flex items-center justify-center text-[10px] text-white bg-(--purple-1)">
+              {cantidadProductos}
+              </span>
+              </button>
+              <button
+                type="button"
+                className="barra-navegacion__wishlist"
+                aria-label="Abrir wishlist"
+                onClick={() => setWishlistAbierta(true)}
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  width="18"
+                  height="18"
+                >
+                  <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
+                </svg>
+                <span className="barra-navegacion__wishlist-contador">
+                  {cantidadWishlist}
+                </span>
+              </button>
               <span className="barra-navegacion__usuario">
                 <span className="barra-navegacion__usuario-punto" />
                 Hola, {usuario.nombre.split(" ")[0]}

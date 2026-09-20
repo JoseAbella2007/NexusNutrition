@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate, useOutletContext } from 'react-router-dom';
 import productosIniciales from '../../data/productos';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import CardProducto from './CardProducto';
@@ -83,6 +83,7 @@ const TITULOS_CATEGORIAS = {
 
 export default function CategoriaProductos() {
   const { nombreCategoria } = useParams();
+  const { agregarAlCarrito, wishlist, alternarWishlist } = useOutletContext();
   const navigate = useNavigate();
   const [productos] = useLocalStorage('productos', productosIniciales);
 
@@ -249,7 +250,12 @@ export default function CategoriaProductos() {
                 className="card-entrada"
                 style={{ animationDelay: `${index * 0.06}s` }}
               >
-                <CardProducto producto={producto} />
+                <CardProducto
+                  producto={producto}
+                  agregarAlCarrito={agregarAlCarrito}
+                  wishlist={wishlist}
+                  alternarWishlist={alternarWishlist}
+                />
               </div>
             ))}
           </div>
