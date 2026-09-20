@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import FondoSeccion from "./FondoSeccion";
-import { usePrefiereMovimientoReducido } from "../../hooks/usePrefiereMovimientoReducido";
 import imagenCorredor from "../../assets/imagenes/corredor.webp";
 import imagenGimnasio from "../../assets/imagenes/gimnasio.webp";
 import imagenDisciplina from "../../assets/imagenes/disciplina.jpg";
@@ -37,7 +36,6 @@ export default function CarruselMasVendidos({
   duracion = 30,
   onSeleccionar,
 }) {
-  const movimientoReducido = usePrefiereMovimientoReducido();
   const cantidad = productos.length;
   const anguloPorItem = 360 / cantidad;
 
@@ -50,8 +48,6 @@ export default function CarruselMasVendidos({
   const escenaRef = useRef(null);
 
   useEffect(() => {
-    if (movimientoReducido) return;
-
     let anterior = performance.now();
     let idFrame;
 
@@ -68,7 +64,7 @@ export default function CarruselMasVendidos({
 
     idFrame = requestAnimationFrame(animar);
     return () => cancelAnimationFrame(idFrame);
-  }, [duracion, movimientoReducido]);
+  }, [duracion]);
 
   const manejarPointerDown = (evento) => {
     arrastrandoRef.current = true;

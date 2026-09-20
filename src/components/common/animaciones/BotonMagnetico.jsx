@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { Link } from "react-router-dom";
-import { usePrefiereMovimientoReducido } from "../../../hooks/usePrefiereMovimientoReducido";
 
 const EnlaceConMotion = motion.create(Link);
 
@@ -13,20 +12,10 @@ export default function BotonMagnetico({
   ...resto
 }) {
   const referencia = useRef(null);
-  const movimientoReducido = usePrefiereMovimientoReducido();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const resorteX = useSpring(x, { stiffness: 200, damping: 18, mass: 0.4 });
   const resorteY = useSpring(y, { stiffness: 200, damping: 18, mass: 0.4 });
-  const Etiqueta = hacia ? Link : "button";
-
-  if (movimientoReducido) {
-    return (
-      <Etiqueta className={claseCss} to={hacia} {...resto}>
-        {children}
-      </Etiqueta>
-    );
-  }
 
   const manejarMovimientoMouse = (evento) => {
     const limites = referencia.current.getBoundingClientRect();

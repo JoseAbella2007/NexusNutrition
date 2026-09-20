@@ -6,7 +6,6 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { usePrefiereMovimientoReducido } from "../../../hooks/usePrefiereMovimientoReducido";
 
 export default function TarjetaInclinada({
   children,
@@ -15,7 +14,6 @@ export default function TarjetaInclinada({
   ...props
 }) {
   const referencia = useRef(null);
-  const movimientoReducido = usePrefiereMovimientoReducido();
 
   const rotacionXCruda = useMotionValue(0);
   const rotacionYCruda = useMotionValue(0);
@@ -32,14 +30,6 @@ export default function TarjetaInclinada({
   const brilloX = useTransform(rotacionY, [-intensidad, intensidad], [0, 100]);
   const brilloY = useTransform(rotacionX, [intensidad, -intensidad], [0, 100]);
   const fondoBrillo = useMotionTemplate`radial-gradient(circle at ${brilloX}% ${brilloY}%, rgba(183,255,0,0.16), transparent 60%)`;
-
-  if (movimientoReducido) {
-    return (
-      <div className={claseCss} {...props}>
-        {children}
-      </div>
-    );
-  }
 
   const manejarMovimientoMouse = (evento) => {
     const limites = referencia.current.getBoundingClientRect();

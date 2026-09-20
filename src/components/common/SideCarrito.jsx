@@ -56,19 +56,12 @@ export default function SideCarrito({
             <h2 className="carrito-titulo">
               Carrito de Compras
             </h2>
-<<<<<<< HEAD
-            <p className="flex items-center justify-center text-sm text-[#a855f7]! gap-2">
-            <span>{cantidadProductos}</span>
-            <span>{cantidadProductos === 1 ? "Producto" : "Productos"}</span>
-=======
-
             <p className="carrito-contador">
               <span>{cantidadProductos}</span>
 
               <span>
                 {cantidadProductos === 1 ? "Producto" : "Productos"}
               </span>
->>>>>>> 359098269af71ad36e8d114b946b14e2c651161c
             </p>
           </div>
 
@@ -162,11 +155,5 @@ export default function SideCarrito({
         </div>
       </aside>
     </>
-<<<<<<< HEAD
 );
 }
-=======
-  );
-}
-
->>>>>>> 359098269af71ad36e8d114b946b14e2c651161c

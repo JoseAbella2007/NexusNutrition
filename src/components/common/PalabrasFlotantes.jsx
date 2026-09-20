@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import { usePrefiereMovimientoReducido } from "../../hooks/usePrefiereMovimientoReducido";
 import "./PalabrasFlotantes.css";
 
 const POSICIONES = [
@@ -14,8 +13,6 @@ const POSICIONES = [
 ];
 
 export default function PalabrasFlotantes({ palabras = [], claseCss = "" }) {
-  const movimientoReducido = usePrefiereMovimientoReducido();
-
   const items = useMemo(
     () =>
       palabras.map((palabra, indice) => {
@@ -37,7 +34,7 @@ export default function PalabrasFlotantes({ palabras = [], claseCss = "" }) {
       {items.map((item) => (
         <span
           key={item.palabra}
-          className={`palabras-flotantes__item ${movimientoReducido ? "palabras-flotantes__item--estatico" : ""}`}
+          className="palabras-flotantes__item"
           style={{
             top: item.top,
             left: item.left,

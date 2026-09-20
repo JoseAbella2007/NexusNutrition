@@ -52,12 +52,6 @@
   }
 }
 
-.palabras-flotantes__item--estatico {
-  animation: none;
-  opacity: 0.3;
-  transform: none;
-}
-
 @media (max-width: 940px) {
   .palabras-flotantes {
     display: none;
