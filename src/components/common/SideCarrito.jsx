@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import { RUTAS } from "../../routes/rutas";
 import "./SideCarrito.responsive.css";
 
@@ -35,6 +36,21 @@ export default function SideCarrito({
           : producto
       )
     );
+  };
+
+  const manejarFinalizarCompra = (evento) => {
+    if (carrito.length === 0) {
+      evento.preventDefault();
+      Swal.fire({
+        icon: "warning",
+        title: "Faltan productos",
+        text: "Agregá al menos un producto al carrito antes de finalizar la compra.",
+        confirmButtonText: "Entendido",
+        background: "var(--bg-1)",
+        color: "var(--white)",
+        confirmButtonColor: "var(--purple-1)",
+      });
+    }
   };
 
   return (
@@ -149,6 +165,7 @@ export default function SideCarrito({
           <Link
             to={RUTAS.NO_ENCONTRADA}
             className="carrito-finalizar"
+            onClick={manejarFinalizarCompra}
           >
             Finalizar compra
           </Link>

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { RUTAS } from "../../routes/rutas";
 import "./SideWishlist.css";
 
 export default function SideWishlist({ abierta, setAbierta, wishlist, eliminarDeWishlist }) {
@@ -72,6 +73,16 @@ export default function SideWishlist({ abierta, setAbierta, wishlist, eliminarDe
               ))}
             </div>
           )}
+        </div>
+
+        <div className="side-wishlist__pie">
+          <Link
+            to={RUTAS.PRODUCTOS}
+            onClick={() => setAbierta(false)}
+            className="side-wishlist__comprar"
+          >
+            Ir a comprar
+          </Link>
         </div>
       </aside>
     </>
