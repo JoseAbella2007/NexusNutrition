@@ -16,7 +16,7 @@ export default function SideWishlist({ abierta, setAbierta, wishlist, eliminarDe
       <aside className={`side-wishlist ${abierta ? "side-wishlist--abierta" : ""}`}>
         <div className="side-wishlist__cabecera">
           <div>
-            <h2 className="side-wishlist__titulo">Favorito</h2>
+            <h2 className="side-wishlist__titulo">Favoritos</h2>
             <p className="side-wishlist__contador">
               <span>{cantidadProductos}</span>
               <span>{cantidadProductos === 1 ? "Producto" : "Productos"}</span>
