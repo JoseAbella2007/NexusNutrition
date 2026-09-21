@@ -16,7 +16,7 @@ export default function SideWishlist({ abierta, setAbierta, wishlist, eliminarDe
       <aside className={`side-wishlist ${abierta ? "side-wishlist--abierta" : ""}`}>
         <div className="side-wishlist__cabecera">
           <div>
-            <h2 className="side-wishlist__titulo">Mi Wishlist</h2>
+            <h2 className="side-wishlist__titulo">Favoritos</h2>
             <p className="side-wishlist__contador">
               <span>{cantidadProductos}</span>
               <span>{cantidadProductos === 1 ? "Producto" : "Productos"}</span>
@@ -35,7 +35,7 @@ export default function SideWishlist({ abierta, setAbierta, wishlist, eliminarDe
 
         <div className="side-wishlist__cuerpo">
           {wishlist.length === 0 ? (
-            <p className="side-wishlist__vacio">Tu wishlist está vacía</p>
+            <p className="side-wishlist__vacio">Tu lista de favoritos está vacía</p>
           ) : (
             <div className="side-wishlist__lista">
               {wishlist.map((producto) => (
