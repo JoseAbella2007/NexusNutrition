@@ -116,3 +116,26 @@
   background-color: var(--green-lime, #b7ff00);
   color: #050505;
 }
+
+@media (max-width: 520px) {
+  .formulario-overlay {
+    padding: 12px;
+    align-items: flex-end;
+  }
+
+  .formulario-producto {
+    padding: 24px 20px;
+    max-height: 88vh;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .formulario-producto__fila {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .formulario-producto__acciones {
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
+}

@@ -4,10 +4,10 @@ function ItemProducto({ producto, onEditar, onEliminar }) {
       <td className="item-producto__imagen-celda">
         <img src={producto.imagen} alt={producto.nombre} className="item-producto__imagen" />
       </td>
-      <td>{producto.nombre}</td>
-      <td>{producto.categoria}</td>
-      <td>${producto.precio.toLocaleString('es-AR')}</td>
-      <td>{producto.stock}</td>
+      <td className="item-producto__nombre" data-label="Nombre">{producto.nombre}</td>
+      <td className="item-producto__categoria" data-label="Categoría">{producto.categoria}</td>
+      <td className="item-producto__precio" data-label="Precio">${producto.precio.toLocaleString('es-AR')}</td>
+      <td className="item-producto__stock" data-label="Stock">{producto.stock}</td>
       <td className="item-producto__acciones">
         <button className="item-producto__editar" onClick={() => onEditar(producto)}>
           Editar

@@ -46,9 +46,9 @@ export default function AdminUsuarios() {
               <tbody>
                 {usuarios.map((fila) => (
                   <tr key={fila.id}>
-                    <td>{fila.nombre}</td>
-                    <td>{fila.correo}</td>
-                    <td>
+                    <td data-label="Nombre">{fila.nombre}</td>
+                    <td data-label="Email">{fila.correo}</td>
+                    <td data-label="Rol">
                       <span className="admin__rol">{fila.rol}</span>
                     </td>
                     <td className="admin__acciones">

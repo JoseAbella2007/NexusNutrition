@@ -72,7 +72,6 @@ export default function SideCarrito({
             <h2 className="carrito-titulo">
               Carrito de Compras
             </h2>
-
             <p className="carrito-contador">
               <span>{cantidadProductos}</span>
 
@@ -173,7 +172,5 @@ export default function SideCarrito({
         </div>
       </aside>
     </>
-  );
+);
 }
-
-

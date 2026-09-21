@@ -2,7 +2,6 @@ import { lazy, Suspense, useMemo, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import BotonMagnetico from "../../common/animaciones/BotonMagnetico";
 import imagenCorredor from "../../../assets/imagenes/corredor.webp";
-import { usePrefiereMovimientoReducido } from "../../../hooks/usePrefiereMovimientoReducido";
 import { useAutenticacion } from "../../../context/ContextoAutenticacion";
 import { RUTAS } from "../../../routes/rutas";
 import "./Portada.css";
@@ -28,7 +27,6 @@ function useParticulas(cantidad) {
 
 export default function Portada() {
   const referenciaSeccion = useRef(null);
-  const movimientoReducido = usePrefiereMovimientoReducido();
   const particulas = useParticulas(18);
   const { estaAutenticado, usuario } = useAutenticacion();
 
@@ -40,7 +38,7 @@ export default function Portada() {
   const desplazamientoFondoY = useTransform(
     progresoScroll,
     [0, 1],
-    [0, movimientoReducido ? 0 : 120],
+    [0, 120],
   );
   const opacidadContenido = useTransform(progresoScroll, [0, 0.8], [1, 0]);
 

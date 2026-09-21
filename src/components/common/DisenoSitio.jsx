@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { useState } from "react";
 import Menu from "./Menu";
 import Footer from "./Footer";
@@ -7,6 +7,9 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 import SideWishlist from "./SideWishlist";
 
 export default function DisenoSitio() {
+  const { pathname } = useLocation();
+  const esAdmin = pathname.startsWith("/admin");
+
   const [carritoAbierto, setCarritoAbierto] = useState(false);
   const [carrito, setCarrito] = useLocalStorage("carrito", []);
 
@@ -59,7 +62,7 @@ export default function DisenoSitio() {
           carrito,
         }}
       />
-      <Footer />
+      {!esAdmin && <Footer />}
       <SideCarrito
         abierto={carritoAbierto}
         setAbierto={setCarritoAbierto}
