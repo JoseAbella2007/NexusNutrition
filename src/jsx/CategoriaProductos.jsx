@@ -8,6 +8,12 @@ import CarruselMasVendidos from './carruselMasVendidos';
 import PalabrasFlotantes from './PalabrasFlotantes';
 import '../css/CategoriaProductos.css';
 
+const REGEX_SOLO_LETRAS = /[^a-zA-ZÀ-ÖØ-öø-ÿñÑ\s]/g;
+
+function soloLetras(texto) {
+  return texto.replace(REGEX_SOLO_LETRAS, '').replace(/\s+/g, ' ');
+}
+
 function quitarAcentos(texto) {
   return texto ? texto.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '') : '';
 }
@@ -113,8 +119,10 @@ export default function CategoriaProductos() {
           (producto) => normalizarCategoria(producto.categoria) === categoriaActual
         );
 
+  const terminoBusqueda = quitarAcentos(busqueda).trim();
+
   const productosBuscados = productosPorCategoria.filter((producto) =>
-    quitarAcentos(producto.nombre).includes(quitarAcentos(busqueda))
+    quitarAcentos(producto.nombre).includes(terminoBusqueda)
   );
 
   const productosFiltrados = [...productosBuscados].sort((a, b) => {
@@ -212,7 +220,12 @@ export default function CategoriaProductos() {
               className="categoria-productos__input"
               placeholder="Buscar por nombre..."
               value={busqueda}
-              onChange={(e) => setBusqueda(e.target.value)}
+              onChange={(e) => setBusqueda(soloLetras(e.target.value))}
+              onPaste={(e) => {
+                e.preventDefault();
+                const textoPegado = e.clipboardData.getData('text');
+                setBusqueda((prev) => prev + soloLetras(textoPegado));
+              }}
             />
           </div>
 
