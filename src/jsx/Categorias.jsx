@@ -71,7 +71,6 @@ export default function Categorias() {
   const { estaAutenticado, esAdministrador } = useAutenticacion();
 
   const obtenerDestino = (slug) => {
-    if (esAdministrador) return RUTAS.ADMIN;
     if (estaAutenticado) return `/categoria/${slug}`;
     return RUTAS.REGISTRO;
   };
