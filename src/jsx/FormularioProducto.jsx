@@ -44,10 +44,15 @@ function FormularioProducto({ productoEditar, productosExistentes, onGuardar, on
   function validar() {
     const nuevosErrores = {};
 
-    if (!datos.nombre.trim()) {
+    const nombreLimpio = datos.nombre.trim();
+    if (!nombreLimpio) {
       nuevosErrores.nombre = 'El nombre es obligatorio.';
+    } else if (nombreLimpio.length < 2) {
+      nuevosErrores.nombre = 'El nombre es demasiado corto.';
+    } else if (nombreLimpio.length > 60) {
+      nuevosErrores.nombre = 'El nombre no puede superar los 60 caracteres.';
     } else {
-      const nombreNormalizado = quitarAcentos(datos.nombre.trim());
+      const nombreNormalizado = quitarAcentos(nombreLimpio);
       const yaExiste = productosExistentes.some(
         (p) =>
           quitarAcentos(p.nombre.trim()) === nombreNormalizado &&
@@ -61,21 +66,37 @@ function FormularioProducto({ productoEditar, productosExistentes, onGuardar, on
     const precioNum = Number(datos.precio);
     if (datos.precio === '' || Number.isNaN(precioNum) || precioNum <= 0) {
       nuevosErrores.precio = 'El precio debe ser un número mayor a 0.';
+    } else if (precioNum > 9999999) {
+      nuevosErrores.precio = 'El precio no puede superar 9.999.999.';
     }
 
     if (!datos.categoria) {
       nuevosErrores.categoria = 'Elegí una categoría.';
     }
-    if (!datos.imagen.trim()) {
+
+    const imagenLimpia = datos.imagen.trim();
+    if (!imagenLimpia) {
       nuevosErrores.imagen = 'La imagen es obligatoria.';
+    } else if (imagenLimpia.length < 5) {
+      nuevosErrores.imagen = 'La URL de la imagen es demasiado corta.';
+    } else if (imagenLimpia.length > 300) {
+      nuevosErrores.imagen = 'La URL de la imagen no puede superar los 300 caracteres.';
     }
-    if (!datos.descripcion.trim()) {
+
+    const descripcionLimpia = datos.descripcion.trim();
+    if (!descripcionLimpia) {
       nuevosErrores.descripcion = 'La descripción es obligatoria.';
+    } else if (descripcionLimpia.length < 10) {
+      nuevosErrores.descripcion = 'La descripción debe tener al menos 10 caracteres.';
+    } else if (descripcionLimpia.length > 500) {
+      nuevosErrores.descripcion = 'La descripción no puede superar los 500 caracteres.';
     }
 
     const stockNum = Number(datos.stock);
     if (datos.stock === '' || Number.isNaN(stockNum) || stockNum < 0 || !Number.isInteger(stockNum)) {
       nuevosErrores.stock = 'El stock debe ser un número entero, 0 o más.';
+    } else if (stockNum > 100000) {
+      nuevosErrores.stock = 'El stock no puede superar 100.000 unidades.';
     }
 
     setErrores(nuevosErrores);
@@ -123,6 +144,8 @@ function FormularioProducto({ productoEditar, productosExistentes, onGuardar, on
             type="text"
             value={datos.nombre}
             onChange={(e) => actualizarCampo('nombre', e.target.value)}
+            minLength={2}
+            maxLength={60}
           />
           {errores.nombre && <span className="formulario-producto__error">{errores.nombre}</span>}
         </div>
@@ -133,6 +156,7 @@ function FormularioProducto({ productoEditar, productosExistentes, onGuardar, on
             <input
               type="number"
               min="0"
+              max="9999999"
               value={datos.precio}
               onChange={(e) => actualizarCampo('precio', e.target.value)}
             />
@@ -144,6 +168,7 @@ function FormularioProducto({ productoEditar, productosExistentes, onGuardar, on
             <input
               type="number"
               min="0"
+              max="100000"
               step="1"
               value={datos.stock}
               onChange={(e) => actualizarCampo('stock', e.target.value)}
@@ -177,6 +202,8 @@ function FormularioProducto({ productoEditar, productosExistentes, onGuardar, on
             placeholder="https://..."
             value={datos.imagen}
             onChange={(e) => actualizarCampo('imagen', e.target.value)}
+            minLength={5}
+            maxLength={300}
           />
           {errores.imagen && <span className="formulario-producto__error">{errores.imagen}</span>}
         </div>
@@ -187,6 +214,8 @@ function FormularioProducto({ productoEditar, productosExistentes, onGuardar, on
             rows="3"
             value={datos.descripcion}
             onChange={(e) => actualizarCampo('descripcion', e.target.value)}
+            minLength={10}
+            maxLength={500}
           />
           {errores.descripcion && (
             <span className="formulario-producto__error">{errores.descripcion}</span>

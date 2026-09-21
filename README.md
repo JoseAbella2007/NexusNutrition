@@ -123,8 +123,11 @@ pnpm lint
 
 Por defecto, `pnpm dev` levanta la app en `http://localhost:5173` (puerto estándar de Vite).
 
+## 🛫 Deploy:
+https://nexus-nutrition-delta.vercel.app/
+
 ## 👥 Autores  
 Pilar Molina: ![Scrum Master](https://img.shields.io/badge/Scrum%20Master-blueviolet?style=for-the-badge)<br>
-Jose Abella: ![Team Leader](https://img.shields.io/badge/Team%20Leader-blue?style=for-the-badge)<br>
+Jose Abella: ![Tech Leader](https://img.shields.io/badge/Tech%20Leader-blue?style=for-the-badge)<br>
 Mariano De Filippo: ![Desarrolladores](https://img.shields.io/badge/Desarrolladores-green?style=for-the-badge)<br>
 Agustin Penza: ![Desarrolladores](https://img.shields.io/badge/Desarrolladores-green?style=for-the-badge)

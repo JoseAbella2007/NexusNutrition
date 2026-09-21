@@ -8,19 +8,25 @@ const EXPRESION_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function validar(formulario) {
   const errores = {};
-  const esUsuarioAdmin = formulario.correo.trim() === "admin";
+  const correoLimpio = formulario.correo.trim();
+  const esUsuarioAdmin = correoLimpio === "admin";
 
-  if (!formulario.correo.trim()) {
+  if (!correoLimpio) {
     errores.correo = "Ingresá tu email.";
-  } else if (
-    !esUsuarioAdmin &&
-    !EXPRESION_EMAIL.test(formulario.correo.trim())
-  ) {
+  } else if (correoLimpio.length < 5) {
+    errores.correo = "El email es demasiado corto.";
+  } else if (correoLimpio.length > 30) {
+    errores.correo = "El email no puede superar los 30 caracteres.";
+  } else if (!esUsuarioAdmin && !EXPRESION_EMAIL.test(correoLimpio)) {
     errores.correo = "Ingresá un email válido.";
   }
 
   if (!formulario.contrasena) {
     errores.contrasena = "Ingresá tu contraseña.";
+  } else if (formulario.contrasena.length < 6) {
+    errores.contrasena = "La contraseña debe tener al menos 6 caracteres.";
+  } else if (formulario.contrasena.length > 20) {
+    errores.contrasena = "La contraseña no puede superar los 20 caracteres.";
   }
 
   return errores;
@@ -107,6 +113,8 @@ export default function Login() {
             onChange={manejarCambio("correo")}
             onBlur={manejarDesenfoque("correo")}
             autoComplete="email"
+            minLength={5}
+            maxLength={30}
           />
           {mostrarError("correo") && (
             <span className="campo-autenticacion__error">{errores.correo}</span>
@@ -126,6 +134,8 @@ export default function Login() {
               onChange={manejarCambio("contrasena")}
               onBlur={manejarDesenfoque("contrasena")}
               autoComplete="current-password"
+              minLength={6}
+              maxLength={20}
             />
             <button
               type="button"
@@ -175,9 +185,13 @@ export default function Login() {
               )}
             </button>
           </div>
-          {mostrarError("contrasena") && (
+          {mostrarError("contrasena") ? (
             <span className="campo-autenticacion__error">
               {errores.contrasena}
+            </span>
+          ) : (
+            <span className="campo-autenticacion__ayuda">
+              Entre 6 y 20 caracteres.
             </span>
           )}
         </div>
