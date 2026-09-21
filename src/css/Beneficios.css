@@ -1,0 +1,137 @@
+.beneficios__grilla {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.beneficios__marco {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: 28px;
+  border: 1px solid var(--border-soft);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 10px;
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+.beneficios__marco-imagen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  filter: grayscale(0.25) brightness(0.8) contrast(1.1);
+  transform: translateZ(-10px) scale(1.1);
+}
+
+.beneficios__marco-cortina {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(5, 5, 5, 0.15) 0%,
+      rgba(5, 5, 5, 0.55) 55%,
+      rgba(5, 5, 5, 0.92) 100%
+    ),
+    linear-gradient(160deg, rgba(183, 255, 0, 0.12), rgba(123, 44, 255, 0.18));
+}
+
+.beneficios__marco-antetitulo {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: var(--green-lime);
+  position: relative;
+  z-index: 1;
+}
+
+.beneficios__marco-titulo {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  color: var(--white);
+  font-weight: 600;
+  line-height: 1.25;
+  position: relative;
+  z-index: 1;
+}
+
+.beneficios__encabezado {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 44px;
+  max-width: 480px;
+}
+
+.beneficios__titulo {
+  font-size: clamp(1.9rem, 3.6vw, 2.6rem);
+}
+
+.beneficios__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.beneficios__item {
+  display: flex;
+  gap: 22px;
+  align-items: flex-start;
+}
+
+.beneficios__indice {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--green-mid);
+  padding-top: 4px;
+}
+
+.beneficios__item h3 {
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+
+.beneficios__item p {
+  font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .beneficios__grilla {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .beneficios__marco {
+    aspect-ratio: 16 / 10;
+  }
+
+  .beneficios__contenido {
+    align-items: center;
+    text-align: center;
+  }
+
+  .beneficios__encabezado {
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .beneficios__lista {
+    align-items: center;
+    width: 100%;
+  }
+
+  .beneficios__item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 380px;
+  }
+}

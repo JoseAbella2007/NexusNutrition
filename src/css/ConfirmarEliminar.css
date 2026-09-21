@@ -1,0 +1,104 @@
+.confirmar-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 20px;
+  animation: overlay-aparece 0.2s ease-out;
+}
+
+@keyframes overlay-aparece {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.confirmar-modal {
+  background-color: var(--bg-1, #080808);
+  border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
+  border-radius: 20px;
+  padding: 32px;
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+  animation: modal-aparece 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modal-aparece {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.confirmar-modal__icono {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background-color: rgba(255, 107, 107, 0.12);
+  color: #ff6b6b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.confirmar-modal__icono svg {
+  width: 26px;
+  height: 26px;
+}
+
+.confirmar-modal__titulo {
+  font-family: 'Space Grotesk', 'Sora', sans-serif;
+  color: var(--white, #ffffff);
+  margin: 0 0 10px;
+}
+
+.confirmar-modal__texto {
+  color: var(--white-soft, #e5e5e5);
+  font-family: 'Manrope', 'Inter', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0 0 24px;
+}
+
+.confirmar-modal__texto strong {
+  color: var(--green-lime, #b7ff00);
+}
+
+.confirmar-modal__acciones {
+  display: flex;
+  gap: 12px;
+}
+
+.confirmar-modal__cancelar,
+.confirmar-modal__eliminar {
+  flex: 1;
+  padding: 12px;
+  border-radius: 999px;
+  font-family: 'Manrope', 'Inter', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.confirmar-modal__cancelar {
+  background-color: transparent;
+  border: 1px solid var(--border-soft, rgba(255, 255, 255, 0.08));
+  color: var(--white-soft, #e5e5e5);
+}
+
+.confirmar-modal__eliminar {
+  background-color: #ff6b6b;
+  color: #050505;
+}
+
+.confirmar-modal__eliminar:hover {
+  opacity: 0.85;
+}
