@@ -1,9 +1,32 @@
 import { Link } from "react-router-dom";
 import { RUTAS } from "../../routes/rutas";
+import Swal from "sweetalert2";
 import "./SideWishlist.css";
 
-export default function SideWishlist({ abierta, setAbierta, wishlist, eliminarDeWishlist }) {
+export default function SideWishlist({
+  abierta,
+  setAbierta,
+  wishlist,
+  eliminarDeWishlist,
+  pasarFavoritosAlCarrito,
+}) {
   const cantidadProductos = wishlist.length;
+
+  const manejarIrAComprar = () => {
+    if (wishlist.length === 0) {
+      Swal.fire({
+        icon: "warning",
+        title: "Faltan productos",
+        text: "Agregá al menos un producto a favoritos antes de ir a comprar.",
+        confirmButtonText: "Entendido",
+        background: "var(--bg-1)",
+        color: "var(--white)",
+        confirmButtonColor: "var(--purple-1)",
+      });
+      return;
+    }
+    pasarFavoritosAlCarrito();
+  };
 
   return (
     <>
@@ -52,7 +75,7 @@ export default function SideWishlist({ abierta, setAbierta, wishlist, eliminarDe
                       ${producto.precio.toLocaleString("es-AR")}
                     </p>
                     <Link
-                      to={`/producto/${producto.id}`}
+                      to={`${RUTAS.PRODUCTOS}?producto=${producto.id}`}
                       onClick={() => setAbierta(false)}
                       className="side-wishlist__ver"
                     >
@@ -76,13 +99,13 @@ export default function SideWishlist({ abierta, setAbierta, wishlist, eliminarDe
         </div>
 
         <div className="side-wishlist__pie">
-          <Link
-            to={RUTAS.PRODUCTOS}
-            onClick={() => setAbierta(false)}
+          <button
+            type="button"
+            onClick={manejarIrAComprar}
             className="side-wishlist__comprar"
           >
             Ir a comprar
-          </Link>
+          </button>
         </div>
       </aside>
     </>

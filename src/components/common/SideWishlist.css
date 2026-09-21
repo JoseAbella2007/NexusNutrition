@@ -164,3 +164,8 @@
   background: var(--purple-1);
   color: white;
 }
+
+.side-wishlist__comprar {
+  border: 0;
+  cursor: pointer;
+}
