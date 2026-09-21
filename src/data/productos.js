@@ -1,8 +1,4 @@
-// Las imágenes viven en public/productos/ y se referencian por ruta estática.
-// Así la URL guardada en localStorage es la misma en dev, build y preview.
-
 const productos = [
-  // ===================== SUPLEMENTACIÓN (8) =====================
   {
     id: "e5544c74-27d2-4a60-b640-6d4644c78d27",
     nombre: "Whey Protein Concentrado 1kg",
@@ -76,7 +72,6 @@ const productos = [
     stock: 21
   },
 
-  // ===================== ENTRENAMIENTO (5) =====================
   {
     id: "eb9c6b1f-a22d-440d-a159-58aa1503a2b6",
     nombre: "Colchoneta de Yoga",
@@ -123,7 +118,6 @@ const productos = [
     stock: 20
   },
 
-  // ===================== NUTRICIÓN Y DIETAS (7) =====================
   {
     id: "e4bb0526-debf-48b0-a8d2-5f68242836a1",
     nombre: "Barritas de Cereal Integral x6",
@@ -188,7 +182,6 @@ const productos = [
     stock: 16
   },
 
-  // ===================== SALUD Y BIENESTAR (6) =====================
   {
     id: "e55f1ecf-8c8b-4e7d-ad43-5528dff8914b",
     nombre: "Pistola de Masaje (Massage Gun)",

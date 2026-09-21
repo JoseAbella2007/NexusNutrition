@@ -47,6 +47,17 @@ export default function DisenoSitio() {
     setWishlist((actual) => actual.filter((item) => item.id !== id));
   };
 
+  const pasarFavoritosAlCarrito = () => {
+    setCarrito((actual) => {
+      const nuevos = wishlist
+        .filter((favorito) => !actual.some((item) => item.id === favorito.id))
+        .map((favorito) => ({ ...favorito, cantidad: 1 }));
+      return [...actual, ...nuevos];
+    });
+    setWishlistAbierta(false);
+    setCarritoAbierto(true);
+  };
+
   return (
     <>
       <Menu
@@ -74,6 +85,7 @@ export default function DisenoSitio() {
         setAbierta={setWishlistAbierta}
         wishlist={wishlist}
         eliminarDeWishlist={eliminarDeWishlist}
+        pasarFavoritosAlCarrito={pasarFavoritosAlCarrito}
         />
     </>
   );

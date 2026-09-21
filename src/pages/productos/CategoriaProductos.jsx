@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate, useOutletContext } from 'react-router-dom';
+import { useParams, useNavigate, useOutletContext, useSearchParams } from 'react-router-dom';
 import productosIniciales from '../../data/productos';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import CardProducto from './CardProducto';
@@ -92,6 +92,12 @@ export default function CategoriaProductos() {
   const [orden, setOrden] = useState('');
   const [paginaActual, setPaginaActual] = useState(1);
   const [idProductoSeleccionado, setIdProductoSeleccionado] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const idProductoDesdeUrl = searchParams.get('producto');
+
+  useEffect(() => {
+    if (idProductoDesdeUrl) setIdProductoSeleccionado(idProductoDesdeUrl);
+  }, [idProductoDesdeUrl]);
 
   const categoriaActual = nombreCategoria || 'todas';
   const productosPorPagina = categoriaActual === 'todas' ? 12 : 4;
@@ -320,7 +326,10 @@ export default function CategoriaProductos() {
       {productoSeleccionado && (
         <QuickViewProducto
           producto={productoSeleccionado}
-          onCerrar={() => setIdProductoSeleccionado(null)}
+          onCerrar={() => {
+            setIdProductoSeleccionado(null);
+            if (idProductoDesdeUrl) setSearchParams({}, { replace: true });
+          }}
         />
       )}
     </div>
