@@ -50,7 +50,6 @@ function CardProducto({
           </span>
 
           <div className="card-producto__iconos">
-            {/* Carrito */}
             <button
               className={`card-producto__icono-boton ${
                 agregado
@@ -72,7 +71,6 @@ function CardProducto({
               </svg>
             </button>
 
-            {/* Wishlist */}
             <button
               className={`card-producto__icono-boton ${
                 enWishlist

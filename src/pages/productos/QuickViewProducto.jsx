@@ -172,9 +172,7 @@ function QuickViewProducto({ producto, onCerrar }) {
               </button>
             </div>
           </div>
-          {/* ICONOS */}
           <div className="quickview-acciones">
-            {/* Wishlist */}
             <button
               className={`quickview-icono ${
                 enWishlist
@@ -202,7 +200,6 @@ function QuickViewProducto({ producto, onCerrar }) {
               </svg>
             </button>
 
-            {/* Carrito */}
             <button
               className="quickview-icono"
               onClick={handleAgregarAlCarrito}
@@ -222,7 +219,6 @@ function QuickViewProducto({ producto, onCerrar }) {
             </button>
           </div>
 
-          {/* Comprar */}
           <button
             className="quickview-comprar"
             onClick={comprarAhora}

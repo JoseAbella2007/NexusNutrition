@@ -59,10 +59,8 @@ function Inicio() {
   const PRODUCTOS_DESTACADOS = CATEGORIAS_HOME.map((cat) =>
     productos.find((p) => p.categoria === cat.nombre)
   );
-
   return (
     <div className="inicio">
-      {/* HERO */}
       <section className="hero" style={{ backgroundImage: `url(/hero-runner.jpeg)` }}>
         <div className="hero__contenido">
           <span className="hero__eyebrow">— NEXUS NUTRITION</span>
@@ -85,14 +83,11 @@ function Inicio() {
           </div>
         </div>
       </section>
-
-      {/* CATEGORÍAS */}
       <section className="categorias">
         <span className="categorias__eyebrow">— CATEGORÍAS</span>
         <h2 className="categorias__titulo">
           Cada objetivo, <span className="categorias__titulo--verde">su fórmula</span>
         </h2>
-
         <div className="categorias__grid">
           {CATEGORIAS_HOME.map((cat) => (
             <Link key={cat.slug} to={`/categoria/${cat.slug}`} className="categoria-card">
@@ -104,9 +99,7 @@ function Inicio() {
               <div className="categoria-card__imagen-wrapper">
                 <img src={cat.imagen} alt={cat.nombre} className="categoria-card__imagen" />
               </div>
-
               <span className="categoria-card__icono">{cat.icono}</span>
-
               <h3 className="categoria-card__nombre">{cat.nombre}</h3>
               <div className="categoria-card__tags">
                 {cat.tags.map((tag) => (
@@ -119,18 +112,14 @@ function Inicio() {
           ))}
         </div>
       </section>
-
-      {/* CATÁLOGO */}
       <section className="catalogo-home">
         <span className="catalogo-home__eyebrow">— CATÁLOGO</span>
         <h2 className="catalogo-home__titulo">Lo más elegido</h2>
-
         <div className="catalogo-home__grid">
           {PRODUCTOS_DESTACADOS.map(
             (producto) => producto && <CardProducto key={producto.id} producto={producto} agregarAlCarrito={agregarAlCarrito} />
           )}
         </div>
-
         <Link to="/categoria/todas" className="catalogo-home__ver-todo">
           Ver todo el catálogo
         </Link>

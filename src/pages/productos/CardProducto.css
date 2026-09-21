@@ -174,7 +174,6 @@
     background-attachment: scroll;
   }
 
-  /* ---- Chips de categoría: "Todas" arriba y las demás en 2 columnas ---- */
   .categoria-productos__contenido .categoria-chips {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -191,7 +190,6 @@
     grid-column: 1 / -1;
   }
 
-  /* ---- Filtros: caja redondeada y campos compactos a ancho completo ---- */
   .categoria-productos__contenido .categoria-productos__filtros {
     flex-direction: column;
     flex-wrap: nowrap;

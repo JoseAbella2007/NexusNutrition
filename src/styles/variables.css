@@ -1,45 +1,32 @@
-/* src/styles/variables.css
-   Cargar UNA sola vez, de forma global (por ejemplo desde main.jsx o App.jsx: import "./styles/variables.css").
-   Si otro integrante ya definió estas variables en otro archivo, borrar este y avisar al equipo para no duplicar. */
-
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600&display=swap");
 
 :root {
-  /* Fondos oscuros */
   --bg-0: #050505;
   --bg-1: #080808;
   --bg-2: #0d0d0d;
 
-  /* Verdes de marca (principales) */
   --green-lime: #b7ff00;
   --green-mid: #7cff3a;
   --green-classic: #39ff14;
 
-  /* Violetas de marca (acentos) */
   --purple-1: #7b2cff;
   --purple-2: #a855f7;
 
-  /* Blancos y grises */
   --white: #ffffff;
   --white-soft: #e5e5e5;
   --grey-mute: #8a8a8a;
   --border-soft: rgba(255, 255, 255, 0.08);
 
-  /* Degradados */
   --gradient-green: linear-gradient(135deg, #b7ff00 0%, #7cff3a 100%);
   --gradient-green-purple: linear-gradient(135deg, #b7ff00 0%, #7b2cff 100%);
   --gradient-purple-black: linear-gradient(135deg, #7b2cff 0%, #050505 100%);
 
-  /* Tipografía */
   --font-heading: "Space Grotesk", "Sora", sans-serif;
   --font-body: "Manrope", "Inter", sans-serif;
 
-  /* Otros tokens */
   --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
   --container-width: 1240px;
 
-  /* Pisa las variables de Bootstrap para que su propio body{} termine
-     usando nuestros colores, sin importar el orden de los imports. */
   --bs-body-bg: var(--bg-0);
   --bs-body-color: var(--white-soft);
   --bs-body-font-family: var(--font-body);
@@ -61,7 +48,6 @@ body {
   font-family: var(--font-body);
 }
 
-/* Popup de SweetAlert2 con el tema oscuro/verde de la marca */
 .swal-nexus-popup {
   background: var(--bg-1) !important;
   border: 1px solid var(--border-soft);

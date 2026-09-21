@@ -49,9 +49,6 @@ function FormularioProducto({ productoEditar, productosExistentes, onGuardar, on
     if (!datos.nombre.trim()) {
       nuevosErrores.nombre = 'El nombre es obligatorio.';
     } else {
-      // "Código único": no puede haber dos productos con el mismo nombre
-      // (sin distinguir mayúsculas/tildes), salvo que sea el mismo que
-      // se está editando.
       const nombreNormalizado = quitarAcentos(datos.nombre.trim());
       const yaExiste = productosExistentes.some(
         (p) =>
