@@ -13,6 +13,12 @@ function quitarAcentos(texto) {
     .replace(/[\u0300-\u036f]/g, "");
 }
 
+const REGEX_SOLO_LETRAS = /[^a-zA-ZÀ-ÖØ-öø-ÿñÑ\s]/g;
+
+function soloLetras(texto) {
+  return texto.replace(REGEX_SOLO_LETRAS, "").replace(/\s+/g, " ");
+}
+
 const CATEGORIAS = [
   "Entrenamiento",
   "Nutrición y Dietas",
@@ -75,11 +81,13 @@ function AdminProductos() {
     setOrden("");
   }
 
+  const terminoBusqueda = quitarAcentos(busqueda).trim();
+
   const productosFiltrados = productos
     .filter(
       (p) => categoriaFiltro === "todas" || p.categoria === categoriaFiltro,
     )
-    .filter((p) => quitarAcentos(p.nombre).includes(quitarAcentos(busqueda)))
+    .filter((p) => quitarAcentos(p.nombre).includes(terminoBusqueda))
     .sort((a, b) => {
       if (orden === "precio-asc") return a.precio - b.precio;
       if (orden === "precio-desc") return b.precio - a.precio;
@@ -123,7 +131,12 @@ function AdminProductos() {
               className="admin-productos__input"
               placeholder="Buscar por nombre..."
               value={busqueda}
-              onChange={(e) => setBusqueda(e.target.value)}
+              onChange={(e) => setBusqueda(soloLetras(e.target.value))}
+              onPaste={(e) => {
+                e.preventDefault();
+                const textoPegado = e.clipboardData.getData("text");
+                setBusqueda((prev) => prev + soloLetras(textoPegado));
+              }}
             />
           </div>
 
