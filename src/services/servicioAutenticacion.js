@@ -28,14 +28,26 @@ function generarId() {
 }
 
 function registrarUsuario({ nombre, correo, contrasena }) {
-  if (!nombre || nombre.trim().length < 2) {
-    throw new Error("Ingresá un nombre válido.");
+  if (!nombre || nombre.trim().length < 6) {
+    throw new Error("El nombre debe tener al menos 6 caracteres.");
   }
-  if (!correo || !EXPRESION_CORREO.test(correo.trim())) {
+  if (nombre.trim().length > 20) {
+    throw new Error("El nombre no puede superar los 20 caracteres.");
+  }
+  if (!correo || correo.trim().length < 5) {
+    throw new Error("Ingresá un email válido.");
+  }
+  if (correo.trim().length > 30) {
+    throw new Error("El email no puede superar los 30 caracteres.");
+  }
+  if (!EXPRESION_CORREO.test(correo.trim())) {
     throw new Error("Ingresá un email válido.");
   }
   if (!contrasena || contrasena.length < 6) {
     throw new Error("La contraseña debe tener al menos 6 caracteres.");
+  }
+  if (contrasena.length > 20) {
+    throw new Error("La contraseña no puede superar los 20 caracteres.");
   }
   if (!EXPRESION_MAYUSCULA.test(contrasena)) {
     throw new Error("La contraseña debe incluir al menos una mayúscula.");
@@ -86,11 +98,20 @@ function iniciarSesion(correo, contrasena) {
     return usuarioAdministrador;
   }
 
-  if (!correo || !EXPRESION_CORREO.test(correo.trim())) {
+  if (!correo || correo.trim().length < 5) {
     throw new Error("Ingresá un email válido.");
   }
-  if (!contrasena) {
+  if (correo.trim().length > 30) {
+    throw new Error("El email no puede superar los 30 caracteres.");
+  }
+  if (!EXPRESION_CORREO.test(correo.trim())) {
+    throw new Error("Ingresá un email válido.");
+  }
+  if (!contrasena || contrasena.length < 6) {
     throw new Error("Ingresá tu contraseña.");
+  }
+  if (contrasena.length > 20) {
+    throw new Error("La contraseña no puede superar los 20 caracteres.");
   }
   const correoNormalizado = correo.trim().toLowerCase();
   const usuarios = obtenerUsuarios();

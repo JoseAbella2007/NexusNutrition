@@ -13,12 +13,18 @@ function validar(formulario) {
 
   if (!formulario.nombre.trim()) {
     errores.nombre = "Ingresá tu nombre.";
-  } else if (formulario.nombre.trim().length < 2) {
-    errores.nombre = "El nombre es demasiado corto.";
+  } else if (formulario.nombre.trim().length < 6) {
+    errores.nombre = "El nombre debe tener al menos 6 caracteres.";
+  } else if (formulario.nombre.trim().length > 20) {
+    errores.nombre = "El nombre no puede superar los 20 caracteres.";
   }
 
   if (!formulario.correo.trim()) {
     errores.correo = "Ingresá tu email.";
+  } else if (formulario.correo.trim().length < 5) {
+    errores.correo = "El email es demasiado corto.";
+  } else if (formulario.correo.trim().length > 30) {
+    errores.correo = "El email no puede superar los 30 caracteres.";
   } else if (!EXPRESION_EMAIL.test(formulario.correo.trim())) {
     errores.correo = "Ingresá un email válido.";
   }
@@ -27,6 +33,8 @@ function validar(formulario) {
     errores.contrasena = "Ingresá una contraseña.";
   } else if (formulario.contrasena.length < 6) {
     errores.contrasena = "La contraseña debe tener al menos 6 caracteres.";
+  } else if (formulario.contrasena.length > 20) {
+    errores.contrasena = "La contraseña no puede superar los 20 caracteres.";
   } else if (!EXPRESION_MAYUSCULA.test(formulario.contrasena)) {
     errores.contrasena = "La contraseña debe incluir al menos una mayúscula.";
   } else if (!EXPRESION_CARACTER_ESPECIAL.test(formulario.contrasena)) {
@@ -36,6 +44,12 @@ function validar(formulario) {
 
   if (!formulario.confirmarContrasena) {
     errores.confirmarContrasena = "Repetí tu contraseña.";
+  } else if (formulario.confirmarContrasena.length < 6) {
+    errores.confirmarContrasena =
+      "La contraseña debe tener al menos 6 caracteres.";
+  } else if (formulario.confirmarContrasena.length > 20) {
+    errores.confirmarContrasena =
+      "La contraseña no puede superar los 20 caracteres.";
   } else if (formulario.confirmarContrasena !== formulario.contrasena) {
     errores.confirmarContrasena = "Las contraseñas no coinciden.";
   }
@@ -159,6 +173,8 @@ export default function Registro() {
             onChange={manejarCambio("nombre")}
             onBlur={manejarDesenfoque("nombre")}
             autoComplete="name"
+            minLength={6}
+            maxLength={20}
           />
           {mostrarError("nombre") && (
             <span className="campo-autenticacion__error">{errores.nombre}</span>
@@ -177,6 +193,8 @@ export default function Registro() {
             onChange={manejarCambio("correo")}
             onBlur={manejarDesenfoque("correo")}
             autoComplete="email"
+            minLength={5}
+            maxLength={30}
           />
           {mostrarError("correo") && (
             <span className="campo-autenticacion__error">{errores.correo}</span>
@@ -196,6 +214,8 @@ export default function Registro() {
               onChange={manejarCambio("contrasena")}
               onBlur={manejarDesenfoque("contrasena")}
               autoComplete="new-password"
+              minLength={6}
+              maxLength={20}
             />
             <button
               type="button"
@@ -251,7 +271,8 @@ export default function Registro() {
             </span>
           ) : (
             <span className="campo-autenticacion__ayuda">
-              Incluí una mayúscula y un carácter especial (ej: !@#$).
+              Entre 6 y 20 caracteres. Incluí una mayúscula y un carácter
+              especial (ej: !@#$).
             </span>
           )}
         </div>
@@ -269,6 +290,8 @@ export default function Registro() {
               onChange={manejarCambio("confirmarContrasena")}
               onBlur={manejarDesenfoque("confirmarContrasena")}
               autoComplete="new-password"
+              minLength={6}
+              maxLength={20}
             />
             <button
               type="button"
