@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import "./Error404.css";
 import fondo404 from "../assets/imagenes/team/fondoNosotros.jpeg";
 
-// Criterio: página que se muestra ante cualquier ruta no definida
 export default function Error404() {
   return (
     <section

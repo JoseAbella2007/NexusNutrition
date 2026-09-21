@@ -36,8 +36,6 @@ function FormularioProducto({ productoEditar, productosExistentes, onGuardar, on
 
   function actualizarCampo(campo, valor) {
     setDatos((prev) => ({ ...prev, [campo]: valor }));
-    // Apenas el usuario toca un campo con error, se lo sacamos de encima:
-    // no hace falta esperar al próximo submit para que desaparezca el cartel.
     if (errores[campo]) {
       setErrores((prev) => ({ ...prev, [campo]: undefined }));
     }
@@ -49,9 +47,6 @@ function FormularioProducto({ productoEditar, productosExistentes, onGuardar, on
     if (!datos.nombre.trim()) {
       nuevosErrores.nombre = 'El nombre es obligatorio.';
     } else {
-      // "Código único": no puede haber dos productos con el mismo nombre
-      // (sin distinguir mayúsculas/tildes), salvo que sea el mismo que
-      // se está editando.
       const nombreNormalizado = quitarAcentos(datos.nombre.trim());
       const yaExiste = productosExistentes.some(
         (p) =>

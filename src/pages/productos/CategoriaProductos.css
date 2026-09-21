@@ -97,7 +97,6 @@
   }
 }
 
-/* ===== Sección de abajo (chips, filtros, grilla): foto de fondo distinta ===== */
 .categoria-productos__contenido {
   position: relative;
   z-index: 1;

@@ -11,7 +11,6 @@ const Portada3D = lazy(() => import("./Portada3D"));
 function useParticulas(cantidad) {
   return useMemo(
     () =>
-      /* eslint-disable react-hooks/purity -- posiciones decorativas al azar, no afectan el render */
       Array.from({ length: cantidad }, (_, i) => ({
         id: i,
         izquierda: Math.random() * 100,
@@ -20,7 +19,6 @@ function useParticulas(cantidad) {
         duracion: 10 + Math.random() * 14,
         retraso: Math.random() * -20,
       })),
-    /* eslint-enable react-hooks/purity */
     [cantidad],
   );
 }

@@ -48,7 +48,6 @@ export function ProveedorAutenticacion({ children }) {
   );
 }
 
-// eslint-disable-next-line react-refresh/only-export-components -- hook y contexto van juntos a proposito
 export function useAutenticacion() {
   const contexto = useContext(ContextoAutenticacion);
   if (!contexto) {

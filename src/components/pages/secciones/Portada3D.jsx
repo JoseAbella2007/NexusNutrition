@@ -5,7 +5,6 @@ function CampoDeParticulas({ cantidad = 220 }) {
   const referenciaPuntos = useRef(null);
 
   const posiciones = useMemo(() => {
-    /* eslint-disable react-hooks/purity -- posiciones decorativas al azar, no afectan el render */
     const arreglo = new Float32Array(cantidad * 3);
     for (let i = 0; i < cantidad; i++) {
       const radio = 4.5 + Math.random() * 4.5;
@@ -15,7 +14,6 @@ function CampoDeParticulas({ cantidad = 220 }) {
       arreglo[i * 3 + 1] = radio * Math.sin(phi) * Math.sin(theta);
       arreglo[i * 3 + 2] = radio * Math.cos(phi);
     }
-    /* eslint-enable react-hooks/purity */
     return arreglo;
   }, [cantidad]);
 
